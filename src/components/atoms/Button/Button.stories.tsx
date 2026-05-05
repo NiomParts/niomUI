@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
 import type { ButtonProps } from "./Button.type";
-import { VARIANTS } from "@/utils/varient";
+import { VARIANTS } from "@/constant/varient";
 
 const meta = {
   title: "Atoms/Button",
