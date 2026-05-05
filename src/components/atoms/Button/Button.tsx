@@ -1,7 +1,8 @@
 import { forwardRef } from "react";
 import type { ElementType, ForwardedRef } from "react";
 import type { ButtonProps } from "./Button.type";
-import { cn, VARIANTS } from "@/utils";
+import { cn } from "@/utils";
+import { VARIANTS } from "@/constant";
 
 type ButtonComponent = <C extends ElementType = "button">(
   props: ButtonProps<C> & { ref?: ForwardedRef<HTMLElement> },
@@ -18,7 +19,7 @@ const ButtonImpl = <C extends ElementType = "button">(
       ref={forwardedRef}
       className={cn(
         VARIANTS[variant || "primary"],
-        "w-25 p-2 rounded-md",
+        "w-10 p-2 rounded-md",
         className,
       )}
       {...props}
