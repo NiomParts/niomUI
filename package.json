@@ -1,9 +1,18 @@
 {
   "name": "kuma-niom",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.2-beta.1",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "style": "./dist/index.css",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./style.css": "./dist/index.css"
+  },
   "files": [
     "dist",
     "README.md"
@@ -34,9 +43,9 @@
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "dev": "tsup index.ts --format cjs,esm --dts --clean --watch & vite",
+    "dev": "tsup index.ts --format cjs,esm --dts --clean --watch --inject-style & vite",
     "test": "vitest run",
-    "build": "npm run test && tsup index.ts --format cjs,esm --dts --clean --minify"
+    "build": "npm run test && tsup index.ts --format cjs,esm --dts --clean --minify --inject-style"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.2",
