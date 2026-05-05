@@ -1,9 +1,12 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
 import { VARIANTS } from "@/utils/varient";
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonOwnProps {
   children?: ReactNode;
-  as?: React.ElementType;
   className?: string;
-  varaint?: keyof typeof VARIANTS;
+  variant?: keyof typeof VARIANTS;
 }
+
+export type ButtonProps<C extends ElementType = "button"> = ButtonOwnProps & {
+  as?: C;
+} & Omit<ComponentPropsWithoutRef<C>, keyof ButtonOwnProps | "as">;

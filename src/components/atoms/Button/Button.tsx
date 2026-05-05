@@ -1,28 +1,34 @@
 import { forwardRef } from "react";
+import type { ElementType, ForwardedRef } from "react";
 import type { ButtonProps } from "./Button.type";
 import { cn, VARIANTS } from "@/utils";
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, as, className, ...props }, forwardedRef) => {
-    /**
-     * The `as` prop allows the Button component to render as a different HTML element or React component.
-     * If `as` is not provided, it defaults to rendering a `<button>` element.
-     */
-    const Component = (as || "button") as React.ElementType;
+type ButtonComponent = <C extends ElementType = "button">(
+  props: ButtonProps<C> & { ref?: ForwardedRef<HTMLElement> },
+) => React.ReactElement | null;
 
-    return (
-      <Component
-        ref={forwardedRef}
-        className={cn(
-          VARIANTS[props.varaint || "primary"],
-          "w-20 p-2 rounded-md",
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </Component>
-    );
-  },
-);
+const ButtonImpl = <C extends ElementType = "button">(
+  { children, as, className, variant, ...props }: ButtonProps<C>,
+  forwardedRef: ForwardedRef<HTMLElement>,
+) => {
+  const Component = (as || "button") as ElementType;
+
+  return (
+    <Component
+      ref={forwardedRef}
+      className={cn(
+        VARIANTS[variant || "primary"],
+        "w-25 p-2 rounded-md",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </Component>
+  );
+};
+
+export const Button = forwardRef(ButtonImpl) as ButtonComponent & {
+  displayName?: string;
+};
 Button.displayName = "Button";

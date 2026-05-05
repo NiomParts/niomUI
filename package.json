@@ -21,6 +21,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@testing-library/react": "^16.3.2",
     "classnames": "^2.5.1",
     "path": "^0.12.7",
     "tailwind-merge": "^3.5.0",
@@ -31,7 +32,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "dev": "tsup index.ts --format cjs,esm --dts --clean --watch & vite",
-    "build": "tsup index.ts --format cjs,esm --dts --clean --minify"
+    "test": "vitest run",
+    "build": "npm run test && tsup index.ts --format cjs,esm --dts --clean --minify"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.2",
@@ -43,11 +45,13 @@
     "@tailwindcss/cli": "^4.2.4",
     "@tailwindcss/postcss": "^4.2.4",
     "@tailwindcss/vite": "^4.2.4",
+    "@testing-library/jest-dom": "^6.9.1",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "@vitest/browser-playwright": "^4.1.5",
     "@vitest/coverage-v8": "^4.1.5",
     "autoprefixer": "^10.5.0",
+    "jsdom": "^29.1.1",
     "playwright": "^1.59.1",
     "postcss": "^8.5.12",
     "prop-types": "^15.8.1",
