@@ -1,5 +1,5 @@
 {
-  "name": "nomekuma-niom",
+  "name": "kuma-niom",
   "version": "0.0.1-beta.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
