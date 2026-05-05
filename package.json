@@ -1,0 +1,54 @@
+{
+  "name": "nomekuma-niom",
+  "version": "1.0.0-beta.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "vite",
+    "storybook",
+    "tailwindcss",
+    "react"
+  ],
+  "author": "Nomekuma",
+  "license": "MIT",
+  "dependencies": {
+    "classnames": "^2.5.1",
+    "path": "^0.12.7",
+    "tailwind-merge": "^3.5.0",
+    "tsup": "^8.5.1"
+  },
+  "type": "module",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "dev": "tsup index.ts --format cjs,esm --dts --clean --watch & vite",
+    "build": "tsup index.ts --format cjs,esm --dts --clean --minify"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^5.1.2",
+    "@storybook/addon-a11y": "^10.3.5",
+    "@storybook/addon-docs": "^10.3.5",
+    "@storybook/addon-onboarding": "^10.3.5",
+    "@storybook/addon-vitest": "^10.3.5",
+    "@storybook/react-vite": "^10.3.5",
+    "@tailwindcss/cli": "^4.2.4",
+    "@tailwindcss/postcss": "^4.2.4",
+    "@tailwindcss/vite": "^4.2.4",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/browser-playwright": "^4.1.5",
+    "@vitest/coverage-v8": "^4.1.5",
+    "autoprefixer": "^10.5.0",
+    "playwright": "^1.59.1",
+    "postcss": "^8.5.12",
+    "prop-types": "^15.8.1",
+    "storybook": "^10.3.5",
+    "tailwindcss": "^4.2.4",
+    "vitest": "^4.1.5"
+  }
+}
