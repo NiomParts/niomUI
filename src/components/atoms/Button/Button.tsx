@@ -19,7 +19,7 @@ const ButtonImpl = <C extends ElementType = "button">(
       ref={forwardedRef}
       className={cn(
         VARIANTS[variant || "primary"],
-        "w-20 p-2 rounded-md",
+        "w-fit p-2 rounded-md",
         className,
       )}
       {...props}
