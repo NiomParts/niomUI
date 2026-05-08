@@ -8,7 +8,7 @@ function App() {
     <div className="justify-center items-center flex h-screen">
       <Button
         as={"button"}
-        // varaint="tertiary"
+        variant="secondary"
         className=""
         onClick={() => Click()}
       >
