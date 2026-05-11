@@ -1,6 +1,6 @@
 {
   "name": "kuma-niom",
-  "version": "0.0.7-beta.0",
+  "version": "0.0.7-beta.1",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -23,6 +23,10 @@
     "tailwindcss",
     "react"
   ],
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
   "author": "Nomekuma",
   "repository": {
     "type": "git",
@@ -44,9 +48,9 @@
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "dev": "tsup index.ts --format cjs,esm --dts --clean --watch --inject-style & vite",
+    "dev": "tsup index.ts --format cjs,esm --dts --clean --watch --inject-style --external react --external react-dom --external react/jsx-runtime --external react/jsx-dev-runtime & vite",
     "test": "vitest run",
-    "build": "npm run test && tsup index.ts --format cjs,esm --dts --clean --minify --inject-style",
+    "build": "npm run test && tsup index.ts --format cjs,esm --dts --clean --minify --inject-style --external react --external react-dom --external react/jsx-runtime --external react/jsx-dev-runtime",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -60,6 +64,7 @@
     "@tailwindcss/postcss": "^4.2.4",
     "@tailwindcss/vite": "^4.2.4",
     "@testing-library/jest-dom": "^6.9.1",
+    "@types/react": "^19.2.2",
     "@types/node": "^25.6.2",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
@@ -69,6 +74,8 @@
     "jsdom": "^29.1.1",
     "playwright": "^1.59.1",
     "prop-types": "^15.8.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
     "storybook": "^10.3.5",
     "vitest": "^4.1.5"
   }
