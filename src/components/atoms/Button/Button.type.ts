@@ -1,5 +1,5 @@
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
-import { VARIANTS } from "@/constant/varient";
+import { VARIANTS } from "@/constant/style";
 
 export interface ButtonOwnProps {
   children?: ReactNode;

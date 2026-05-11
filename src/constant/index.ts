@@ -1,1 +1,1 @@
-export * from "./varient";
+export * from "./style";
