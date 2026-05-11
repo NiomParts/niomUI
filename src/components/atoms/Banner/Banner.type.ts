@@ -11,6 +11,7 @@ export interface BannerProps {
   id?: string;
   alt?: string;
   className?: string;
+  style?: React.CSSProperties;
   ref?: RefObject<HTMLDivElement>;
   image?: string;
   imageFit?: "cover" | "contain";
