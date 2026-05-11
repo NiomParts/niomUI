@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 export type TableSelectMode = "single" | "multiple";
 
 export interface TableProps {
-  id: string;
+  id?: string;
   className?: string;
   headerClassName?: string;
   colClassName?: string;
