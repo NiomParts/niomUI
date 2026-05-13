@@ -12,7 +12,7 @@ Niom is a modern and lightweight package designed to simplify your development w
 To install the package, run:
 
 ```bash
-npm install nomekuma-niom
+npm install kuma-niom
 ```
 
 ## Usage
@@ -20,7 +20,7 @@ npm install nomekuma-niom
 Import and use the package in your project:
 
 ```javascript
-import { Button } from "nomekuma-niom";
+import { Button } from "kuma-niom";
 
 function App() {
   return (
