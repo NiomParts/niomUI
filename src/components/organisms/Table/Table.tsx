@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { RowData, TableProps } from "./Table.types";
+import { RowData, TableProps } from "./Table.type";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/utils";
 import { Button } from "@/components/atoms";

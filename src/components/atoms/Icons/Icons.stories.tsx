@@ -1,6 +1,6 @@
 import type { Meta, StoryObj, StoryFn } from "@storybook/react";
 import { Menu, Cross } from "./Icons";
-import type { SVGprops } from "./Icons.types";
+import type { SVGprops } from "./Icons.type";
 
 const meta = {
   title: "Atoms/Icons",

@@ -1,4 +1,4 @@
-import { SVGprops } from "./Icons.types";
+import { SVGprops } from "./Icons.type";
 
 export const Menu = ({
   color = "currentColor",

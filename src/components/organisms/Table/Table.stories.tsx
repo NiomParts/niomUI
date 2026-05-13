@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { TableProps, ColumnProps, PrimitiveValue } from "./Table.types";
+import { TableProps, ColumnProps, PrimitiveValue } from "./Table.type";
 import Table from "./Table";
 
 export default {
