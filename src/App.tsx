@@ -1,9 +1,13 @@
 import { Button } from "./components/atoms/Button/Button";
+import { useState } from "react";
+import { Menu, Cross } from "./components/atoms/Icons/Icons";
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const Click = () => {
-    alert("Button clicked!");
+    setIsMenuOpen(!isMenuOpen);
   };
+
   return (
     <div className="justify-center items-center flex h-screen">
       <Button
@@ -12,7 +16,7 @@ function App() {
         className=""
         onClick={() => Click()}
       >
-        Test 1
+        {isMenuOpen ? <Cross color="red" /> : <Menu color="red" />}
       </Button>
     </div>
   );

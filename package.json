@@ -1,6 +1,6 @@
 {
   "name": "kuma-niom",
-  "version": "0.0.7-beta.3",
+  "version": "0.0.8-beta.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
