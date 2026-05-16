@@ -26,6 +26,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(
       <section
         id={id}
         ref={ref}
+        onClick={props.onClick}
         data-testid="banner-test-id"
         className={cn(
           "relative flex h-48 items-center justify-center overflow-hidden",

@@ -31,4 +31,10 @@ const DIMENSIONS = {
   large: "w-128",
 };
 
-export { VARIANTS, POSITIONS, EFFECTS, DIMENSIONS };
+const SIZE = {
+  small: "text-xs px-2 py-1",
+  medium: "text-sm px-3 py-2",
+  large: "text-base px-4 py-3",
+};
+
+export { VARIANTS, POSITIONS, EFFECTS, DIMENSIONS, SIZE };

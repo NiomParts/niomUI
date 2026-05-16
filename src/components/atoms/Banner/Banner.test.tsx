@@ -1,4 +1,4 @@
-import { describe, it, expect, afterEach } from "vitest";
+import { describe, it, expect, afterEach, vi } from "vitest";
 import { Banner } from "./Banner";
 import { render, cleanup } from "@testing-library/react";
 
@@ -51,5 +51,15 @@ describe("Banner", () => {
     );
     const bannerElement = getByTestId("banner-test-id");
     expect(bannerElement).toHaveClass("w-128");
+  });
+
+  it("calls onClick handler when banner is clicked", () => {
+    const handleClick = vi.fn();
+    const { getByTestId } = render(
+      <Banner image="https://example.com/banner.jpg" onClick={handleClick} />,
+    );
+    const bannerElement = getByTestId("banner-test-id");
+    bannerElement.click();
+    expect(handleClick).toHaveBeenCalledTimes(1);
   });
 });
