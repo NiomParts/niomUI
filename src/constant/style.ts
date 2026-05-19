@@ -37,4 +37,10 @@ const SIZE = {
   large: "text-base px-4 py-3",
 };
 
-export { VARIANTS, POSITIONS, EFFECTS, DIMENSIONS, SIZE };
+const ANIMATION = {
+  pulse: "animate-pulse 1.5s ease-in-out infinite",
+  wave: "animate-wave 1.5s linear infinite",
+  none: "",
+};
+
+export { VARIANTS, POSITIONS, EFFECTS, DIMENSIONS, SIZE, ANIMATION };

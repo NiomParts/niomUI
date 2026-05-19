@@ -23,47 +23,48 @@ const meta: Meta<BadgeProps> = {
     },
   },
 };
+const count = [1, 2, 3, 4, 5];
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    content: "Default Badge",
+    content: ["Default Badge"],
   },
 };
 
 export const WithVariant: Story = {
   args: {
-    content: "Primary Badge",
+    content: ["Primary Badge"],
     variant: "primary",
   },
 };
 
 export const WithSize: Story = {
   args: {
-    content: "Large Badge",
+    content: ["Large Badge"],
     size: "large",
   },
 };
 
 export const WithVisibility: Story = {
   args: {
-    content: "Visible Badge",
+    content: ["Visible Badge"],
     visible: true,
   },
 };
 
 export const HiddenBadge: Story = {
   args: {
-    content: "Hidden Badge",
+    content: ["Hidden Badge"],
     visible: false,
   },
 };
 
 export const WithCustomStyles: Story = {
   args: {
-    content: "Custom Styled Badge",
+    content: ["Custom Styled Badge"],
     className: "bg-green-500 text-white",
     style: { fontSize: "18px", padding: "10px 20px" },
   },
@@ -71,7 +72,23 @@ export const WithCustomStyles: Story = {
 
 export const WithOnClick: Story = {
   args: {
-    content: "Clickable Badge",
+    content: ["Clickable Badge"],
     onClick: () => alert("Badge clicked!"),
+  },
+};
+
+export const HorizontalLayout: Story = {
+  args: {
+    content: ["Badge 1", "Badge 2", "Badge 3"],
+    horizontal: true,
+    gap: 4,
+  },
+};
+
+export const VerticalLayout: Story = {
+  args: {
+    content: ["Badge 1", "Badge 2", "Badge 3"],
+    horizontal: false,
+    gap: 4,
   },
 };

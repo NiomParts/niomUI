@@ -2,7 +2,7 @@ import { VARIANTS, SIZE } from "@/constant/style";
 export interface BadgeProps {
   id?: string;
   /** * The content of the badge. */
-  content: string | number | React.ReactNode;
+  content: string[] | number[] | React.ReactNode[];
   /** * The color of the badge. */
   variant?: keyof typeof VARIANTS;
   /** * The size of the badge. */
@@ -17,4 +17,8 @@ export interface BadgeProps {
   ref?: React.Ref<HTMLSpanElement>;
   /** * The callback function to be called when the badge is clicked. */
   onClick?: () => void;
+  /** * Whether the badge should be displayed horizontally. */
+  horizontal?: boolean;
+  /** * The gap between badges when displayed horizontally. */
+  gap?: number | string;
 }

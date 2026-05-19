@@ -7,23 +7,34 @@ export const Badge = ({
   variant = "primary",
   size = "medium",
   visible = true,
+  horizontal = false,
+  gap = 2,
   ...props
 }: BadgeProps) => {
   return visible ? (
-    <span
-      id={props.id}
-      ref={props.ref}
-      data-testid={props.id}
-      className={cn(
-        "inline-flex items-center justify-center rounded-full font-semibold",
-        VARIANTS[variant || "primary"],
-        SIZE[size || "medium"],
-        props.className,
-      )}
-      style={props.style}
-      onClick={props.onClick}
+    <section
+      className={cn(horizontal ? "flex" : "flex flex-col")}
+      style={{ gap: `${gap}` }}
+      data-testid={`${props.id}-container`}
     >
-      {content}
-    </span>
+      {content.map((item, index) => (
+        <span
+          id={props.id}
+          key={index}
+          ref={props.ref}
+          data-testid={props.id}
+          className={cn(
+            "inline-flex items-center justify-center rounded-full font-semibold w-fit h-fit",
+            VARIANTS[variant || "primary"],
+            SIZE[size || "medium"],
+            props.className,
+          )}
+          style={props.style}
+          onClick={props.onClick}
+        >
+          {item}
+        </span>
+      ))}
+    </section>
   ) : null;
 };

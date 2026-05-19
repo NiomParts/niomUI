@@ -7,7 +7,7 @@ describe("Banner", () => {
 
   it("renders the banner with correct image", () => {
     const { getByTestId } = render(
-      <Banner image="https://example.com/banner.jpg" />,
+      <Banner id="banner-test-id" image="https://example.com/banner.jpg" />,
     );
     const bannerElement = getByTestId("banner-test-id");
     expect(bannerElement).toBeInTheDocument();
@@ -17,6 +17,7 @@ describe("Banner", () => {
   it("renders content in the correct position", () => {
     const { getByText } = render(
       <Banner
+        id="banner-test-id"
         image="https://example.com/banner.jpg"
         content={<h2>Banner Title</h2>}
         textPosition="top-right"
@@ -30,6 +31,7 @@ describe("Banner", () => {
   it("applies hover effects correctly", () => {
     const { getByTestId } = render(
       <Banner
+        id="banner-test-id"
         image="https://example.com/banner.jpg"
         hoverEffect
         shadowOnHover
@@ -47,7 +49,11 @@ describe("Banner", () => {
 
   it("applies dimensions correctly", () => {
     const { getByTestId } = render(
-      <Banner image="https://example.com/banner.jpg" dimensions="large" />,
+      <Banner
+        id="banner-test-id"
+        image="https://example.com/banner.jpg"
+        dimensions="large"
+      />,
     );
     const bannerElement = getByTestId("banner-test-id");
     expect(bannerElement).toHaveClass("w-128");
@@ -56,7 +62,11 @@ describe("Banner", () => {
   it("calls onClick handler when banner is clicked", () => {
     const handleClick = vi.fn();
     const { getByTestId } = render(
-      <Banner image="https://example.com/banner.jpg" onClick={handleClick} />,
+      <Banner
+        id="banner-test-id"
+        image="https://example.com/banner.jpg"
+        onClick={handleClick}
+      />,
     );
     const bannerElement = getByTestId("banner-test-id");
     bannerElement.click();
