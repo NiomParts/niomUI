@@ -1,5 +1,12 @@
 import type { Meta, StoryObj, StoryFn } from "@storybook/react";
-import { Menu, Cross } from "./Icons";
+import {
+  Menu,
+  Cross,
+  ArrowDown,
+  ArrowUp,
+  ArrowLeft,
+  ArrowRight,
+} from "./Icons";
 import type { SVGprops } from "./Icons.type";
 
 const meta = {
@@ -29,6 +36,38 @@ export const MenuIcon: Story = {
 
 export const CrossIcon: Story = {
   render: createTemplate(Cross),
+  args: {
+    color: "black",
+    size: 24,
+  } as SVGprops,
+};
+
+export const ArrowDownIcon: Story = {
+  render: createTemplate(ArrowDown),
+  args: {
+    color: "black",
+    size: 24,
+  } as SVGprops,
+};
+
+export const ArrowUpIcon: Story = {
+  render: createTemplate(ArrowUp),
+  args: {
+    color: "black",
+    size: 24,
+  } as SVGprops,
+};
+
+export const ArrowRightIcon: Story = {
+  render: createTemplate(ArrowRight),
+  args: {
+    color: "black",
+    size: 24,
+  } as SVGprops,
+};
+
+export const ArrowLeftIcon: Story = {
+  render: createTemplate(ArrowLeft),
   args: {
     color: "black",
     size: 24,
