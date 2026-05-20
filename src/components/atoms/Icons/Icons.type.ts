@@ -7,4 +7,6 @@ export interface SVGprops extends React.SVGProps<SVGSVGElement> {
   height?: number | string;
   /** * The width of the icon. */
   width?: number | string;
+  /** className for the svg element */
+  className?: string;
 }

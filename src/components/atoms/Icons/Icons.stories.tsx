@@ -29,7 +29,7 @@ const createTemplate = (IconComponent: React.FC<SVGprops>) => {
 export const MenuIcon: Story = {
   render: createTemplate(Menu),
   args: {
-    color: "black",
+    className: "text-primary",
     size: 24,
   } as SVGprops,
 };
@@ -61,7 +61,7 @@ export const ArrowUpIcon: Story = {
 export const ArrowRightIcon: Story = {
   render: createTemplate(ArrowRight),
   args: {
-    color: "black",
+    className: "text-primary",
     size: 24,
   } as SVGprops,
 };
