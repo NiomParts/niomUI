@@ -15,5 +15,5 @@
     "skipLibCheck": true,
     "ignoreDeprecations": "6.0"
   },
-  "include": ["src", "index.ts"]
+  "include": ["src", "index.ts", "tsup.config.ts"]
 }

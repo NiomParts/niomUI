@@ -1,14 +1,14 @@
 {
   "name": "kuma-niom",
   "version": "0.1.0-beta.0",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "style": "./dist/index.css",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
     "./style.css": "./dist/index.css"
@@ -48,9 +48,9 @@
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "dev": "tsup index.ts --format cjs,esm --dts --clean --watch --inject-style --external react --external react-dom --external react/jsx-runtime --external react/jsx-dev-runtime & vite",
+    "dev": "tsup & vite",
     "test": "vitest run",
-    "build": "npm run test && tsup index.ts --format cjs,esm --dts --clean --minify --inject-style --external react --external react-dom --external react/jsx-runtime --external react/jsx-dev-runtime",
+    "build": "npm run test && tsup",
     "prepare": "husky"
   },
   "devDependencies": {
