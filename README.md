@@ -40,7 +40,8 @@ The stylesheet entry is optional and remains available for CSS-only tooling or c
 
 ## Scripts
 
-- `npm run dev`: Start English documentation with hot reload.
+- `npm run dev`: Build and serve both documentation locales on port 3000.
+- `npm run dev:en`: Start English documentation with hot reload on port 3000.
 - `npm run dev:fr`: Start French documentation with hot reload on port 3001.
 - `npm run preview:docs`: Build and serve both locales on port 3001.
 - `npm run playground`: Start the Vite component playground.
