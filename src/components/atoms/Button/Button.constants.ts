@@ -7,6 +7,7 @@ export const BUTTON_VARIANTS = [
   "ghost",
   "danger",
   "link",
+  "accent",
   "tertiary",
 ] as const satisfies readonly ButtonVariant[];
 
@@ -30,6 +31,7 @@ export const BUTTON_VARIANT_CLASSES: Record<ButtonVariant, string> = {
   danger:
     "bg-danger text-danger-foreground hover:bg-danger-hover",
   link: "border-0 bg-transparent p-0 text-primary underline-offset-4 hover:text-primary-hover hover:underline",
+  accent: "bg-accent text-accent-foreground hover:bg-accent-hover",
 };
 
 export const BUTTON_SIZE_CLASSES: Record<ButtonSize, string> = {

@@ -4,18 +4,19 @@ import type {
   ForwardedRef,
   ReactElement,
   ReactNode,
-} from 'react';
+} from "react";
 
 export type ButtonVariant =
-  | 'primary'
-  | 'secondary'
-  | 'tertiary'
-  | 'outline'
-  | 'ghost'
-  | 'danger'
-  | 'link';
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "outline"
+  | "ghost"
+  | "danger"
+  | "accent"
+  | "link";
 
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonSize = "sm" | "md" | "lg";
 
 export interface ButtonOwnProps {
   children?: ReactNode;
@@ -30,9 +31,9 @@ export interface ButtonOwnProps {
   loadingText?: string;
 }
 
-export type ButtonProps<C extends ElementType = 'button'> = ButtonOwnProps & {
+export type ButtonProps<C extends ElementType = "button"> = ButtonOwnProps & {
   as?: C;
-} & Omit<ComponentPropsWithoutRef<C>, keyof ButtonOwnProps | 'as'>;
+} & Omit<ComponentPropsWithoutRef<C>, keyof ButtonOwnProps | "as">;
 
 export type ButtonComponent = <C extends ElementType = "button">(
   props: ButtonProps<C> & { ref?: ForwardedRef<HTMLElement> },
