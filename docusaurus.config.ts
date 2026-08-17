@@ -87,11 +87,11 @@ const config: Config = {
       {
         docs: {
           routeBasePath: "docs",
-          sidebarPath: "./sidebars.ts",
+          sidebarPath: "./docs/sidebars.ts",
         },
         blog: false,
         theme: {
-          customCss: "./src/css/docs.css",
+          customCss: "./src/docusaurus/styles.css",
         },
       },
     ],

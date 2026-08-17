@@ -43,6 +43,6 @@
     "index.ts",
     "tsup.config.ts",
     "docusaurus.config.ts",
-    "sidebars.ts"
+    "docs/sidebars.ts"
   ]
 }
