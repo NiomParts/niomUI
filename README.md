@@ -22,7 +22,7 @@ Import and use the package in your project:
 
 ```javascript
 import { Button } from "niom-parts";
-import "niom-parts/style.css";
+import "niom-parts/css/index.css";
 
 function App() {
   return (
@@ -31,6 +31,12 @@ function App() {
     </div>
   );
 }
+```
+
+You can also import the styles from CSS:
+
+```css
+@import "niom-parts/css/index.css";
 ```
 
 ## Scripts
