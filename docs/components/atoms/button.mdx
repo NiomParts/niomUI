@@ -1,0 +1,75 @@
+---
+title: Button
+description: Buttons for actions, links, and loading states.
+---
+
+# Button
+
+Buttons support visual variants, three sizes, icons, loading state, and polymorphic rendering.
+
+```jsx live
+function ButtonExample() {
+  const [loading, setLoading] = React.useState(false);
+
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      <Button
+        loading={loading}
+        loadingText="Saving..."
+        onClick={() => {
+          setLoading(true);
+          window.setTimeout(() => setLoading(false), 900);
+        }}
+      >
+        Save changes
+      </Button>
+      <Button variant="secondary">Preview</Button>
+      <Button variant="outline">Cancel</Button>
+      <Button variant="danger">Delete</Button>
+    </div>
+  );
+}
+```
+
+```tsx
+import { Button, Cart } from "niom-parts";
+
+<Button leftIcon={<Cart size={18} />} size="lg">
+  Add to cart
+</Button>
+```
+
+## Common use cases
+
+Buttons can render as links, expose icon-only actions, fill a container, or communicate unavailable actions.
+
+```jsx live
+function ButtonUseCases() {
+  return (
+    <div className="grid w-full max-w-sm gap-3">
+      <Button leftIcon={<Cart size={18} />} className="w-full">
+        Add to cart
+      </Button>
+      <div className="flex flex-wrap gap-2">
+        <Button as="a" href="#props" variant="link">View API</Button>
+        <Button aria-label="Search" variant="ghost"><Search size={18} /></Button>
+        <Button disabled variant="secondary">Unavailable</Button>
+      </div>
+    </div>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `as` | `ElementType` | `"button"` |
+| `variant` | `"primary" \| "secondary" \| "tertiary" \| "outline" \| "ghost" \| "danger" \| "link"` | `"primary"` |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `leftIcon` | `ReactNode` | - |
+| `rightIcon` | `ReactNode` | - |
+| `disabled` | `boolean` | `false` |
+| `loading` | `boolean` | `false` |
+| `loadingText` | `string` | `"Loading..."` |
+| `className` | `string` | `""` |

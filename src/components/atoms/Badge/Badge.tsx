@@ -26,7 +26,7 @@ const BadgeImpl = <C extends ElementType = "span">(
     <Component
       ref={forwardedRef}
       className={cn(
-        "inline-grid place-items-center rounded-full font-black leading-none",
+        "niom-focus-ring inline-grid appearance-none place-items-center rounded-full border-0 font-black leading-none",
         BADGE_VARIANT_CLASSES[variant],
         BADGE_SIZE_CLASSES[size],
         className,

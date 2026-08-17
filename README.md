@@ -6,7 +6,7 @@ Niom Parts is a lightweight React component library for building Niom-style inte
 
 - **React Components**: Reusable atoms, molecules, and organisms.
 - **Table Organism**: Flexible table variants, color schemes, selection, pagination, sticky columns, and custom stripe colors.
-- **Bundled Styles**: Import the package CSS once and use the components across your app.
+- **Bundled Styles**: Component imports load the compiled styles automatically.
 
 ## Installation
 
@@ -22,7 +22,6 @@ Import and use the package in your project:
 
 ```javascript
 import { Button } from "niom-parts";
-import "niom-parts/css/index.css";
 
 function App() {
   return (
@@ -33,17 +32,19 @@ function App() {
 }
 ```
 
-You can also import the styles from CSS:
+The stylesheet entry is optional and remains available for CSS-only tooling or custom build pipelines:
 
 ```css
-@import "niom-parts/css/index.css";
+@import "niom-parts/style.css";
 ```
 
 ## Scripts
 
-- `npm run dev`: Start the development server.
-- `npm run test`: Run the unit and Storybook test suites.
-- `npm run build`: Build the package for production.
+- `npm run dev`: Start the Docusaurus documentation website.
+- `npm run playground`: Start the Vite component playground.
+- `npm run test`: Run the component test suites.
+- `npm run build`: Build the documentation website.
+- `npm run build:package`: Test and build the npm package.
 
 ## License
 

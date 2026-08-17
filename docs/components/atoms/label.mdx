@@ -1,0 +1,57 @@
+---
+title: Label
+description: Accessible labels for form controls.
+---
+
+import { ComponentPreview } from '@site/src/components/docs/ComponentPreview';
+import { Input, Label } from '@site/src/components';
+
+# Label
+
+Use Label to associate readable text with an input. Required fields receive a visible marker.
+
+<ComponentPreview>
+  <div className="grid w-full max-w-sm gap-2">
+    <Label htmlFor="docs-email" required>Email address</Label>
+    <Input id="docs-email" type="email" placeholder="name@example.com" />
+  </div>
+</ComponentPreview>
+
+```tsx
+import { Input, Label } from "niom-parts";
+
+<Label htmlFor="email" required>Email address</Label>
+<Input id="email" type="email" />
+```
+
+## Common use cases
+
+Use the state props to keep label styling aligned with its related control.
+
+<ComponentPreview className="component-preview--column">
+  <div className="grid w-full max-w-sm gap-5">
+    <div className="grid gap-2">
+      <Label htmlFor="profile-name">Display name</Label>
+      <Input id="profile-name" defaultValue="Maya" />
+    </div>
+    <div className="grid gap-2">
+      <Label htmlFor="required-phone" required>Phone number</Label>
+      <Input id="required-phone" type="tel" />
+    </div>
+    <div className="grid gap-2">
+      <Label htmlFor="locked-field" disabled>Organization</Label>
+      <Input id="locked-field" disabled value="Niom" readOnly />
+    </div>
+  </div>
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `ReactNode` | required |
+| `htmlFor` | `string` | - |
+| `required` | `boolean` | - |
+| `disabled` | `boolean` | - |
+| `className` | `string` | - |
+| `forwardedRef` | `ForwardedRef<HTMLLabelElement>` | - |

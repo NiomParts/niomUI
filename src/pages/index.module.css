@@ -1,0 +1,171 @@
+.page {
+  min-height: calc(100vh - var(--ifm-navbar-height));
+  background: var(--docs-background);
+}
+
+.hero {
+  display: grid;
+  min-height: calc(100vh - var(--ifm-navbar-height));
+  place-items: center;
+  padding: 5rem 1.5rem 7rem;
+}
+
+.heroInner {
+  display: flex;
+  width: min(48rem, 100%);
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.35rem;
+  color: var(--docs-muted-foreground);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.version {
+  border: 1px solid var(--docs-border);
+  border-radius: 999px;
+  padding: 0.25rem 0.5rem;
+  background: var(--docs-surface);
+  color: var(--docs-foreground);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.logo {
+  display: block;
+  width: 3.75rem;
+  height: 3.75rem;
+  flex: 0 0 3.75rem;
+  object-fit: contain;
+}
+
+.brand h1 {
+  margin: 0;
+  color: var(--docs-foreground);
+  font-size: 4rem;
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.heroInner > p {
+  max-width: 38rem;
+  margin: 1.5rem auto 0;
+  color: var(--docs-muted-foreground);
+  font-size: 1.1rem;
+  line-height: 1.75;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.buttonContent {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.install {
+  width: 100%;
+  max-width: 28rem;
+  margin: 2.5rem auto 0;
+  text-align: left;
+}
+
+.installLabel {
+  display: block;
+  margin-bottom: 0.55rem;
+  color: var(--docs-muted-foreground);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.install pre {
+  margin: 0;
+}
+
+.install :global(.theme-code-block) {
+  margin: 0;
+  border-color: var(--docs-border-strong);
+  background: var(--docs-surface) !important;
+}
+
+.install :global(.prism-code) {
+  padding: 0.9rem 1rem;
+  background: var(--docs-surface) !important;
+  font-size: 0.86rem;
+}
+
+@media (max-width: 560px) {
+  .hero {
+    min-height: calc(100svh - var(--ifm-navbar-height));
+    padding: 3.5rem 1rem 5rem;
+  }
+
+  .eyebrow {
+    margin-bottom: 1rem;
+  }
+
+  .logo {
+    width: 3rem;
+    height: 3rem;
+    flex-basis: 3rem;
+  }
+
+  .brand {
+    gap: 0.7rem;
+  }
+
+  .brand h1 {
+    font-size: 2.55rem;
+  }
+
+  .heroInner > p {
+    margin-top: 1.25rem;
+    font-size: 1rem;
+  }
+
+  .actions {
+    width: min(20rem, 100%);
+    flex-direction: column;
+  }
+
+  .actions a {
+    width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo {
+    width: 2.65rem;
+    height: 2.65rem;
+    flex-basis: 2.65rem;
+  }
+
+  .brand h1 {
+    font-size: 2.15rem;
+  }
+}

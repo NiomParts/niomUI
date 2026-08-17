@@ -1,0 +1,111 @@
+---
+title: Icon
+description: Niom SVG icons and brand marks.
+---
+
+import { ComponentPreview } from '@site/src/components/docs/ComponentPreview';
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUp,
+  Cart,
+  Check,
+  Cross,
+  DropDown,
+  Eye,
+  EyeOff,
+  FacebookLogo,
+  GitHubLogo,
+  GoogleLogo,
+  HalfStarFilled,
+  Heart,
+  InstagramLogo,
+  LoginIcon,
+  MasterCard,
+  MCBLogo,
+  Menu,
+  MinusIcon,
+  PaypalLogo,
+  PlusIcon,
+  Profile,
+  Search,
+  Star,
+  StarFilled,
+  TikTokLogo,
+  WhatsAppLogo,
+} from '@site/src/components';
+
+# Icon
+
+Niom exports a set of lightweight SVG icon components. Every icon accepts standard SVG props plus `size`, `width`, `height`, `color`, and `className`.
+
+<ComponentPreview label="Icon catalog" className="component-preview--top">
+  <div className="icon-catalog">
+    <div className="icon-catalog__item"><Menu size={24} /><code>Menu</code></div>
+    <div className="icon-catalog__item"><Cross size={24} /><code>Cross</code></div>
+    <div className="icon-catalog__item"><Cart size={24} /><code>Cart</code></div>
+    <div className="icon-catalog__item"><Heart size={24} /><code>Heart</code></div>
+    <div className="icon-catalog__item"><ArrowDown size={24} /><code>ArrowDown</code></div>
+    <div className="icon-catalog__item"><ArrowUp size={24} /><code>ArrowUp</code></div>
+    <div className="icon-catalog__item"><ArrowRight size={24} /><code>ArrowRight</code></div>
+    <div className="icon-catalog__item"><ArrowLeft size={24} /><code>ArrowLeft</code></div>
+    <div className="icon-catalog__item"><Search size={24} /><code>Search</code></div>
+    <div className="icon-catalog__item"><Check size={24} /><code>Check</code></div>
+    <div className="icon-catalog__item"><Eye size={24} /><code>Eye</code></div>
+    <div className="icon-catalog__item"><EyeOff size={24} /><code>EyeOff</code></div>
+    <div className="icon-catalog__item"><Star size={24} /><code>Star</code></div>
+    <div className="icon-catalog__item"><StarFilled size={24} color="var(--color-highlight)" /><code>StarFilled</code></div>
+    <div className="icon-catalog__item"><HalfStarFilled size={24} color="var(--color-highlight)" /><code>HalfStarFilled</code></div>
+    <div className="icon-catalog__item"><LoginIcon size={24} /><code>LoginIcon</code></div>
+    <div className="icon-catalog__item"><Profile size={24} /><code>Profile</code></div>
+    <div className="icon-catalog__item"><DropDown size={24} /><code>DropDown</code></div>
+    <div className="icon-catalog__item"><PlusIcon size={24} /><code>PlusIcon</code></div>
+    <div className="icon-catalog__item"><MinusIcon size={24} /><code>MinusIcon</code></div>
+    <div className="icon-catalog__item"><GoogleLogo /><code>GoogleLogo</code></div>
+    <div className="icon-catalog__item"><GitHubLogo /><code>GitHubLogo</code></div>
+    <div className="icon-catalog__item"><WhatsAppLogo /><code>WhatsAppLogo</code></div>
+    <div className="icon-catalog__item"><FacebookLogo /><code>FacebookLogo</code></div>
+    <div className="icon-catalog__item"><InstagramLogo /><code>InstagramLogo</code></div>
+    <div className="icon-catalog__item"><TikTokLogo /><code>TikTokLogo</code></div>
+    <div className="icon-catalog__item"><PaypalLogo /><code>PaypalLogo</code></div>
+    <div className="icon-catalog__item"><MCBLogo /><code>MCBLogo</code></div>
+    <div className="icon-catalog__item"><MasterCard /><code>MasterCard</code></div>
+  </div>
+</ComponentPreview>
+
+```tsx
+import { Button, Cart } from "niom-parts";
+
+<Button aria-label="Open cart" variant="ghost">
+  <Cart size={20} aria-hidden="true" />
+</Button>
+```
+
+## Common use cases
+
+Decorative icons should be hidden from assistive technology, while icon-only buttons need an accessible label.
+
+```jsx live
+function IconUseCases() {
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      <Button leftIcon={<Search size={18} aria-hidden="true" />}>Search</Button>
+      <Button aria-label="Add to favorites" variant="outline"><Heart size={19} /></Button>
+      <span className="inline-flex items-center gap-2 text-accent"><Check size={18} aria-hidden="true" />Payment confirmed</span>
+      <ArrowRight size={28} color="var(--color-secondary)" />
+    </div>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `size` | `number \| string` | icon-specific |
+| `width` | `number \| string` | - |
+| `height` | `number \| string` | - |
+| `color` | `string` | `"currentColor"` |
+| `className` | `string` | - |
+| SVG attributes | `SVGProps<SVGSVGElement>` | - |

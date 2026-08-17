@@ -1,0 +1,69 @@
+---
+title: Badge
+description: Compact status and count labels.
+---
+
+# Badge
+
+Use badges for counts, short statuses, and compact metadata.
+
+```jsx live
+function BadgeExample() {
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      <Badge>New</Badge>
+      <Badge variant="secondary">Featured</Badge>
+      <Badge variant="tertiary">Pro</Badge>
+      <Badge variant="success">In stock</Badge>
+      <Badge variant="warning">Low stock</Badge>
+      <Badge variant="danger">Sold out</Badge>
+    </div>
+  );
+}
+```
+
+```tsx
+import { Badge } from "niom-parts";
+
+<Badge variant="success" size="md">
+  In stock
+</Badge>;
+```
+
+## Common use cases
+
+Use a badge inside other controls for counts, or pair it with text for compact status metadata.
+
+```jsx live
+function BadgeUseCases() {
+  return (
+    <div className="flex flex-wrap items-center gap-5">
+      <Button variant="outline" className="relative">
+        Notifications
+        <Badge variant="danger" className="absolute -right-0.4 -top-0.5">
+          3
+        </Badge>
+      </Button>
+      <div className="flex items-center gap-2 text-sm">
+        Order #1042
+        <Badge variant="success" size="md">
+          Paid
+        </Badge>
+      </div>
+      <Badge as="strong" variant="muted">
+        Archived
+      </Badge>
+    </div>
+  );
+}
+```
+
+## Props
+
+| Prop        | Type                                                                                      | Default     |
+| ----------- | ----------------------------------------------------------------------------------------- | ----------- |
+| `as`        | `ElementType`                                                                             | `"span"`    |
+| `variant`   | `"primary" \| "secondary" \| "tertiary" \| "muted" \| "success" \| "danger" \| "warning"` | `"primary"` |
+| `size`      | `"sm" \| "md"`                                                                            | `"sm"`      |
+| `children`  | `ReactNode`                                                                               | -           |
+| `className` | `string`                                                                                  | `""`        |

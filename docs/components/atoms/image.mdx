@@ -1,0 +1,65 @@
+---
+title: Image
+description: Responsive images with fit and fallback support.
+---
+
+import { ComponentPreview } from '@site/src/components/docs/ComponentPreview';
+import { Image } from '@site/src/components';
+import { Stock, Logo } from '@site/src/media';
+
+# Image
+
+Image wraps the native image element with object-fit, aspect-ratio, lazy loading, and fallback support.
+
+<ComponentPreview>
+  <Image
+    src={Stock}
+    fallbackSrc={Logo}
+    alt="Skincare products arranged on a pale surface"
+    width={320}
+    height={240}
+    aspectRatio="4/3"
+    className="rounded-md"
+  />
+</ComponentPreview>
+
+```tsx
+import { Image } from "niom-parts";
+
+<Image
+  src="/products/serum.jpg"
+  fallbackSrc="/images/fallback.jpg"
+  alt="Hydrating face serum"
+  aspectRatio="4/3"
+  objectFit="cover"
+/>
+```
+
+## Common use cases
+
+Choose `cover` for product photography, `contain` for logos, and provide a fallback for remote media.
+
+```jsx live
+function ImageUseCases() {
+  return (
+    <div className="grid w-full max-w-xl grid-cols-2 gap-4">
+      <Image src={Stock} alt="Product arrangement" aspectRatio="1/1" objectFit="cover" className="rounded-md" />
+      <Image src="/missing-image.jpg" fallbackSrc={Logo} alt="Niom Parts" aspectRatio="1/1" objectFit="contain" className="rounded-md bg-surface p-6" />
+    </div>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `src` | `string` | required |
+| `alt` | `string` | required |
+| `fallbackSrc` | `string` | - |
+| `loading` | `"lazy" \| "eager"` | `"lazy"` |
+| `objectFit` | `"cover" \| "contain" \| "fill" \| "none" \| "scale-down"` | `"cover"` |
+| `width` | `number` | - |
+| `height` | `number` | - |
+| `aspectRatio` | `string` | - |
+| `className` | `string` | - |

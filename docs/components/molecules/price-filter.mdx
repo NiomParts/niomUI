@@ -1,0 +1,92 @@
+---
+title: PriceFilter
+description: Localized price range control.
+---
+
+# PriceFilter
+
+PriceFilter combines a range Slider with localized currency output.
+
+```jsx live
+function PriceFilterExample() {
+  const [range, setRange] = React.useState([500, 5000]);
+
+  return (
+    <PriceFilter
+      label="Budget"
+      value={range}
+      min={0}
+      max={10000}
+      step={250}
+      currency="MUR"
+      locale="en-MU"
+      onChange={setRange}
+    />
+  );
+}
+```
+
+```tsx
+import { PriceFilter } from "niom-parts";
+
+<PriceFilter
+  value={range}
+  min={0}
+  max={10000}
+  step={250}
+  currency="MUR"
+  locale="en-MU"
+  onChange={setRange}
+/>
+```
+
+## Common use cases
+
+Set `currency` and `locale` together for local storefronts, and use `disabled` while filters are being applied.
+
+```jsx live
+function PriceFilterUseCases() {
+  const [eurRange, setEurRange] = React.useState([25, 175]);
+
+  return (
+    <div className="grid w-full gap-7 sm:grid-cols-2">
+      <PriceFilter
+        label="European catalog"
+        value={eurRange}
+        min={0}
+        max={250}
+        step={5}
+        currency="EUR"
+        locale="fr-FR"
+        onChange={setEurRange}
+      />
+      <PriceFilter
+        label="Locked budget"
+        value={[500, 2500]}
+        min={0}
+        max={5000}
+        step={100}
+        currency="MUR"
+        locale="en-MU"
+        onChange={() => {}}
+        disabled
+      />
+    </div>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `[number, number]` | required |
+| `onChange` | `(value: [number, number]) => void` | required |
+| `min` | `number` | `0` |
+| `max` | `number` | `100` |
+| `step` | `number` | `1` |
+| `label` | `ReactNode` | `"Price"` |
+| `currency` | `string` | `"USD"` |
+| `locale` | `string` | runtime locale |
+| `disabled` | `boolean` | `false` |
+| `className` | `string` | - |

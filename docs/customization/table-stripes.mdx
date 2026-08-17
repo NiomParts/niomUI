@@ -1,0 +1,20 @@
+---
+title: Table stripes
+description: Customize odd and even striped table row colors.
+---
+
+# Table stripe colors
+
+Set `variant="striped"`, then pass any valid CSS color to `stripedOddRowColor` and `stripedEvenRowColor`.
+
+```tsx
+<Table
+  variant="striped"
+  stripedOddRowColor="color-mix(in srgb, var(--color-primary) 12%, var(--color-surface))"
+  stripedEvenRowColor="color-mix(in srgb, var(--color-secondary) 16%, var(--color-surface))"
+  columns={columns}
+  data={data}
+/>
+```
+
+You can use hex, RGB, HSL, CSS variables, or `color-mix()` values.

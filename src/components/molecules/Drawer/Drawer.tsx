@@ -55,7 +55,8 @@ export function Drawer({
     <div className={cn("fixed inset-0 z-50 flex items-start justify-start")}>
       <button
         type="button"
-        className="absolute inset-0 bg-black/60"
+        tabIndex={-1}
+        className="absolute inset-0 bg-black/60 outline-none"
         aria-label="Close drawer overlay"
         onClick={closeDrawer}
       />

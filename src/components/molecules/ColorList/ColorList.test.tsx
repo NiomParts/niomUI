@@ -18,6 +18,8 @@ describe("ColorList", () => {
     mockColors.forEach((color) => {
       const colorItem = screen.getByRole("button", { name: color });
       expect(colorItem).toBeInTheDocument();
+      expect(colorItem).toHaveAttribute("type", "button");
+      expect(colorItem).toHaveClass("niom-focus-ring");
     });
   });
 

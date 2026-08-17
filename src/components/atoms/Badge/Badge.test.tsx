@@ -38,4 +38,14 @@ describe("Badge", () => {
     expect(badge).toHaveClass("bg-muted");
     expect(badge).toHaveClass("h-6");
   });
+
+  it("removes native button chrome and uses the shared focus outline", () => {
+    render(<Badge as="button">Filters</Badge>);
+
+    expect(screen.getByRole("button", { name: "Filters" })).toHaveClass(
+      "appearance-none",
+      "border-0",
+      "niom-focus-ring",
+    );
+  });
 });

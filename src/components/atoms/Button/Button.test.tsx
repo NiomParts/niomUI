@@ -13,7 +13,27 @@ describe('Button', () => {
   it('applies the requested variant classes', () => {
     render(<Button variant="outline">View Product</Button>);
 
-    expect(screen.getByRole('button', { name: 'View Product' })).toHaveClass('border');
+    expect(screen.getByRole('button', { name: 'View Product' })).toHaveClass(
+      'border',
+      'border-border',
+    );
+  });
+
+  it('prevents native button borders on filled variants', () => {
+    render(<Button>Save</Button>);
+
+    expect(screen.getByRole('button', { name: 'Save' })).toHaveClass(
+      'border',
+      'border-transparent',
+    );
+  });
+
+  it('uses the shared keyboard focus outline', () => {
+    render(<Button>Save</Button>);
+
+    expect(screen.getByRole('button', { name: 'Save' })).toHaveClass(
+      'niom-focus-ring',
+    );
   });
 
   it('applies the requested size classes', () => {

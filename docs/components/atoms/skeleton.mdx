@@ -1,0 +1,63 @@
+---
+title: Skeleton
+description: Loading placeholders for content layouts.
+---
+
+# Skeleton
+
+Skeleton creates neutral loading placeholders with optional animation and configurable corners.
+
+```jsx live
+function SkeletonExample() {
+  return (
+    <div className="grid w-72 gap-4">
+      <div className="flex items-center gap-3">
+        <Skeleton className="size-12" rounded="full" />
+        <div className="grid flex-1 gap-2">
+          <Skeleton className="h-4 w-2/3" />
+          <Skeleton className="h-3 w-full" />
+        </div>
+      </div>
+      <Skeleton className="h-36 w-full" rounded="lg" />
+    </div>
+  );
+}
+```
+
+```tsx
+import { Skeleton } from "niom-parts";
+
+<Skeleton className="h-40 w-full" rounded="lg" />
+```
+
+## Common use cases
+
+Match placeholders to the final layout to avoid page movement while data loads.
+
+```jsx live
+function SkeletonUseCases() {
+  return (
+    <div className="grid w-full max-w-lg gap-5">
+      <Card className="grid gap-3">
+        <Skeleton className="h-5 w-1/3" />
+        <Skeleton className="h-3 w-full" />
+        <Skeleton className="h-3 w-4/5" />
+      </Card>
+      <div className="grid grid-cols-[3rem_1fr_5rem] items-center gap-3">
+        <Skeleton className="size-12" rounded="full" />
+        <Skeleton className="h-4 w-full" />
+        <Skeleton className="h-9 w-full" rounded="md" animated={false} />
+      </div>
+    </div>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `animated` | `boolean` | `true` |
+| `rounded` | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"md"` |
+| `className` | `string` | - |
+| HTML attributes | `HTMLAttributes<HTMLDivElement>` | - |

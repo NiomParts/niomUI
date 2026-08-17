@@ -10,7 +10,7 @@ import type {
   PrimitiveValue,
   RowData,
   TableProps,
-} from "@/type/components/organisms/Table.type";
+} from "@type/components/organisms/Table.type";
 
 export const Table = ({
   id,
@@ -165,6 +165,7 @@ export const Table = ({
               selectable ? () => handleOnRowClick(rowData, rowIndex) : undefined
             }
             className={cn(
+              "niom-focus-ring",
               {
                 "row--clickable": selectable,
                 "row--selected":

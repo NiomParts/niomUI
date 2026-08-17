@@ -1,0 +1,79 @@
+---
+title: InputField
+description: Input, label, and error message composition.
+---
+
+# InputField
+
+InputField combines Input and Label with static or floating labels and an accessible error message.
+
+```jsx live
+function InputFieldExample() {
+  const [email, setEmail] = React.useState("");
+  const invalid = email.length > 0 && !email.includes("@");
+
+  return (
+    <div className="w-full max-w-sm">
+      <InputField
+        floatingLabel="Email address"
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+        error={invalid}
+        errorMessage="Enter a valid email address."
+        type="email"
+        required
+      />
+    </div>
+  );
+}
+```
+
+```tsx
+import { InputField } from "niom-parts";
+
+<InputField
+  floatingLabel="Email address"
+  type="email"
+  error={invalid}
+  errorMessage="Enter a valid email address."
+/>
+```
+
+## Common use cases
+
+InputField supports standard labels, floating labels, validation messages, and disabled form values.
+
+```jsx live
+function InputFieldUseCases() {
+  const [password, setPassword] = React.useState("");
+
+  return (
+    <div className="grid w-full max-w-md gap-5">
+      <InputField label="Full name" placeholder="Maya Chen" required />
+      <InputField
+        floatingLabel="Password"
+        type="password"
+        value={password}
+        onChange={(event) => setPassword(event.target.value)}
+        error={password.length > 0 && password.length < 8}
+        errorMessage="Use at least 8 characters."
+      />
+      <InputField label="Workspace" value="Niom" disabled readOnly />
+    </div>
+  );
+}
+```
+
+## Props
+
+InputField accepts the public Input props plus the following composition props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `label` | `ReactNode` | - |
+| `floatingLabel` | `ReactNode` | - |
+| `error` | `boolean` | `false` |
+| `errorMessage` | `string` | - |
+| `required` | `boolean` | - |
+| `disabled` | `boolean` | `false` |
+| `className` | `string` | - |

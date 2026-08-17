@@ -47,7 +47,7 @@ const ButtonImpl = <C extends ElementType = "button">(
     <Component
       ref={forwardedRef}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-md font-semibold transition outline-none focus-visible:outline focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-60",
+        "niom-focus-ring inline-flex appearance-none items-center justify-center gap-2 rounded-md border border-transparent font-semibold transition disabled:cursor-not-allowed disabled:opacity-60",
         BUTTON_VARIANT_CLASSES[variant],
         BUTTON_SIZE_CLASSES[size],
         className,

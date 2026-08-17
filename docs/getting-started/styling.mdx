@@ -1,0 +1,43 @@
+---
+title: Styling
+description: Extend Niom components and theme tokens.
+---
+
+# Styling
+
+Niom Parts injects its compiled styles when the package entry loads, so component imports work without a separate CSS import.
+
+The stylesheet entry remains available when a toolchain expects an explicit CSS asset:
+
+```tsx
+import "niom-parts/style.css";
+```
+
+This explicit import is optional and does not need to be repeated in individual component files.
+
+Most components accept `className` so you can adjust layout, width, and spacing:
+
+```tsx
+import { Button, Card } from "niom-parts";
+
+export function CheckoutCard() {
+  return (
+    <Card className="grid max-w-md gap-4" padding="lg">
+      <h2>Order summary</h2>
+      <Button className="w-full">Checkout</Button>
+    </Card>
+  );
+}
+```
+
+Niom uses CSS custom properties for its semantic color system. Override a token after the package stylesheet to theme every component that consumes it:
+
+```css
+:root {
+  --color-primary: #22c55e;
+  --color-primary-hover: #4ade80;
+  --color-primary-foreground: #04130d;
+}
+```
+
+See the complete [color reference](../customization/colors.mdx).

@@ -32,8 +32,7 @@ export function AccordionTrigger({
       aria-controls={controls}
       onClick={() => onToggle(itemIndex)}
       className={cn(
-        "group flex w-full items-center gap-3 p-3 text-left font-semibold transition outline-none",
-        "focus-visible:outline-2 focus-visible:outline-offset-2",
+        "niom-focus-ring group flex w-full items-center gap-3 p-3 text-left font-semibold transition",
         ACCORDION_TRIGGER_VARIANT_CLASSES[variant],
         disabled && "cursor-not-allowed opacity-50",
         iconPosition === "right" && "justify-between",

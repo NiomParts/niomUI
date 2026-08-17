@@ -130,7 +130,14 @@ describe("Select", () => {
     const select = screen.getByRole("combobox", { name: "Category" });
 
     expect(select).toHaveAttribute("id", "category");
-    expect(select).toHaveClass("custom-class", "text-foreground");
+    expect(select).toHaveClass(
+      "custom-class",
+      "text-foreground",
+      "bg-transparent",
+      "appearance-none",
+      "niom-focus-ring",
+    );
+    expect(select).not.toHaveClass("focus:ring-foreground");
     expect(document.querySelector('input[name="category"]')).toHaveValue("");
 
     fireEvent.click(select);

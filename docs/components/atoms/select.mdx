@@ -1,0 +1,82 @@
+---
+title: Select
+description: Accessible custom select with keyboard navigation.
+---
+
+# Select
+
+Select supports controlled and uncontrolled values, disabled options, keyboard navigation, and native form submission through a hidden input.
+
+```jsx live
+function SelectExample() {
+  const [value, setValue] = React.useState();
+  const options = [
+    { value: "audio", label: "Audio" },
+    { value: "graphics", label: "Graphics" },
+    { value: "legacy", label: "Legacy", disabled: true },
+  ];
+
+  return (
+    <div className="grid w-full max-w-sm gap-3">
+      <Select
+        aria-label="Product category"
+        options={options}
+        value={value}
+        onChange={setValue}
+        placeholder="Select a category"
+        variant="outlined"
+      />
+      <span className="text-sm text-muted-foreground">Selected: {value || "none"}</span>
+    </div>
+  );
+}
+```
+
+```tsx
+import { Select } from "niom-parts";
+
+<Select
+  name="category"
+  options={[{ value: "audio", label: "Audio" }]}
+  placeholder="Select a category"
+  onChange={setCategory}
+/>
+```
+
+## Common use cases
+
+Select supports semantic variants, initial values, required form fields, and unavailable controls.
+
+```jsx live
+function SelectUseCases() {
+  const options = [
+    { value: "mu", label: "Mauritius" },
+    { value: "fr", label: "France" },
+    { value: "archive", label: "Archived region", disabled: true },
+  ];
+
+  return (
+    <div className="grid w-full max-w-sm gap-3">
+      <Select options={options} defaultValue="mu" name="country" variant="secondary" />
+      <Select options={options} placeholder="Required region" required variant="outlined" />
+      <Select options={options} placeholder="Unavailable" disabled />
+    </div>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `options` | `SelectOption[]` | required |
+| `value` | `string \| number` | - |
+| `defaultValue` | `string \| number` | - |
+| `placeholder` | `string` | `"Select"` |
+| `onChange` | `(value: string \| number) => void` | - |
+| `variant` | `"outlined" \| "primary" \| "secondary" \| "tertiary"` | `"primary"` |
+| `disabled` | `boolean` | - |
+| `required` | `boolean` | - |
+| `name` | `string` | - |
+| `dropdownClassName` | `string` | - |
+| `optionClassName` | `string` | - |

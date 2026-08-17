@@ -1,0 +1,43 @@
+.playgroundEditor {
+  max-height: 28rem;
+  overflow: auto;
+  background: #0c0c0f;
+  direction: ltr;
+  font: var(--ifm-code-font-size) / var(--ifm-pre-line-height)
+    var(--ifm-font-family-monospace) !important;
+}
+
+.playgroundEditor pre {
+  border-radius: 0;
+  background: #0c0c0f !important;
+}
+
+.editorButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: 1px solid var(--docs-border);
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  color: var(--docs-muted-foreground);
+  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background-color var(--ifm-transition-fast),
+    border-color var(--ifm-transition-fast);
+}
+
+.editorButton:hover {
+  border-color: var(--docs-border-strong);
+  background: var(--docs-surface-hover);
+  color: var(--docs-foreground);
+}
+
+.editorButtonIcon {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 1rem;
+  fill: currentcolor;
+}

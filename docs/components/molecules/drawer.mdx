@@ -1,0 +1,78 @@
+---
+title: Drawer
+description: Left and right modal side panels.
+---
+
+# Drawer
+
+Drawer renders a modal side panel with an overlay, Escape-key handling, and focus on its close button.
+
+```jsx live
+function DrawerExample() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open drawer</Button>
+      <Drawer isOpen={open} onClose={() => setOpen(false)} side="right">
+        <h2 className="mt-2 text-xl font-bold">Your cart</h2>
+        <p className="mt-2 text-muted-foreground">The drawer can contain any React content.</p>
+      </Drawer>
+    </>
+  );
+}
+```
+
+```tsx
+import { Button, Drawer } from "niom-parts";
+
+<Button onClick={() => setOpen(true)}>Open drawer</Button>
+<Drawer isOpen={open} onClose={() => setOpen(false)} side="right">
+  Drawer content
+</Drawer>
+```
+
+## Common use cases
+
+Left drawers work well for navigation or filters; right drawers suit carts and contextual details.
+
+```jsx live
+function DrawerUseCases() {
+  const [side, setSide] = React.useState(null);
+
+  return (
+    <div className="flex flex-wrap gap-3">
+      <Button variant="secondary" onClick={() => setSide("left")}>Open filters</Button>
+      <Button onClick={() => setSide("right")}>Open cart</Button>
+      <Drawer isOpen={side !== null} onClose={() => setSide(null)} side={side || "left"}>
+        {side === "left" ? (
+          <div className="grid gap-4">
+            <h2 className="text-xl font-bold">Filters</h2>
+            <CheckBoxGroup
+              label="Availability"
+              items={[{ label: "In stock", value: "stock" }, { label: "On sale", value: "sale" }]}
+              value={["stock"]}
+            />
+          </div>
+        ) : (
+          <div className="grid gap-4">
+            <h2 className="text-xl font-bold">Your cart</h2>
+            <p className="text-muted-foreground">Two products are ready for checkout.</p>
+            <Button>Checkout</Button>
+          </div>
+        )}
+      </Drawer>
+    </div>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `isOpen` | `boolean` | required |
+| `onClose` | `() => void` | required |
+| `side` | `"left" \| "right"` | `"left"` |
+| `children` | `ReactNode` | - |
+| `className` | `string` | - |

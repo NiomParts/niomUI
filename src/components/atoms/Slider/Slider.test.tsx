@@ -20,6 +20,10 @@ describe("Slider", () => {
     expect(slider).toHaveAttribute("aria-valuemin", "0");
     expect(slider).toHaveAttribute("aria-valuemax", "100");
     expect(slider).toHaveAttribute("aria-valuenow", "50");
+    expect(slider).toHaveClass(
+      "niom-focus-ring",
+    );
+    expect(slider).not.toHaveClass("focus-visible:ring-offset-2");
   });
 
   it("renders two thumbs for a range value", () => {

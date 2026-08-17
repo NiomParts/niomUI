@@ -24,6 +24,9 @@ describe("Accordion", () => {
       "aria-expanded",
       "true",
     );
+    expect(screen.getByRole("button", { name: "First" })).toHaveClass(
+      "niom-focus-ring",
+    );
   });
 
   it("keeps only one item open by default", async () => {

@@ -1,0 +1,106 @@
+---
+title: Accordion
+description: Expandable single and multiple content sections.
+---
+
+# Accordion
+
+Accordion coordinates accessible triggers and panels. Use `AccordionItem` for each section.
+
+```jsx live
+function AccordionExample() {
+  return (
+    <Accordion defaultActiveKey={0} variant="boxed" className="w-full max-w-lg space-y-3">
+      <AccordionItem
+        label="Product details"
+        icon={<PlusIcon size={18} />}
+        activeIcon={<MinusIcon size={18} />}
+      >
+        Built for focused product and filter interfaces.
+      </AccordionItem>
+      <AccordionItem
+        label="Shipping"
+        icon={<PlusIcon size={18} />}
+        activeIcon={<MinusIcon size={18} />}
+      >
+        Standard shipping is available across Mauritius.
+      </AccordionItem>
+      <AccordionItem label="Unavailable section" disabled />
+    </Accordion>
+  );
+}
+```
+
+```tsx
+import { Accordion, AccordionItem, MinusIcon, PlusIcon } from "niom-parts";
+
+<Accordion defaultActiveKey={0} variant="boxed">
+  <AccordionItem
+    label="Product details"
+    icon={<PlusIcon size={18} />}
+    activeIcon={<MinusIcon size={18} />}
+  >
+    Panel content
+  </AccordionItem>
+</Accordion>
+```
+
+## Common use cases
+
+Enable `multiple` for FAQs and filters where more than one section should remain visible. Individual items can also be disabled or place their icon on either side.
+
+```jsx live
+function AccordionUseCases() {
+  const [openSections, setOpenSections] = React.useState([0, 1]);
+
+  return (
+    <div className="grid w-full max-w-xl gap-3">
+      <span className="text-sm text-muted-foreground">
+        {openSections.length} section{openSections.length === 1 ? "" : "s"} open
+      </span>
+      <Accordion
+        defaultActiveKey={[0, 1]}
+        multiple
+        onChange={setOpenSections}
+        variant="outline"
+      >
+        <AccordionItem label="Can I change my order?" iconPosition="left">
+          Orders can be updated before they enter fulfillment.
+        </AccordionItem>
+        <AccordionItem label="Which payment methods are accepted?" iconPosition="left">
+          Visa, Mastercard, and mobile payments are supported.
+        </AccordionItem>
+        <AccordionItem label="Returns are unavailable" disabled />
+      </Accordion>
+    </div>
+  );
+}
+```
+
+## Accordion props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `children` | `ReactNode` | required |
+| `defaultActiveKey` | `number \| number[]` | - |
+| `multiple` | `boolean` | `false` |
+| `variant` | `"primary" \| "secondary" \| "tertiary" \| "none" \| "outline" \| "boxed" \| "accent"` | `"primary"` |
+| `onChange` | `(activeKeys: number[]) => void` | - |
+| `id` | `string` | generated |
+| `className` | `string` | - |
+
+## AccordionItem props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `label` | `ReactNode` | - |
+| `disabled` | `boolean` | `false` |
+| `headerPosition` | `"top" \| "bottom"` | `"top"` |
+| `iconPosition` | `"left" \| "right"` | `"right"` |
+| `padding` | `"none" \| "small" \| "medium" \| "large"` | `"medium"` |
+| `shadow` | `"none" \| "small" \| "medium" \| "large"` | `"none"` |
+| `bordered` | `boolean` | `true` |
+| `header` | `ReactNode` | - |
+| `footer` | `ReactNode` | - |
+| `icon` | `ReactNode` | - |
+| `activeIcon` | `ReactNode` | - |

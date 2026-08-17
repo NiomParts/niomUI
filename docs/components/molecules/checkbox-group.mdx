@@ -1,0 +1,91 @@
+---
+title: CheckboxGroup
+description: A coordinated collection of checkbox options.
+---
+
+# CheckboxGroup
+
+The exported component is named `CheckBoxGroup`. It manages a string array and can lay options out horizontally or vertically.
+
+```jsx live
+function CheckboxGroupExample() {
+  const [selected, setSelected] = React.useState(["audio"]);
+  const items = [
+    { label: "Audio", value: "audio", totalCount: 8 },
+    { label: "Graphics", value: "graphics", totalCount: 12 },
+    { label: "Legacy", value: "legacy", totalCount: 3, disabled: true },
+  ];
+
+  return (
+    <div className="grid gap-4">
+      <CheckBoxGroup
+        label="Departments"
+        items={items}
+        value={selected}
+        onChange={setSelected}
+        variant="secondary"
+      />
+      <span className="text-sm text-muted-foreground">{selected.join(", ") || "None selected"}</span>
+    </div>
+  );
+}
+```
+
+```tsx
+import { CheckBoxGroup } from "niom-parts";
+
+<CheckBoxGroup
+  label="Departments"
+  items={items}
+  value={selected}
+  onChange={setSelected}
+/>
+```
+
+## Common use cases
+
+Use a horizontal group for compact permissions or settings. Disable the whole group while its parent form is read-only.
+
+```jsx live
+function CheckboxGroupUseCases() {
+  const [permissions, setPermissions] = React.useState(["view"]);
+  const items = [
+    { label: "View", value: "view" },
+    { label: "Edit", value: "edit" },
+    { label: "Publish", value: "publish" },
+  ];
+
+  return (
+    <div className="grid w-full gap-6">
+      <CheckBoxGroup
+        label="Permissions"
+        items={items}
+        orientation="horizontal"
+        value={permissions}
+        onChange={setPermissions}
+        variant="accent"
+      />
+      <CheckBoxGroup
+        disabled
+        label="Locked plan options"
+        items={items.slice(0, 2)}
+        value={["view"]}
+      />
+    </div>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `items` | `CheckboxGroupItem[]` | required |
+| `value` | `string[]` | `[]` |
+| `onChange` | `(values: string[]) => void` | - |
+| `label` | `ReactNode` | - |
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` |
+| `disabled` | `boolean` | `false` |
+| `variant` | `CheckboxVariant` | - |
+| `textVariant` | `CheckboxTextVariant` | - |
+| `className` | `string` | `""` |

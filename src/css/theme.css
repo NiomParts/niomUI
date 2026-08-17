@@ -1,0 +1,48 @@
+@theme {
+  --color-background: #08111f;
+  --color-foreground: #f5f7fb;
+  --color-clear: #f4fafc;
+
+  --color-surface: #111c30;
+  --color-surface-hover: #182641;
+  --color-surface-foreground: #f5f7fb;
+
+  --color-muted: #1d2a42;
+  --color-muted-foreground: #b8c2d4;
+
+  --color-border: #2b3850;
+  --color-ring: #7dd3fc;
+
+  --color-primary: #38bdf8;
+  --color-primary-hover: #7dd3fc;
+  --color-primary-foreground: #08111f;
+
+  --color-secondary: #a78bfa;
+  --color-secondary-hover: #c4b5fd;
+  --color-secondary-foreground: #111026;
+
+  --color-tertiary: #10288c;
+  --color-tertiary-hover: #1e3a8a;
+  --color-tertiary-foreground: #ffffff;
+
+  --color-accent: #34d399;
+  --color-accent-hover: #6ee7b7;
+  --color-accent-foreground: #04130d;
+
+  --color-danger: #ef4444;
+  --color-danger-hover: #f87171;
+  --color-danger-foreground: #ffffff;
+
+  --color-highlight: #f5b942;
+  --color-highlight-hover: #f8ca6a;
+  --color-highlight-foreground: #1b1203;
+}
+
+.niom-focus-ring {
+  outline: none;
+}
+
+.niom-focus-ring:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}

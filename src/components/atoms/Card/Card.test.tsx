@@ -28,6 +28,14 @@ describe("Card", () => {
     ).toBeInTheDocument();
   });
 
+  it("uses the shared focus outline when rendered interactively", () => {
+    render(<Card as="button">Open product</Card>);
+
+    expect(screen.getByRole("button", { name: "Open product" })).toHaveClass(
+      "niom-focus-ring",
+    );
+  });
+
   it("applies variant and padding classes", () => {
     render(
       <Card padding="lg" variant="outline">

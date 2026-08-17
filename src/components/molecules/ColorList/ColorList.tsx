@@ -31,6 +31,7 @@ export const ColorList = ({
         <Badge
           key={color}
           as="button"
+          type="button"
           role="button"
           className={cn(
             "h-6 w-6 cursor-pointer rounded-full border border-border",

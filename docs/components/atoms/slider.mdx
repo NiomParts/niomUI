@@ -1,0 +1,78 @@
+---
+title: Slider
+description: Single-value and range sliders.
+---
+
+# Slider
+
+Slider supports single and range values, horizontal and vertical orientation, pointer input, and keyboard controls.
+
+```jsx live
+function SliderExample() {
+  const [value, setValue] = React.useState([25, 75]);
+
+  return (
+    <div className="grid w-full max-w-md gap-4">
+      <div className="flex justify-between text-sm text-muted-foreground">
+        <span>{value[0]}</span>
+        <span>{value[1]}</span>
+      </div>
+      <Slider
+        value={value}
+        min={0}
+        max={100}
+        step={5}
+        ariaLabels={["Minimum", "Maximum"]}
+        onChange={setValue}
+      />
+    </div>
+  );
+}
+```
+
+```tsx
+import { Slider } from "niom-parts";
+
+<Slider
+  value={range}
+  min={0}
+  max={100}
+  step={5}
+  ariaLabels={["Minimum", "Maximum"]}
+  onChange={setRange}
+/>
+```
+
+## Common use cases
+
+Use a single value for settings such as volume and a range for bounded filters.
+
+```jsx live
+function SliderUseCases() {
+  const [volume, setVolume] = React.useState(40);
+  const [years, setYears] = React.useState([2, 8]);
+
+  return (
+    <div className="grid w-full max-w-md gap-6">
+      <div className="grid gap-2"><span className="text-sm">Volume: {volume}%</span><Slider value={volume} onChange={setVolume} ariaLabel="Volume" /></div>
+      <div className="grid gap-2"><span className="text-sm">Experience: {years[0]}-{years[1]} years</span><Slider value={years} min={0} max={12} onChange={setYears} ariaLabels={["Minimum years", "Maximum years"]} /></div>
+      <Slider value={60} onChange={() => {}} disabled ariaLabel="Locked value" />
+    </div>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `number \| [number, number]` | required |
+| `min` | `number` | `0` |
+| `max` | `number` | `100` |
+| `step` | `number` | `1` |
+| `onChange` | `(value: number \| [number, number]) => void` | required |
+| `disabled` | `boolean` | `false` |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
+| `ariaLabel` | `string` | - |
+| `ariaLabels` | `[string, string]` | - |
+| `className` | `string` | - |

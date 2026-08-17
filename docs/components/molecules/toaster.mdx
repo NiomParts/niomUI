@@ -1,0 +1,89 @@
+---
+title: Toaster
+description: Success and error notification messages.
+---
+
+# Toaster
+
+Use Toaster directly for a message, or use `ToastProvider` with `useToast` for application-level notifications.
+
+```jsx live
+function ToasterExample() {
+  const [visible, setVisible] = React.useState(true);
+
+  return (
+    <div className="grid min-h-28 place-items-center gap-4">
+      {visible ? (
+        <Toaster
+          message="Your changes were saved successfully."
+          variant="success"
+          autoCloseMs={5000}
+          onClose={() => setVisible(false)}
+        />
+      ) : (
+        <Button onClick={() => setVisible(true)}>Show toast</Button>
+      )}
+    </div>
+  );
+}
+```
+
+```tsx
+import { ToastProvider, useToast } from "niom-parts";
+
+function SaveButton() {
+  const { showToast } = useToast();
+
+  return (
+    <button onClick={() => showToast({ message: "Saved", variant: "success" })}>
+      Save
+    </button>
+  );
+}
+
+export function App() {
+  return <ToastProvider><SaveButton /></ToastProvider>;
+}
+```
+
+## Common use cases
+
+Use success notifications to confirm an action and error notifications for problems that need attention.
+
+```jsx live
+function ToasterUseCases() {
+  const [toast, setToast] = React.useState(null);
+
+  return (
+    <div className="grid min-h-32 place-items-center gap-4">
+      <div className="flex flex-wrap gap-3">
+        <Button onClick={() => setToast({ message: "Profile saved.", variant: "success" })}>
+          Save profile
+        </Button>
+        <Button variant="danger" onClick={() => setToast({ message: "Payment failed. Try again.", variant: "error" })}>
+          Simulate error
+        </Button>
+      </div>
+      {toast && (
+        <Toaster
+          key={`${toast.variant}-${toast.message}`}
+          {...toast}
+          autoCloseMs={5000}
+          onClose={() => setToast(null)}
+        />
+      )}
+    </div>
+  );
+}
+```
+
+## Toaster props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `message` | `string` | required |
+| `variant` | `"success" \| "error"` | required |
+| `onClose` | `() => void` | - |
+| `autoCloseMs` | `number` | `3500` |
+
+`ToastProvider` accepts `children`. The `useToast` hook returns `toast`, `showToast(options)`, and `dismissToast()`.

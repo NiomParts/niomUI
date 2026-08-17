@@ -1,0 +1,41 @@
+---
+title: Utilisation
+description: Importez et composez les composants Niom Parts.
+---
+
+import { ComponentPreview } from '@site/src/components/docs/ComponentPreview';
+import { Badge, Button, Cart } from '@site/src/components';
+
+# Utilisation
+
+Les composants et leurs styles compilés sont exportés depuis l'entrée principale du paquet. Importez les composants là où vous en avez besoin.
+
+<ComponentPreview>
+  <div className="flex items-center gap-3">
+    <Button leftIcon={<Cart size={18} />}>Ajouter au panier</Button>
+    <Badge variant="success">En stock</Badge>
+  </div>
+</ComponentPreview>
+
+```tsx
+import { Badge, Button, Cart } from "niom-parts";
+
+export function ProductActions() {
+  return (
+    <div className="flex items-center gap-3">
+      <Button leftIcon={<Cart size={18} />}>Ajouter au panier</Button>
+      <Badge variant="success">En stock</Badge>
+    </div>
+  );
+}
+```
+
+## Composants polymorphes
+
+`Button`, `Badge` et `Card` prennent en charge la prop `as`. Elle conserve le style Niom tout en rendant un élément HTML plus adapté.
+
+```tsx
+<Button as="a" href="/checkout">
+  Passer au paiement
+</Button>
+```

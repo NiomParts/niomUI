@@ -7,7 +7,14 @@
 
     "strict": true,
     "baseUrl": "./",
+    "types": [
+      "node",
+      "@docusaurus/module-type-aliases",
+      "@docusaurus/theme-classic",
+      "@docusaurus/theme-live-codeblock"
+    ],
     "paths": {
+      "@site/*": ["./*"],
       "@/*": ["./src/*"],
       "@components": ["./src/components/index.ts"],
       "@components/*": ["./src/components/*"],
@@ -31,5 +38,11 @@
     "skipLibCheck": true,
     "ignoreDeprecations": "6.0"
   },
-  "include": ["src", "index.ts", "tsup.config.ts"]
+  "include": [
+    "src",
+    "index.ts",
+    "tsup.config.ts",
+    "docusaurus.config.ts",
+    "sidebars.ts"
+  ]
 }

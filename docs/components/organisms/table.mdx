@@ -1,0 +1,193 @@
+---
+title: Table
+description: Data tables with color schemes, variants, selection, sticky content, and pagination.
+---
+
+# Table
+
+Table renders typed column definitions and row data with color schemes, visual variants, selection, custom striping, sticky content, and pagination.
+
+```jsx live
+function TableExample() {
+  const [scheme, setScheme] = React.useState("primary");
+  const columns = [
+    { key: "order", title: "Order", dataIndex: "order" },
+    { key: "customer", title: "Customer", dataIndex: "customer" },
+    {
+      key: "status",
+      title: "Status",
+      dataIndex: "status",
+      render: (value) => <Badge variant="success">{value}</Badge>,
+    },
+    { key: "total", title: "Total", dataIndex: "total", cellClassName: "font-semibold text-accent" },
+  ];
+  const data = [
+    { id: "1001", order: "#1001", customer: "Maya Chen", status: "Paid", total: "MUR 12,400" },
+    { id: "1002", order: "#1002", customer: "Noah Patel", status: "Packed", total: "MUR 8,250" },
+    { id: "1003", order: "#1003", customer: "Ava Morel", status: "Pending", total: "MUR 3,980" },
+  ];
+
+  return (
+    <div className="grid w-full gap-4">
+      <div className="flex flex-wrap gap-2">
+        {["primary", "secondary", "accent", "tertiary"].map((color) => (
+          <Button key={color} size="sm" variant={color} onClick={() => setScheme(color)}>
+            {color}
+          </Button>
+        ))}
+      </div>
+      <Table
+        columns={columns}
+        data={data}
+        colorScheme={scheme}
+        variant="striped"
+        hover
+        selectable
+        highlightRowBorder
+      />
+    </div>
+  );
+}
+```
+
+```tsx
+import { Table } from "niom-parts";
+import type { ColumnProps, RowData } from "niom-parts";
+
+const columns: ColumnProps[] = [
+  { key: "name", title: "Name", dataIndex: "name" },
+  { key: "status", title: "Status", dataIndex: "status" },
+];
+
+const data: RowData[] = [
+  { id: 1, name: "Maya Chen", status: "Active" },
+];
+
+<Table columns={columns} data={data} hover />;
+```
+
+## Colors and variants
+
+`colorScheme` controls the semantic color used by headers, hover states, selection, borders, and pagination. Color variants are also available directly through `variant`.
+
+| API | Values |
+| --- | --- |
+| `colorScheme` | `default`, `primary`, `secondary`, `accent`, `tertiary` |
+| Layout variants | `default`, `striped`, `bordered`, `borderless`, `compact` |
+| Color variants | `primary`, `secondary`, `accent`, `tertiary` |
+
+The selected `colorScheme` also controls hover styling, so `colorScheme="primary"` uses the primary hover color instead of the default surface color.
+
+## Custom stripe colors
+
+```tsx
+<Table
+  variant="striped"
+  stripedOddRowColor="color-mix(in srgb, var(--color-primary) 12%, var(--color-surface))"
+  stripedEvenRowColor="color-mix(in srgb, var(--color-secondary) 16%, var(--color-surface))"
+  columns={columns}
+  data={data}
+/>
+```
+
+## Common use cases
+
+This compact order table demonstrates captions, pagination, custom cell rendering, and an empty result state.
+
+```jsx live
+function TableUseCases() {
+  const [showEmpty, setShowEmpty] = React.useState(false);
+  const columns = [
+    { key: "order", title: "Order", dataIndex: "order" },
+    { key: "item", title: "Item", dataIndex: "item" },
+    {
+      key: "status",
+      title: "Status",
+      dataIndex: "status",
+      render: (value) => <Badge variant={value === "Paid" ? "success" : "secondary"}>{value}</Badge>,
+    },
+  ];
+  const data = Array.from({ length: 12 }, (_, index) => ({
+    id: index + 1,
+    order: `#${1201 + index}`,
+    item: `Catalog item ${index + 1}`,
+    status: index % 3 === 0 ? "Pending" : "Paid",
+  }));
+
+  return (
+    <div className="grid w-full gap-4">
+      <Button
+        className="justify-self-start"
+        size="sm"
+        variant="outline"
+        onClick={() => setShowEmpty((current) => !current)}
+      >
+        {showEmpty ? "Show orders" : "Show empty state"}
+      </Button>
+      <Table
+        caption={() => <span className="block p-3 text-left font-semibold">Recent orders</span>}
+        columns={columns}
+        data={showEmpty ? [] : data}
+        emptyMessage="No orders match the current filters."
+        colorScheme="secondary"
+        variant="compact"
+        hover
+        pagination
+        pageSize={10}
+      />
+    </div>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `columns` | `ColumnProps[]` | required |
+| `data` | `RowData[]` | required |
+| `colorScheme` | `"default" \| "primary" \| "secondary" \| "accent" \| "tertiary"` | `"default"` |
+| `variant` | layout or color variant | `"default"` |
+| `size` | `"xs" \| "small" \| "medium" \| "large"` | `"medium"` |
+| `hover` | `boolean` | `false` |
+| `shadowOnHover` | `"none" \| "small" \| "medium" \| "large"` | `"none"` |
+| `stripedOddRowColor` | `string` | scheme default |
+| `stripedEvenRowColor` | `string` | scheme default |
+| `pagination` | `boolean` | `false` |
+| `pageSize` | `number` | `10` |
+| `stickyHeader` | `boolean` | `false` |
+| `stickyColumn` | `boolean` | `false` |
+| `selectable` | `boolean` | `false` |
+| `selectMode` | `"single" \| "multiple"` | `"single"` |
+| `selectedRowId` | `string \| number \| null` | - |
+| `highlightRowBorder` | `boolean` | - |
+| `onSelectRow` | `(ids: (string \| number)[]) => void` | - |
+| `onDeselectRow` | `(ids: (string \| number)[]) => void` | - |
+| `onRowClick` | `(rowData) => void` | - |
+| `caption` | `ReactNode \| () => ReactNode` | - |
+| `headerTemplate` | `ReactNode \| () => ReactNode` | - |
+| `footerTemplate` | `ReactNode \| () => ReactNode` | - |
+| `expandableHeader` | `boolean` | `true` |
+| `emptyMessage` | `string` | `"No data available"` |
+| `width` | `string` | - |
+| `height` | `string` | - |
+| `className` | `string` | `""` |
+| `headerClassName` | `string` | `""` |
+| `colClassName` | `string` | `""` |
+| `rowClassName` | `string` | `""` |
+
+## Column definition
+
+| Prop | Type | Purpose |
+| --- | --- | --- |
+| `key` | `string` | Stable column key |
+| `title` | `ReactNode` | Header content |
+| `dataIndex` | `string` | Row property to display |
+| `render` | `(value, rowIndex) => ReactNode` | Custom cell renderer |
+| `onCell` | `(rowData, rowIndex) => object` | Additional cell attributes |
+| `fixed` | `"left" \| "right"` | Sticky column edge |
+| `width` | `string` | Column width |
+| `colSpan` | `number` | Header column span |
+| `rowSpan` | `number` | Header row span |
+| `className` | `string` | Header and cell classes |
+| `cellClassName` | `string` | Body cell classes |

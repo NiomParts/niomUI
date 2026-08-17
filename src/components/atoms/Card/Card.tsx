@@ -26,7 +26,7 @@ const CardImpl = <C extends ElementType = "article">(
     <Component
       ref={forwardedRef}
       className={cn(
-        "rounded-lg border shadow-sm",
+        "niom-focus-ring rounded-lg border shadow-sm",
         CARD_VARIANT_CLASSES[variant],
         CARD_PADDING_CLASSES[padding],
         className,

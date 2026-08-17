@@ -1,8 +1,8 @@
 import { useState } from "react";
-import {
+import type {
   TableSelectMode,
   PrimitiveValue,
-} from "@/type/components/organisms/Table.type";
+} from "@type/components/organisms/Table.type";
 
 interface Props {
   selectMode: TableSelectMode;

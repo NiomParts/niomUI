@@ -31,6 +31,17 @@ describe("Input", () => {
     );
   });
 
+  it("uses the shared focus outline without a box-shadow ring", () => {
+    render(<Input placeholder="Email address" />);
+
+    expect(screen.getByPlaceholderText("Email address")).toHaveClass(
+      "niom-focus-ring",
+    );
+    expect(screen.getByPlaceholderText("Email address")).not.toHaveClass(
+      "focus:ring-2",
+    );
+  });
+
   it("renders a search action button and calls onSearch", () => {
     const handleSearch = vi.fn();
     render(

@@ -1,0 +1,43 @@
+---
+title: Styles
+description: Étendez les composants Niom et les variables du thème.
+---
+
+# Styles
+
+Niom Parts injecte ses styles compilés au chargement de l'entrée du paquet. Les imports de composants fonctionnent donc sans import CSS séparé.
+
+La feuille de style reste disponible lorsqu'un outil exige un fichier CSS explicite :
+
+```tsx
+import "niom-parts/style.css";
+```
+
+Cet import est facultatif et ne doit pas être répété dans chaque fichier de composant.
+
+La plupart des composants acceptent `className` pour ajuster la mise en page, la largeur et l'espacement :
+
+```tsx
+import { Button, Card } from "niom-parts";
+
+export function CheckoutCard() {
+  return (
+    <Card className="grid max-w-md gap-4" padding="lg">
+      <h2>Récapitulatif de la commande</h2>
+      <Button className="w-full">Payer</Button>
+    </Card>
+  );
+}
+```
+
+Niom utilise des propriétés CSS personnalisées pour son système de couleurs sémantiques. Remplacez une variable après la feuille de style du paquet pour personnaliser tous les composants qui l'utilisent :
+
+```css
+:root {
+  --color-primary: #22c55e;
+  --color-primary-hover: #4ade80;
+  --color-primary-foreground: #04130d;
+}
+```
+
+Consultez la [référence complète des couleurs](../customization/colors).

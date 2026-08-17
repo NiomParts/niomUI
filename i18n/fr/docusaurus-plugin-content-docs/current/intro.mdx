@@ -1,0 +1,39 @@
+---
+sidebar_position: 1
+title: Introduction
+description: Commencez à créer des interfaces avec Niom Parts.
+---
+
+# Niom Parts
+
+Niom Parts est une bibliothèque de composants React pour les interfaces produit, organisée en atomes, molécules et organismes réutilisables.
+
+## Installation
+
+```bash
+npm install niom-parts
+```
+
+Les imports de composants chargent automatiquement les styles compilés. Aucun import de feuille de style n'est requis.
+
+Une entrée CSS explicite reste disponible pour les outils CSS ou les chaînes de compilation personnalisées :
+
+```tsx
+import "niom-parts/style.css";
+```
+
+Importez ensuite uniquement les composants utilisés :
+
+```tsx
+import { Button, Cart } from "niom-parts";
+
+export function AddToCart() {
+  return (
+    <Button leftIcon={<Cart size={18} />}>
+      Ajouter au panier
+    </Button>
+  );
+}
+```
+
+Continuez avec [l'installation](./getting-started/installation.mdx), ou parcourez le [catalogue de composants](./components/atoms/badge).

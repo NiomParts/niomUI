@@ -16,7 +16,7 @@
   justify-content: center;
   width: 18px;
   height: 18px;
-  border: 1.5px solid var(--color-clear);
+  border: 1.5px solid var(--color-border);
   border-radius: 4px;
   background-color: transparent;
   color: var(--color-primary-foreground);

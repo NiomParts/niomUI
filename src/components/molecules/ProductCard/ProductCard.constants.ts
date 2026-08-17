@@ -13,7 +13,7 @@ export const PRODUCT_CARD_SECONDS_PER_HOUR = 3_600;
 export const PRODUCT_CARD_SECONDS_PER_MINUTE = 60;
 
 export const PRODUCT_CARD_CLASS_NAME =
-  "group grid w-full max-w-80 cursor-pointer gap-2 overflow-hidden rounded-lg bg-surface p-2 text-left transition hover:border-primary/60 hover:bg-surface-hover focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-ring sm:gap-4 sm:p-3";
+  "niom-focus-ring group grid w-full max-w-80 cursor-pointer gap-2 overflow-hidden rounded-lg bg-surface p-2 text-left transition hover:border-primary/60 hover:bg-surface-hover sm:gap-4 sm:p-3";
 
 export const PRODUCT_CARD_IMAGE_CLASS_NAME =
   "h-full w-full rounded-lg object-cover transition duration-300 group-hover:scale-105";

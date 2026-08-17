@@ -1,0 +1,49 @@
+---
+title: Colors
+description: Niom Parts semantic color tokens.
+---
+
+import { ComponentPreview } from '@site/src/components/docs/ComponentPreview';
+import { Badge } from '@site/src/components';
+
+# Colors
+
+Niom components use semantic CSS custom properties. This keeps component variants consistent and gives applications one place to customize their theme.
+
+<ComponentPreview>
+  <div className="flex flex-wrap items-center gap-3">
+    <Badge variant="primary">Primary</Badge>
+    <Badge variant="secondary">Secondary</Badge>
+    <Badge variant="tertiary">Tertiary</Badge>
+    <Badge variant="success">Accent</Badge>
+    <Badge variant="warning">Highlight</Badge>
+    <Badge variant="danger">Danger</Badge>
+  </div>
+</ComponentPreview>
+
+| Token | Default | Usage |
+| --- | --- | --- |
+| `--color-background` | `#08111f` | Page and control backgrounds |
+| `--color-foreground` | `#f5f7fb` | Primary text |
+| `--color-surface` | `#111c30` | Cards, panels, and menus |
+| `--color-muted` | `#1d2a42` | Subdued fills and loading states |
+| `--color-border` | `#2b3850` | Borders and dividers |
+| `--color-primary` | `#38bdf8` | Main actions and selected states |
+| `--color-secondary` | `#a78bfa` | Secondary emphasis |
+| `--color-tertiary` | `#10288c` | Alternative strong emphasis |
+| `--color-accent` | `#34d399` | Success and positive states |
+| `--color-danger` | `#ef4444` | Errors and destructive actions |
+| `--color-highlight` | `#f5b942` | Ratings and warnings |
+
+## Override tokens
+
+Load your overrides after the Niom stylesheet:
+
+```css title="theme.css"
+:root {
+  --color-primary: #0ea5e9;
+  --color-primary-hover: #38bdf8;
+  --color-secondary: #8b5cf6;
+  --color-accent: #10b981;
+}
+```

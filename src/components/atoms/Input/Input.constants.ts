@@ -14,12 +14,12 @@ export const INPUT_BASE_CLASS =
   "h-11 w-full rounded-md border bg-background px-3 text-sm text-foreground shadow-sm transition-colors";
 
 export const INPUT_STATE_CLASS =
-  "placeholder:text-muted-foreground focus:outline-none focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50";
+  "niom-focus-ring placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50";
 
 export const INPUT_DEFAULT_CLASS =
-  "border-border focus:border-ring focus:ring-ring/30";
+  "border-border focus:border-ring";
 
-export const INPUT_ERROR_CLASS = "border-danger focus:ring-danger/30";
+export const INPUT_ERROR_CLASS = "border-danger focus:border-danger";
 
 export const INPUT_WITH_LEFT_ICON_CLASS = "pl-10";
 

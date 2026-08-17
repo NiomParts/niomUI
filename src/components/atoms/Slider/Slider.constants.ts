@@ -41,7 +41,7 @@ export const SLIDER_ACTIVE_RANGE_ORIENTATION_CLASSES: Record<
 };
 
 export const SLIDER_THUMB_BASE_CLASS =
-  "absolute z-10 size-5 rounded-full border-2 border-primary bg-background shadow-md transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+  "niom-focus-ring absolute z-10 size-5 rounded-full border-2 border-primary bg-background shadow-md transition-shadow";
 
 export const SLIDER_THUMB_ENABLED_CLASS =
   "cursor-grab hover:shadow-lg active:cursor-grabbing active:shadow-lg";

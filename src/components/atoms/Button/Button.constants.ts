@@ -18,18 +18,18 @@ export const BUTTON_SIZES = [
 
 export const BUTTON_VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary:
-    "bg-primary text-primary-foreground hover:bg-primary-hover focus-visible:outline-ring",
+    "bg-primary text-primary-foreground hover:bg-primary-hover",
   secondary:
-    "bg-secondary text-secondary-foreground hover:bg-secondary-hover focus-visible:outline-secondary",
+    "bg-secondary text-secondary-foreground hover:bg-secondary-hover",
   tertiary:
-    "bg-tertiary text-tertiary-foreground hover:bg-tertiary-hover focus-visible:outline-ring",
+    "bg-tertiary text-tertiary-foreground hover:bg-tertiary-hover",
   outline:
-    "border border-border bg-transparent text-foreground hover:bg-surface-hover focus-visible:outline-ring",
+    "border-border bg-transparent text-foreground hover:bg-surface-hover",
   ghost:
-    "bg-transparent text-foreground hover:bg-surface-hover focus-visible:outline-ring",
+    "bg-transparent text-foreground hover:bg-surface-hover",
   danger:
-    "bg-danger text-danger-foreground hover:bg-danger-hover focus-visible:outline-danger",
-  link: "bg-transparent p-0 text-primary underline-offset-4 hover:text-primary-hover hover:underline focus-visible:outline-ring",
+    "bg-danger text-danger-foreground hover:bg-danger-hover",
+  link: "border-0 bg-transparent p-0 text-primary underline-offset-4 hover:text-primary-hover hover:underline",
 };
 
 export const BUTTON_SIZE_CLASSES: Record<ButtonSize, string> = {

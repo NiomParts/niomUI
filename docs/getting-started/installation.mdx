@@ -1,0 +1,47 @@
+---
+title: Installation
+description: Install Niom Parts and its required peer dependencies.
+---
+
+# Installation
+
+Niom Parts supports React 18 and React 19.
+
+```bash
+npm install niom-parts
+```
+
+## Styles
+
+The package entry includes the compiled styles automatically. A normal component import is enough:
+
+```tsx title="src/main.tsx"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Button } from "niom-parts";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(<App />);
+```
+
+For CSS-only tooling or a build pipeline that expects an explicit stylesheet, these optional paths all resolve to the same file:
+
+```tsx
+import "niom-parts/style.css";
+import "niom-parts/css";
+import "niom-parts/css/index.css";
+```
+
+The same optional stylesheet can be loaded from a CSS file:
+
+```css
+@import "niom-parts/style.css";
+```
+
+## Requirements
+
+| Package | Supported version |
+| --- | --- |
+| React | `^18.0.0` or `^19.0.0` |
+| React DOM | `^18.0.0` or `^19.0.0` |
+| Node.js for development | `^20.19.0` or `>=22.12.0` |

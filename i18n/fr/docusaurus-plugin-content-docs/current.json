@@ -1,0 +1,30 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.docsSidebar.category.Getting Started": {
+    "message": "Bien démarrer",
+    "description": "The label for category 'Getting Started' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Components": {
+    "message": "Composants",
+    "description": "The label for category 'Components' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Atoms": {
+    "message": "Atomes",
+    "description": "The label for category 'Atoms' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Molecules": {
+    "message": "Molécules",
+    "description": "The label for category 'Molecules' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Organisms": {
+    "message": "Organismes",
+    "description": "The label for category 'Organisms' in sidebar 'docsSidebar'"
+  },
+  "sidebar.docsSidebar.category.Customization": {
+    "message": "Personnalisation",
+    "description": "The label for category 'Customization' in sidebar 'docsSidebar'"
+  }
+}

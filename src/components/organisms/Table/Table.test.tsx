@@ -186,6 +186,9 @@ describe("Table", () => {
 
     const row = screen.getByText("Maya Chen").closest("tr")!;
 
+    expect(row).toHaveClass(
+      "niom-focus-ring",
+    );
     fireEvent.keyDown(row, { key: "Enter" });
 
     expect(row).toHaveClass("row--selected");

@@ -1,0 +1,68 @@
+---
+title: Checkbox
+description: Controlled and uncontrolled checkbox input.
+---
+
+# Checkbox
+
+Checkbox supports semantic control and text colors as separate variants.
+
+```jsx live
+function CheckboxExample() {
+  const [checked, setChecked] = React.useState(true);
+
+  return (
+    <div className="grid gap-3">
+      <Checkbox checked={checked} onChange={setChecked}>
+        Email me product updates
+      </Checkbox>
+      <Checkbox defaultChecked variant="secondary" textVariant="secondary">
+        Include recommendations
+      </Checkbox>
+      <Checkbox disabled>Unavailable option</Checkbox>
+    </div>
+  );
+}
+```
+
+```tsx
+import { Checkbox } from "niom-parts";
+
+<Checkbox checked={accepted} onChange={setAccepted}>
+  Accept terms
+</Checkbox>
+```
+
+## Common use cases
+
+Controlled checkboxes work well for validation, while uncontrolled values are useful for simple preference forms.
+
+```jsx live
+function CheckboxUseCases() {
+  const [accepted, setAccepted] = React.useState(false);
+
+  return (
+    <div className="grid gap-3">
+      <Checkbox checked={accepted} onChange={setAccepted} textVariant={accepted ? "accent" : "foreground"}>
+        I accept the terms
+      </Checkbox>
+      <Button size="sm" disabled={!accepted}>Continue</Button>
+      <Checkbox defaultChecked variant="accent">Remember this device</Checkbox>
+      <Checkbox disabled defaultChecked>Required by your organization</Checkbox>
+    </div>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `checked` | `boolean` | - |
+| `defaultChecked` | `boolean` | - |
+| `onChange` | `(checked: boolean) => void` | - |
+| `variant` | `"primary" \| "secondary" \| "tertiary" \| "accent" \| "danger" \| "muted"` | `"primary"` |
+| `textVariant` | `"foreground" \| "muted" \| "primary" \| "secondary" \| "tertiary" \| "accent" \| "danger"` | `"foreground"` |
+| `disabled` | `boolean` | `false` |
+| `children` | `ReactNode` | - |
+| `className` | `string` | - |

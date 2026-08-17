@@ -33,19 +33,19 @@ export const ACCORDION_VARIANT_CLASSES: Record<AccordionVariant, string> = {
 
 export const ACCORDION_TRIGGER_VARIANT_CLASSES: Record<AccordionVariant, string> = {
   primary:
-    "bg-primary text-primary-foreground hover:bg-primary-hover focus-visible:outline-ring data-[state=open]:bg-primary-hover",
+    "bg-primary text-primary-foreground hover:bg-primary-hover data-[state=open]:bg-primary-hover",
   secondary:
-    "bg-secondary text-secondary-foreground hover:bg-secondary-hover focus-visible:outline-secondary data-[state=open]:bg-secondary-hover",
+    "bg-secondary text-secondary-foreground hover:bg-secondary-hover data-[state=open]:bg-secondary-hover",
   tertiary:
-    "bg-tertiary text-tertiary-foreground hover:bg-tertiary-hover focus-visible:outline-ring data-[state=open]:bg-tertiary-hover",
+    "bg-tertiary text-tertiary-foreground hover:bg-tertiary-hover data-[state=open]:bg-tertiary-hover",
   none:
-    "bg-transparent text-foreground hover:bg-transparent focus-visible:outline-ring data-[state=open]:bg-transparent",
+    "bg-transparent text-foreground hover:bg-transparent data-[state=open]:bg-transparent",
   outline:
-    "border-border bg-transparent text-foreground hover:bg-surface-hover focus-visible:outline-ring data-[state=open]:bg-surface-hover",
+    "border-border bg-transparent text-foreground hover:bg-surface-hover data-[state=open]:bg-surface-hover",
   boxed:
-    "bg-surface text-surface-foreground hover:bg-surface-hover focus-visible:outline-ring data-[state=open]:bg-surface-hover",
+    "bg-surface text-surface-foreground hover:bg-surface-hover data-[state=open]:bg-surface-hover",
   accent:
-    "bg-accent text-accent-foreground hover:bg-accent-hover focus-visible:outline-ring data-[state=open]:bg-accent-hover",
+    "bg-accent text-accent-foreground hover:bg-accent-hover data-[state=open]:bg-accent-hover",
 };
 
 export const ACCORDION_PANEL_VARIANT_CLASSES: Record<AccordionVariant, string> = {

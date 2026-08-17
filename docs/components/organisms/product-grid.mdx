@@ -1,0 +1,130 @@
+---
+title: ProductGrid
+description: Responsive product collection with loading, empty, error, and pagination states.
+---
+
+# ProductGrid
+
+ProductGrid lays out ProductCard items and handles loading, empty, error, and client-side pagination states.
+
+```jsx live
+function ProductGridExample() {
+  const products = [
+    {
+      id: "serum",
+      name: "Hydrating Face Serum",
+      image: Stock,
+      price: 36,
+      originalPrice: 40,
+      discount: 10,
+      rating: 4.5,
+      reviewCount: 128,
+      badge: "New",
+    },
+    {
+      id: "cleanser",
+      name: "Daily Gel Cleanser",
+      image: Stock,
+      price: 24,
+      rating: 4,
+      reviewCount: 82,
+    },
+    {
+      id: "cream",
+      name: "Barrier Repair Cream",
+      image: Stock,
+      price: 42,
+      rating: 5,
+      reviewCount: 51,
+      favorite: true,
+    },
+  ];
+
+  return (
+    <div className="w-full">
+      <ProductGrid
+        products={products}
+        columns={3}
+        paginated={false}
+        onAddToCart={(product) => window.alert(`Added ${product.name}`)}
+      />
+    </div>
+  );
+}
+```
+
+```tsx
+import { ProductGrid } from "niom-parts";
+
+<ProductGrid
+  products={products}
+  columns={4}
+  productsPerPage={8}
+  paginated
+  onProductClick={openProduct}
+  onFavorite={toggleFavorite}
+  onAddToCart={addToCart}
+/>
+```
+
+## Props
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `products` | `ProductCardProps[]` | required |
+| `loading` | `boolean` | `false` |
+| `skeletonCount` | `number` | `8` |
+| `emptyMessage` | `ReactNode` | `"No products found."` |
+| `error` | `ReactNode` | - |
+| `columns` | `2 \| 3 \| 4 \| 5` | `4` |
+| `paginated` | `boolean` | `true` |
+| `productsPerPage` | `number` | `8` |
+| `onProductClick` | `(product) => void` | - |
+| `onFavorite` | `(product) => void` | - |
+| `onAddToCart` | `(product) => void` | - |
+| `className` | `string` | - |
+
+## Common use cases
+
+Switch between the common asynchronous states below. The ready state also demonstrates client-side pagination.
+
+```jsx live
+function ProductGridStates() {
+  const [state, setState] = React.useState("ready");
+  const products = Array.from({ length: 5 }, (_, index) => ({
+    id: `product-${index + 1}`,
+    name: `Product ${index + 1}`,
+    image: Stock,
+    price: 20 + index * 4,
+    rating: 4 + (index % 2) * 0.5,
+    reviewCount: 12 + index,
+  }));
+
+  return (
+    <div className="grid w-full gap-5">
+      <div className="flex flex-wrap gap-2">
+        {["ready", "loading", "empty", "error"].map((value) => (
+          <Button
+            key={value}
+            size="sm"
+            variant={state === value ? "primary" : "outline"}
+            onClick={() => setState(value)}
+          >
+            {value}
+          </Button>
+        ))}
+      </div>
+      <ProductGrid
+        products={state === "ready" ? products : []}
+        loading={state === "loading"}
+        skeletonCount={3}
+        emptyMessage="No matching products."
+        error={state === "error" ? "Products could not be loaded." : undefined}
+        columns={3}
+        productsPerPage={3}
+        paginated
+      />
+    </div>
+  );
+}
+```

@@ -2,10 +2,10 @@ const SelectVariants = {
   primary: "bg-primary text-primary-foreground",
   secondary: "bg-secondary text-secondary-foreground",
   tertiary: "bg-tertiary text-tertiary-foreground ",
-  outlined: "bg-transparant  text-foreground ",
+  outlined: "bg-transparent text-foreground",
 };
 
 const SelectContainer =
-  "block w-full rounded-md p-3 text-base sm:text-sm focus:ring-2 focus:ring-foreground focus:outline-none border border-border";
+  "niom-focus-ring block w-full appearance-none rounded-md border border-border p-3 text-base sm:text-sm";
 
 export { SelectVariants, SelectContainer };

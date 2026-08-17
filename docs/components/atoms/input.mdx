@@ -1,0 +1,70 @@
+---
+title: Input
+description: Text inputs with icons and built-in actions.
+---
+
+# Input
+
+Input includes error and disabled styling, optional icons, a password visibility toggle, and a search action.
+
+```jsx live
+function InputExample() {
+  const [query, setQuery] = React.useState("");
+
+  return (
+    <div className="grid w-full max-w-sm gap-4">
+      <Input
+        type="search"
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
+        onSearch={() => window.alert(`Searching for ${query || "everything"}`)}
+        placeholder="Search products"
+      />
+      <Input type="password" placeholder="Password" />
+      <Input error defaultValue="not-an-email" type="email" />
+    </div>
+  );
+}
+```
+
+```tsx
+import { Input, Search } from "niom-parts";
+
+<Input
+  icon={<Search size={16} />}
+  iconPosition="left"
+  placeholder="Search by product name"
+/>
+```
+
+## Common use cases
+
+Inputs can cover profile data, numeric values, read-only states, and validation without changing composition.
+
+```jsx live
+function InputUseCases() {
+  return (
+    <div className="grid w-full max-w-sm gap-3">
+      <Input defaultValue="Maya Chen" aria-label="Full name" />
+      <Input type="number" min="1" defaultValue="2" aria-label="Quantity" />
+      <Input disabled value="Managed by your organization" aria-label="Managed value" readOnly />
+      <Input error aria-invalid="true" placeholder="Required field" aria-label="Invalid field" />
+    </div>
+  );
+}
+```
+
+## Props
+
+Input accepts native input attributes in addition to these props.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `type` | `"text" \| "password" \| "email" \| "number" \| "search" \| "tel" \| "url"` | `"text"` |
+| `error` | `boolean` | `false` |
+| `icon` | `ReactNode` | - |
+| `iconPosition` | `"left" \| "right"` | `"left"` |
+| `searchButtonLabel` | `string` | `"Search"` |
+| `onSearch` | `MouseEventHandler<HTMLButtonElement>` | - |
+| `forwardedRef` | `ForwardedRef<HTMLInputElement>` | - |
+| `className` | `string` | - |
