@@ -1,0 +1,40 @@
+.sb-show-main,
+.sb-main-padded,
+.docs-story,
+.sbdocs-wrapper,
+.sbdocs-content {
+  background: var(--color-background) !important;
+  color: var(--color-foreground) !important;
+}
+
+.docs-story {
+  border-color: var(--color-border) !important;
+}
+
+.sbdocs-preview,
+.sbdocs-pre,
+.docblock-argstable,
+.docblock-argstable-body,
+.docblock-source {
+  background: var(--color-surface) !important;
+  color: var(--color-surface-foreground) !important;
+  border-color: var(--color-border) !important;
+}
+
+.sbdocs-title,
+.sbdocs-h1,
+.sbdocs-h2,
+.sbdocs-h3,
+.sbdocs-p,
+.sbdocs-li,
+.sbdocs-a,
+.docblock-argstable-head,
+.docblock-argstable-body {
+  color: var(--color-foreground) !important;
+}
+
+.docblock-argstable code,
+.docblock-source code {
+  background: var(--color-background) !important;
+  color: var(--color-primary) !important;
+}

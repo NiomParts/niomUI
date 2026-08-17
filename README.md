@@ -1,18 +1,19 @@
-# Niom
+# Niom Parts
 
-Niom is a modern and lightweight package designed to simplify your development workflow. It integrates seamlessly with tools like Vite and TailwindCSS to help you build scalable and maintainable applications.
+Niom Parts is a lightweight React component library for building Niom-style interfaces with reusable atoms, molecules, and organisms.
 
 ## Features
 
-- **Vite Integration**: Fast and modern development server.
-- **TailwindCSS**: Utility-first CSS framework for rapid UI development.
+- **React Components**: Reusable atoms, molecules, and organisms.
+- **Table Organism**: Flexible table variants, color schemes, selection, pagination, sticky columns, and custom stripe colors.
+- **Bundled Styles**: Import the package CSS once and use the components across your app.
 
 ## Installation
 
 To install the package, run:
 
 ```bash
-npm install kuma-niom
+npm install niom-parts
 ```
 
 ## Usage
@@ -20,7 +21,8 @@ npm install kuma-niom
 Import and use the package in your project:
 
 ```javascript
-import { Button } from "kuma-niom";
+import { Button } from "niom-parts";
+import "niom-parts/style.css";
 
 function App() {
   return (
@@ -34,7 +36,8 @@ function App() {
 ## Scripts
 
 - `npm run dev`: Start the development server.
-- `npm run build`: Build the project for production.
+- `npm run test`: Run the unit and Storybook test suites.
+- `npm run build`: Build the package for production.
 
 ## License
 

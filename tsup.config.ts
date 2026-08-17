@@ -12,6 +12,9 @@ export default defineConfig({
       js: format === "esm" ? ".mjs" : ".cjs",
     };
   },
+  esbuildOptions(options) {
+    options.assetNames = "assets/[name]-[hash]";
+  },
   external: [
     "react",
     "react-dom",

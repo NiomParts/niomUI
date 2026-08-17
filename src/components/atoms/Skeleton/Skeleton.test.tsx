@@ -1,57 +1,51 @@
-import { describe, it, expect, afterEach } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
 import { Skeleton } from "./Skeleton";
-import { render, cleanup } from "@testing-library/react";
 
-describe("Skeleton", () => {
-  afterEach(cleanup);
-  it("renders the skeleton component", () => {
-    const { getByTestId } = render(
-      <Skeleton id="skeleton-test-id" width="100px" height="20px" />,
-    );
-
-    const skeletonElement = getByTestId("skeleton-0");
-    expect(skeletonElement).toBeInTheDocument();
-    expect(skeletonElement).toHaveStyle("width: 100px");
-    expect(skeletonElement).toHaveStyle("height: 20px");
+describe("Skeleton Component", () => {
+  it("renders correctly", () => {
+    render(<Skeleton data-testid="skeleton" />);
+    const skeleton = screen.getByTestId("skeleton");
+    expect(skeleton).toBeInTheDocument();
+    expect(skeleton).toHaveAttribute("aria-hidden", "true");
   });
 
-  it('applies the correct animation class based on the "animation" prop', () => {
-    const { getByTestId } = render(
-      <Skeleton id="skeleton-animation-test-id-0" animation="wave" />,
-    );
-
-    const skeletonElement = getByTestId("skeleton-0");
-    expect(skeletonElement).toHaveClass("animate-wave");
+  it("enables animation by default", () => {
+    render(<Skeleton data-testid="skeleton" />);
+    const skeleton = screen.getByTestId("skeleton");
+    expect(skeleton).toHaveClass("animate-pulse");
   });
 
-  it("renders multiple skeleton lines when count prop is greater than 1", () => {
-    const { getByTestId } = render(
-      <Skeleton id="skeleton-multiple-test-id-0" count={3} />,
-    );
-
-    const skeletonLine1 = getByTestId("skeleton-0");
-    const skeletonLine2 = getByTestId("skeleton-1");
-    const skeletonLine3 = getByTestId("skeleton-2");
-
-    expect(skeletonLine1).toBeInTheDocument();
-    expect(skeletonLine2).toBeInTheDocument();
-    expect(skeletonLine3).toBeInTheDocument();
+  it("disables animation when configured", () => {
+    render(<Skeleton animated={false} data-testid="skeleton" />);
+    const skeleton = screen.getByTestId("skeleton");
+    expect(skeleton).not.toHaveClass("animate-pulse");
   });
 
-  it("applies horizontal layout and gap correctly when horizontal prop is true", () => {
-    const { getByTestId } = render(
-      <Skeleton
-        id="skeleton-horizontal-test-id-0"
-        count={3}
-        horizontal={true}
-        gap={"4px"}
-      />,
+  it("applies custom classes", () => {
+    render(
+      <Skeleton className="h-4 w-32 custom-class" data-testid="skeleton" />,
     );
+    const skeleton = screen.getByTestId("skeleton");
+    expect(skeleton).toHaveClass("h-4", "w-32", "custom-class");
+  });
 
-    const skeletonContainer = getByTestId(
-      "skeleton-horizontal-test-id-0-container",
+  it("applies rounded variants", () => {
+    const { rerender } = render(
+      <Skeleton rounded="none" data-testid="skeleton" />,
     );
-    expect(skeletonContainer).toHaveClass("flex");
-    expect(skeletonContainer).toHaveStyle("gap: 4px");
+    expect(screen.getByTestId("skeleton")).toHaveClass("rounded-none");
+
+    rerender(<Skeleton rounded="sm" data-testid="skeleton" />);
+    expect(screen.getByTestId("skeleton")).toHaveClass("rounded-sm");
+
+    rerender(<Skeleton rounded="md" data-testid="skeleton" />);
+    expect(screen.getByTestId("skeleton")).toHaveClass("rounded-md");
+
+    rerender(<Skeleton rounded="lg" data-testid="skeleton" />);
+    expect(screen.getByTestId("skeleton")).toHaveClass("rounded-lg");
+
+    rerender(<Skeleton rounded="full" data-testid="skeleton" />);
+    expect(screen.getByTestId("skeleton")).toHaveClass("rounded-full");
   });
 });

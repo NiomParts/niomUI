@@ -1,17 +1,17 @@
 {
-  "name": "kuma-niom",
+  "name": "niom-parts",
   "version": "0.1.4",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "style": "./dist/index.css",
+  "style": "./dist/styles/index.css",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     },
-    "./style.css": "./dist/index.css"
+    "./style.css": "./dist/styles/index.css"
   },
   "files": [
     "dist",
@@ -33,26 +33,23 @@
     "url": "git+https://github.com/Nomekuma/niom.git"
   },
   "license": "MIT",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "dependencies": {
-    "@testing-library/react": "^16.3.2",
-    "autoprefixer": "^10.5.0",
     "classnames": "^2.5.1",
     "motion": "^12.38.0",
-    "path": "^0.12.7",
-    "postcss": "^8.5.12",
-    "tailwind-merge": "^3.5.0",
-    "tailwindcss": "^4.2.4",
-    "tsup": "^8.5.1"
+    "tailwind-merge": "^3.5.0"
   },
   "type": "module",
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "dev": "tsup & vite",
+    "dev": "vite",
     "test": "vitest run",
-    "build:css": "tailwindcss -i src/css/index.css -o dist/index.css --minify",
-    "build": "npm run test && npm run build:css && tsup",
-    "prepare": "husky"
+    "build:css": "tailwindcss -i src/css/index.css -o dist/styles/index.css --minify",
+    "build": "npm run test && tsup && npm run build:css",
+    "prepare": "husky >/dev/null 2>&1 || true"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.2",
@@ -65,19 +62,25 @@
     "@tailwindcss/postcss": "^4.2.4",
     "@tailwindcss/vite": "^4.2.4",
     "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/react": "^19.2.2",
     "@types/node": "^25.6.2",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "@vitest/browser-playwright": "^4.1.5",
     "@vitest/coverage-v8": "^4.1.5",
+    "autoprefixer": "^10.5.0",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
     "playwright": "^1.59.1",
+    "postcss": "^8.5.12",
     "prop-types": "^15.8.1",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "storybook": "^10.3.5",
+    "tailwindcss": "^4.2.4",
+    "tsup": "^8.5.1",
     "vitest": "^4.1.5"
   }
 }

@@ -1,17 +1,25 @@
-import React, { useMemo } from "react";
-import { RowData, TableProps } from "./Table.type";
+import { useMemo } from "react";
+import type { CSSProperties, KeyboardEvent } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { cn } from "@/utils";
-import { Button } from "@/components/atoms";
-import { useTableOnRowClick, useTablePageControl } from "@/hooks";
 
-export const Table: React.FC<TableProps> = ({
+import { Button } from "@atoms";
+import { useTableOnRowClick, useTablePageControl } from "@hooks";
+import { cn } from "@utils";
+
+import type {
+  PrimitiveValue,
+  RowData,
+  TableProps,
+} from "@/type/components/organisms/Table.type";
+
+export const Table = ({
   id,
   headerIndex,
   className = "",
   headerClassName = "",
   colClassName = "",
   rowClassName = "",
+  colorScheme = "default",
   variant = "default",
   hover = false,
   shadowOnHover = "none",
@@ -19,6 +27,8 @@ export const Table: React.FC<TableProps> = ({
   pageSize = 10,
   stickyHeader = false,
   stickyColumn = false,
+  stripedOddRowColor,
+  stripedEvenRowColor,
   size = "medium",
   columns,
   data,
@@ -34,10 +44,17 @@ export const Table: React.FC<TableProps> = ({
   caption,
   footerTemplate,
   expandableHeader = true,
-  // Lifted select state
   selectedRowId,
   highlightRowBorder,
-}) => {
+}: TableProps) => {
+  const resolvedColorScheme =
+    variant === "primary" ||
+    variant === "secondary" ||
+    variant === "accent" ||
+    variant === "tertiary"
+      ? variant
+      : colorScheme;
+
   const { selectedRows, handleOnRowClick } = useTableOnRowClick({
     selectMode,
     onSelectRow,
@@ -46,10 +63,32 @@ export const Table: React.FC<TableProps> = ({
     highlightRowBorder,
   });
 
+  const {
+    handlePrevPage,
+    currentPage,
+    currentPageSize,
+    handleNextPage,
+    handlePageSizeChange,
+  } = useTablePageControl({
+    totalPages: Math.ceil(data.length / pageSize),
+    pageSize,
+  });
+
+  const totalPages = Math.max(1, Math.ceil(data.length / currentPageSize));
+  const indexOfLastRow = currentPage * currentPageSize;
+  const indexOfFirstRow = indexOfLastRow - currentPageSize;
+  const currentData = data.slice(indexOfFirstRow, indexOfLastRow);
+  const tableContainerStyle = {
+    width,
+    height,
+    "--table-striped-odd-bg": stripedOddRowColor,
+    "--table-striped-even-bg": stripedEvenRowColor,
+  } as CSSProperties;
+
   const tableClasses = cn(
-    "table ",
+    "table",
     {
-      "table--hover  transition duration-200 ease-in-out": hover,
+      "table--hover transition duration-200 ease-in-out": hover,
       "shadow-none": shadowOnHover === "none",
       "shadow-sm": shadowOnHover === "small",
       "shadow-md": shadowOnHover === "medium",
@@ -62,104 +101,51 @@ export const Table: React.FC<TableProps> = ({
       "table--xs": size === "xs",
       "table--default": variant === "default",
       "table--striped": variant === "striped",
-      "table--bordered ": variant === "bordered",
+      "table--bordered": variant === "bordered",
       "table--borderless": variant === "borderless",
       "table--compact": variant === "compact",
+      "table--color-variant":
+        variant === "primary" ||
+        variant === "secondary" ||
+        variant === "accent" ||
+        variant === "tertiary",
       "table--selectable": selectable,
       "table--selected": selectedRows.length > 0,
       "table--deselected": selectedRows.length === 0,
+      "table--scheme-default": resolvedColorScheme === "default",
+      "table--scheme-primary": resolvedColorScheme === "primary",
+      "table--scheme-secondary": resolvedColorScheme === "secondary",
+      "table--scheme-accent": resolvedColorScheme === "accent",
+      "table--scheme-tertiary": resolvedColorScheme === "tertiary",
     },
     className,
   );
 
-  const {
-    handlePrevPage,
-    currentPage,
-    currentPageSize,
-    handleNextPage,
-    handlePageSizeChange,
-  } = useTablePageControl({
-    totalPages: Math.ceil(data.length / pageSize),
-    pageSize: pageSize,
-  });
-
-  const totalPages = Math.ceil(data.length / currentPageSize);
-
-  const indexOfLastRow = currentPage * currentPageSize;
-  const indexOfFirstRow = indexOfLastRow - currentPageSize;
-  const currentData = data.slice(indexOfFirstRow, indexOfLastRow);
-
   const handleRowKeyDown = (
-    e: React.KeyboardEvent<HTMLTableRowElement>,
+    event: KeyboardEvent<HTMLTableRowElement>,
     rowData: RowData,
     rowIndex: number,
   ) => {
-    if (e.key === "Enter" || e.key === " ") {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
       handleOnRowClick(rowData, rowIndex);
     }
   };
 
-  const renderTableHead = () => {
-    return (
-      <thead>
-        {headerTemplate && headerIndex !== undefined && headerIndex !== 1 && (
-          <tr className="header-caption">
-            {typeof headerTemplate === "function"
-              ? headerTemplate()
-              : headerTemplate}
-          </tr>
-        )}
-        <AnimatePresence initial={false}>
-          {expandableHeader && (
-            <motion.tr
-              key="header-row"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{
-                duration: 0.15,
-                ease: [0.3, 0.6, 0.3, 1],
-              }}
-              layout
-              className={cn(rowClassName, "table_head_row overflow-hidden")}
-            >
-              {columns.map((col) => {
-                const colClassname = cn(
-                  {
-                    [`table--sticky-column-${col.fixed}`]:
-                      stickyColumn && col.fixed,
-                  },
-                  headerClassName,
-                  colClassName,
-                  col.className,
-                );
-
-                return col.colSpan !== 0 ? (
-                  <th
-                    key={`th-${col.key}`}
-                    style={{ width: col.width }}
-                    className={colClassname}
-                    colSpan={col.colSpan || 1}
-                    rowSpan={col.rowSpan || 1}
-                  >
-                    {col.title}
-                  </th>
-                ) : null;
-              })}
-            </motion.tr>
-          )}
-        </AnimatePresence>
-      </thead>
-    );
+  const renderCellValue = (value: PrimitiveValue) => {
+    if (value === null || value === undefined) return value;
+    return typeof value === "object" && !("type" in value)
+      ? JSON.stringify(value)
+      : value;
   };
 
   const renderTableBody = useMemo(() => {
-    if (!currentData || currentData.length === 0) {
+    if (!currentData.length) {
       return (
         <tbody>
           <tr>
             <td colSpan={columns.length} className="text-center">
-              {emptyMessage ? emptyMessage : "No data available"}
+              {emptyMessage || "No data available"}
             </td>
           </tr>
         </tbody>
@@ -168,13 +154,13 @@ export const Table: React.FC<TableProps> = ({
 
     return (
       <tbody>
-        {currentData.map((rowData: RowData, rowIndex: number) => (
+        {currentData.map((rowData, rowIndex) => (
           <tr
-            key={`tr-${rowIndex}`}
+            key={`tr-${rowData.id ?? rowIndex}`}
             tabIndex={selectable ? 0 : undefined}
             aria-selected={selectedRows.includes(rowIndex)}
             aria-disabled={!selectable}
-            onKeyDown={(e) => handleRowKeyDown(e, rowData, rowIndex)}
+            onKeyDown={(event) => handleRowKeyDown(event, rowData, rowIndex)}
             onClick={
               selectable ? () => handleOnRowClick(rowData, rowIndex) : undefined
             }
@@ -190,31 +176,26 @@ export const Table: React.FC<TableProps> = ({
             )}
           >
             {columns.map((col, index) => {
-              const colClassnames = cn(
-                {
-                  [`table--sticky-column-${col.fixed}`]:
-                    stickyColumn && col.fixed,
-                },
-                colClassName,
-                col.className,
-              );
               const cellProps = col.onCell ? col.onCell(rowData, rowIndex) : {};
+              const cellValue = rowData[col.dataIndex];
 
               return (
                 <td
-                  key={`td-${index}`}
-                  className={cn(col.cellClassName, colClassnames)}
+                  key={`td-${col.key}-${index}`}
+                  className={cn(
+                    {
+                      [`table--sticky-column-${col.fixed}`]:
+                        stickyColumn && col.fixed,
+                    },
+                    colClassName,
+                    col.className,
+                    col.cellClassName,
+                  )}
                   {...cellProps}
                 >
-                  {(() => {
-                    const cellValue = rowData[col.dataIndex];
-                    if (col.render) return col.render(cellValue, rowIndex);
-                    if (cellValue === null || cellValue === undefined)
-                      return cellValue;
-                    return typeof cellValue === "object"
-                      ? JSON.stringify(cellValue)
-                      : (cellValue as React.ReactNode);
-                  })()}
+                  {col.render
+                    ? col.render(cellValue, rowIndex)
+                    : renderCellValue(cellValue)}
                 </td>
               );
             })}
@@ -222,51 +203,109 @@ export const Table: React.FC<TableProps> = ({
         ))}
       </tbody>
     );
-  }, [currentData, selectedRows]);
+  }, [
+    columns,
+    colClassName,
+    currentData,
+    emptyMessage,
+    handleOnRowClick,
+    rowClassName,
+    selectable,
+    selectedRowId,
+    selectedRows,
+    stickyColumn,
+  ]);
+
+  const renderTableHead = () => (
+    <thead>
+      {headerTemplate && headerIndex !== undefined && headerIndex !== 1 && (
+        <tr className="header-caption">
+          {typeof headerTemplate === "function"
+            ? headerTemplate()
+            : headerTemplate}
+        </tr>
+      )}
+      <AnimatePresence initial={false}>
+        {expandableHeader && (
+          <motion.tr
+            key="header-row"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.15, ease: [0.3, 0.6, 0.3, 1] }}
+            layout
+            className={cn(rowClassName, "table_head_row overflow-hidden")}
+          >
+            {columns.map((col) =>
+              col.colSpan !== 0 ? (
+                <th
+                  key={`th-${col.key}`}
+                  style={{ width: col.width }}
+                  className={cn(
+                    {
+                      [`table--sticky-column-${col.fixed}`]:
+                        stickyColumn && col.fixed,
+                    },
+                    headerClassName,
+                    colClassName,
+                    col.className,
+                  )}
+                  colSpan={col.colSpan || 1}
+                  rowSpan={col.rowSpan || 1}
+                >
+                  {col.title}
+                </th>
+              ) : null,
+            )}
+          </motion.tr>
+        )}
+      </AnimatePresence>
+    </thead>
+  );
 
   const renderPagination = () => {
     if (!pagination) return null;
 
     return (
-      <div className="paginator-wrapper m-2 flex flex-row-reverse">
+      <div className="paginator-wrapper">
         <nav className="paginator-controls" aria-label="Pagination">
           <Button
             onClick={handlePrevPage}
             disabled={currentPage === 1}
-            className="button"
+            variant="outline"
+            size="sm"
             aria-label="Previous Page"
           >
             Prev
           </Button>
-          <span className="mx-2">
+          <span className="paginator-status">
             Page {currentPage} of {totalPages}
           </span>
           <Button
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
-            className="button"
+            variant="outline"
+            size="sm"
             aria-label="Next Page"
           >
             Next
           </Button>
         </nav>
 
-        <div className="page-size-selector mx-4 mt-0.5">
-          <label htmlFor="page-size" className="mx-2">
-            Rows per page:
-          </label>
+        <label htmlFor="page-size" className="page-size-selector">
+          Rows per page:
           <select
             id="page-size"
             value={currentPageSize}
-            onChange={(e) => handlePageSizeChange(e.target.value)}
+            onChange={(event) => handlePageSizeChange(event.target.value)}
           >
-            {[10, 20, 50, 100].map((size) => (
-              <option key={size} value={size}>
-                {size}
+            {[10, 20, 50, 100].map((sizeOption) => (
+              <option key={sizeOption} value={sizeOption}>
+                {sizeOption}
               </option>
             ))}
           </select>
-        </div>
+        </label>
       </div>
     );
   };
@@ -275,8 +314,8 @@ export const Table: React.FC<TableProps> = ({
     <div
       id={id}
       data-testid={id}
-      className={`table-container ${variant} ${size} ${className} `}
-      style={{ width, height }}
+      className={cn("table-container", variant, size, className)}
+      style={tableContainerStyle}
     >
       <table className={tableClasses}>
         {caption && (
@@ -294,7 +333,6 @@ export const Table: React.FC<TableProps> = ({
             : footerTemplate}
         </div>
       )}
-
       {renderPagination()}
     </div>
   );

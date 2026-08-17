@@ -1,29 +1,62 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "./Button";
-import type { ButtonProps } from "./Button.type";
-import { VARIANTS } from "@/constant/style";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { Button } from './Button';
+import { BUTTON_SIZES, BUTTON_VARIANTS } from './Button.constants';
 
 const meta = {
-  title: "Atoms/Button",
+  title: 'Atoms/Button',
   component: Button,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    varaint: {
-      options: Object.keys(VARIANTS),
-      control: { type: "select" },
+    variant: {
+      control: 'select',
+      options: BUTTON_VARIANTS,
+    },
+    size: {
+      control: 'select',
+      options: BUTTON_SIZES,
     },
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
-export const ButtonVarients: Story = {
+export const Default: Story = {
   args: {
-    children: "Button",
-    varaint: "primary",
-  } as ButtonProps,
+    children: 'Add To Cart',
+  },
+};
+
+export const Outline: Story = {
+  args: {
+    children: 'View Product',
+    variant: 'outline',
+  },
+};
+
+export const Large: Story = {
+  args: {
+    children: 'Checkout',
+    size: 'lg',
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    children: 'Processing',
+    loading: true,
+  },
+};
+
+export const WithIcons: Story = {
+  args: {
+    children: 'Add To Cart',
+    leftIcon: '🛒',
+    rightIcon: '→',
+  },
 };

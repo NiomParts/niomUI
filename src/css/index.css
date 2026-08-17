@@ -1,15 +1,117 @@
 @import "tailwindcss";
+@import "./Checkbox.module.css";
 @import "./table.css";
 
 @theme {
-  --color-primary: #1e90ff;
-  --color-secondary: #32cd32;
-  --color-tertiary: #0d9488;
-  --color-danger: #ff6347;
-  --color-warning: #ffcc00;
-  --color-success: #28a745;
-  --color-accent: #ff69b4;
-  --body-background-color: #f8f9fa;
-  --color-even-row: #0d9445;
-  --color-odd-row: #0d5d94;
+  --color-background: #08111f;
+  --color-foreground: #f5f7fb;
+  --color-clear: #f4fafc;
+
+  --color-surface: #111c30;
+  --color-surface-hover: #182641;
+  --color-surface-foreground: #f5f7fb;
+
+  --color-muted: #1d2a42;
+  --color-muted-foreground: #b8c2d4;
+
+  --color-border: #2b3850;
+  --color-ring: #7dd3fc;
+
+  --color-primary: #38bdf8;
+  --color-primary-hover: #7dd3fc;
+  --color-primary-foreground: #08111f;
+
+  --color-secondary: #a78bfa;
+  --color-secondary-hover: #c4b5fd;
+  --color-secondary-foreground: #111026;
+
+  --color-tertiary: #10288c;
+  --color-tertiary-hover: #1e3a8a;
+  --color-tertiary-foreground: #ffffff;
+
+  --color-accent: #34d399;
+  --color-accent-hover: #6ee7b7;
+  --color-accent-foreground: #04130d;
+
+  --color-danger: #ef4444;
+  --color-danger-hover: #f87171;
+  --color-danger-foreground: #ffffff;
+
+  --color-highlight: #f5b942;
+  --color-highlight-hover: #f8ca6a;
+  --color-highlight-foreground: #1b1203;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(
+        circle at top,
+        color-mix(in srgb, var(--color-primary) 24%, transparent),
+        transparent 42%
+      ),
+      linear-gradient(180deg, var(--color-background) 0%, #0d1728 100%);
+    color: var(--color-foreground);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  button {
+    font: inherit;
+  }
+}
+
+@layer utilities {
+  @keyframes niom-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-niom-float {
+    animation: niom-float 4s ease-in-out infinite;
+  }
+
+  @keyframes slide-in-left {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .animate-slide-in-left {
+    animation: slide-in-left 0.3s ease-out forwards;
+  }
+
+  @keyframes slide-in-right {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  .animate-slide-in-right {
+    animation: slide-in-right 0.3s ease-out forwards;
+  }
 }

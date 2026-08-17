@@ -1,177 +1,268 @@
-import { Meta, StoryFn } from "@storybook/react";
-import { TableProps, ColumnProps, PrimitiveValue } from "./Table.type";
-import Table from "./Table";
+import type { Meta, StoryObj } from "@storybook/react";
 
-export default {
+import type {
+  ColumnProps,
+  RowData,
+} from "@/type/components/organisms/Table.type";
+import { Table } from "./Table";
+
+const columns = [
+  {
+    key: "order",
+    title: "Order",
+    dataIndex: "order",
+    fixed: "left",
+    width: "9rem",
+  },
+  {
+    key: "customer",
+    title: "Customer",
+    dataIndex: "customer",
+  },
+  {
+    key: "status",
+    title: "Status",
+    dataIndex: "status",
+    render: (value) => (
+      <span className="rounded-sm bg-primary px-2 py-1 text-xs font-semibold text-primary-foreground">
+        {String(value)}
+      </span>
+    ),
+  },
+  {
+    key: "total",
+    title: "Total",
+    dataIndex: "total",
+    className: "text-right",
+    cellClassName: "text-right font-semibold text-accent",
+  },
+] satisfies ColumnProps[];
+
+const data = [
+  {
+    id: "ord-1001",
+    order: "#1001",
+    customer: "Maya Chen",
+    status: "Paid",
+    total: "MUR 12,400",
+  },
+  {
+    id: "ord-1002",
+    order: "#1002",
+    customer: "Noah Patel",
+    status: "Packed",
+    total: "MUR 8,250",
+  },
+  {
+    id: "ord-1003",
+    order: "#1003",
+    customer: "Ava Morel",
+    status: "Pending",
+    total: "MUR 3,980",
+  },
+  {
+    id: "ord-1004",
+    order: "#1004",
+    customer: "Leo Simon",
+    status: "Paid",
+    total: "MUR 18,100",
+  },
+] satisfies RowData[];
+
+const paginatedData = Array.from({ length: 18 }, (_, index) => ({
+  ...data[index % data.length],
+  id: `ord-${index + 1}`,
+  order: `#${1001 + index}`,
+  total: `MUR ${(4200 + index * 730).toLocaleString("en-US")}`,
+})) satisfies RowData[];
+
+const meta = {
   title: "Organisms/Table",
   component: Table,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
+  args: {
+    id: "orders-table",
+    caption: "Recent orders",
+    columns,
+    data,
+    colorScheme: "default",
+    variant: "default",
+    size: "medium",
+    hover: true,
+    selectable: false,
+    pagination: false,
+    stickyHeader: false,
+    stickyColumn: false,
+    emptyMessage: "No orders found.",
+  },
   argTypes: {
-    id: { control: "text" },
-    className: { control: "text" },
-    colClassName: { control: "text" },
-    rowClassName: { control: "text" },
-    width: { control: "text" },
-    height: { control: "text" },
+    columns: {
+      control: false,
+    },
+    data: {
+      control: false,
+    },
     variant: {
       control: "select",
-      options: ["default", "striped", "bordered", "borderless", "compact"],
+      options: [
+        "default",
+        "striped",
+        "bordered",
+        "borderless",
+        "compact",
+        "primary",
+        "secondary",
+        "accent",
+        "tertiary",
+      ],
     },
-    hover: { control: "boolean" },
+    colorScheme: {
+      control: "select",
+      options: ["default", "primary", "secondary", "accent", "tertiary"],
+    },
+    size: {
+      control: "select",
+      options: ["xs", "small", "medium", "large"],
+    },
     shadowOnHover: {
       control: "select",
       options: ["none", "small", "medium", "large"],
     },
-    pagination: { control: "boolean" },
-    pageSize: { control: "number" },
-    stickyHeader: { control: "boolean" },
-    stickyColumn: { control: "boolean" },
-    size: { control: "select", options: ["small", "medium", "large"] },
-    selectable: { control: "boolean" },
-    selectMode: { control: "select", options: ["single", "multiple"] },
-    headerTemplate: { control: "text" },
-    footerTemplate: { control: "text" },
+    selectMode: {
+      control: "select",
+      options: ["single", "multiple"],
+    },
+    stripedOddRowColor: {
+      control: "text",
+      table: {
+        type: {
+          summary: "CSS color string",
+        },
+      },
+    },
+    stripedEvenRowColor: {
+      control: "text",
+      table: {
+        type: {
+          summary: "CSS color string",
+        },
+      },
+    },
+    onRowClick: {
+      table: {
+        disable: true,
+      },
+    },
+    onSelectRow: {
+      table: {
+        disable: true,
+      },
+    },
+    onDeselectRow: {
+      table: {
+        disable: true,
+      },
+    },
   },
-} as Meta;
-
-const Template: StoryFn<TableProps> = (args) => <Table {...args} />;
-
-const columns: ColumnProps[] = [
-  {
-    key: "user",
-    title: "Name",
-    dataIndex: "user",
-    fixed: "left",
-    render: (value: PrimitiveValue) => (
-      <a href="/" className="">
-        {value as React.ReactNode}
-      </a>
+  decorators: [
+    (Story) => (
+      <div className="w-[min(64rem,calc(100vw-2rem))]">
+        <Story />
+      </div>
     ),
+  ],
+} satisfies Meta<typeof Table>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {};
+
+export const Striped: Story = {
+  args: {
+    variant: "striped",
   },
-  {
-    key: "age",
-    title: "Age",
-    dataIndex: "age",
+};
+
+export const CustomStripedColors: Story = {
+  args: {
+    variant: "striped",
+    stripedOddRowColor:
+      "color-mix(in srgb, var(--color-primary) 12%, var(--color-surface))",
+    stripedEvenRowColor:
+      "color-mix(in srgb, var(--color-secondary) 16%, var(--color-surface))",
   },
-  {
-    key: "address",
-    title: "Address",
-    dataIndex: "address",
+};
+
+export const AccentScheme: Story = {
+  args: {
+    colorScheme: "accent",
+    headerIndex: 0,
+    headerTemplate: <th colSpan={columns.length}>Accent report</th>,
+    highlightRowBorder: true,
+    selectable: true,
+    variant: "striped",
   },
-  {
-    key: "telephone",
-    title: "Telephone",
-    dataIndex: "telephone",
+};
+
+export const PrimaryVariant: Story = {
+  args: {
+    variant: "primary",
   },
-];
+};
 
-const data = [
-  {
-    user: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    telephone: "123-456-7890",
+export const SecondaryVariant: Story = {
+  args: {
+    variant: "secondary",
   },
-  {
-    user: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    telephone: "123-456-7890",
+};
+
+export const AccentVariant: Story = {
+  args: {
+    variant: "accent",
   },
-  {
-    user: "Joe Black",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-    telephone: "123-456-7890",
+};
+
+export const TertiaryVariant: Story = {
+  args: {
+    variant: "tertiary",
   },
-];
-
-// variant args
-export const Default = Template.bind({});
-Default.args = {
-  id: "table",
-  columns: columns,
-  data: data,
 };
 
-export const Striped = Template.bind({});
-Striped.args = {
-  ...Default.args,
-  variant: "striped",
+export const Bordered: Story = {
+  args: {
+    variant: "bordered",
+  },
 };
 
-export const Bordered = Template.bind({});
-Bordered.args = {
-  ...Default.args,
-  variant: "bordered",
+export const Selectable: Story = {
+  args: {
+    selectable: true,
+    highlightRowBorder: true,
+  },
 };
 
-export const Borderless = Template.bind({});
-Borderless.args = {
-  ...Default.args,
-  variant: "borderless",
+export const Paginated: Story = {
+  args: {
+    data: paginatedData,
+    pagination: true,
+    pageSize: 10,
+  },
 };
 
-// hover props
-
-export const Hover = Template.bind({});
-Hover.args = {
-  ...Default.args,
-  hover: true,
+export const StickyColumn: Story = {
+  args: {
+    stickyColumn: true,
+    width: "48rem",
+  },
 };
 
-// size props
-
-export const Small = Template.bind({});
-Small.args = {
-  ...Default.args,
-  size: "small",
-};
-export const Medium = Template.bind({});
-Medium.args = {
-  ...Default.args,
-  size: "medium",
-};
-export const Large = Template.bind({});
-Large.args = {
-  ...Default.args,
-  size: "large",
-};
-
-// sticky props
-
-export const StickyHeader = Template.bind({});
-StickyHeader.args = {
-  ...Default.args,
-  stickyHeader: true,
-};
-
-export const StickyColumn = Template.bind({});
-StickyColumn.args = {
-  ...Default.args,
-  stickyColumn: true,
-};
-
-// paginations props
-
-export const Pagination = Template.bind({});
-Pagination.args = {
-  ...Default.args,
-  pagination: true,
-};
-
-export const PageSize = Template.bind({});
-PageSize.args = {
-  ...Default.args,
-  pageSize: 10,
-};
-
-// click event props
-export const Selectable = Template.bind({});
-Selectable.args = {
-  ...Default.args,
-  selectable: true,
+export const Empty: Story = {
+  args: {
+    data: [],
+  },
 };

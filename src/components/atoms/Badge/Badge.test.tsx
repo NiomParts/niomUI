@@ -1,72 +1,41 @@
-import { describe, it, expect, afterEach, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+
 import { Badge } from "./Badge";
-import { render, cleanup } from "@testing-library/react";
 
 describe("Badge", () => {
-  afterEach(cleanup);
+  it("renders badge content", () => {
+    render(<Badge>99+</Badge>);
 
-  it("renders the badge with correct content", () => {
-    const { getByText } = render(<Badge content={["New"]} size="medium" />);
-    const badgeElement = getByText("New");
-    expect(badgeElement).toBeInTheDocument();
+    expect(screen.getByText("99+")).toBeInTheDocument();
   });
 
-  it("applies variant and size classes correctly", () => {
-    const { getByTestId } = render(
-      <Badge
-        id="badge-test-id"
-        content={["New"]}
-        variant="primary"
-        size="medium"
-      />,
-    );
-    const badgeElement = getByTestId("badge-test-id");
-    expect(badgeElement).toHaveClass("bg-primary");
-    expect(badgeElement).toHaveClass("text-sm");
+  it("renders as a span by default", () => {
+    render(<Badge data-testid="badge">3</Badge>);
+
+    expect(screen.getByTestId("badge").tagName).toBe("SPAN");
   });
 
-  it("handles visibility correctly", () => {
-    const { queryByText } = render(
-      <Badge content={["Hidden Badge"]} visible={false} />,
+  it("renders as a different element when requested", () => {
+    render(
+      <Badge as="div" data-testid="badge">
+        New
+      </Badge>,
     );
-    const badgeElement = queryByText("Hidden Badge");
-    expect(badgeElement).toBeNull();
+
+    expect(screen.getByTestId("badge").tagName).toBe("DIV");
   });
 
-  it("applies if badge has been clicked", () => {
-    const handleClick = vi.fn();
-    const { getByTestId } = render(
-      <Badge
-        id="badge-click-test-id"
-        content={["Clickable Badge"]}
-        onClick={handleClick}
-      />,
+  it("applies variant and size classes", () => {
+    render(
+      <Badge data-testid="badge" size="md" variant="muted">
+        12
+      </Badge>,
     );
-    const badgeElement = getByTestId("badge-click-test-id");
-    badgeElement.click();
-    expect(handleClick).toHaveBeenCalledTimes(1);
-  });
 
-  it("it should render multiple badges when content is an array", () => {
-    const { getByText } = render(
-      <Badge content={["Badge 1", "Badge 2", "Badge 3"]} horizontal={true} />,
-    );
-    expect(getByText("Badge 1")).toBeInTheDocument();
-    expect(getByText("Badge 2")).toBeInTheDocument();
-    expect(getByText("Badge 3")).toBeInTheDocument();
-  });
+    const badge = screen.getByTestId("badge");
 
-  it("applies horizontal layout and gap correctly", () => {
-    const { getByTestId } = render(
-      <Badge
-        id="badge-horizontal-test-id"
-        content={["Badge 1", "Badge 2", "Badge 3"]}
-        horizontal={true}
-        gap={'4px'}
-      />,
-    );
-    const containerElement = getByTestId("badge-horizontal-test-id-container");
-    expect(containerElement).toHaveClass("flex");
-    expect(containerElement).toHaveStyle("gap: 4px");
+    expect(badge).toHaveClass("bg-muted");
+    expect(badge).toHaveClass("h-6");
   });
 });

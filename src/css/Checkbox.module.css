@@ -1,0 +1,166 @@
+.checkbox {
+  @apply relative inline-flex items-baseline gap-2 cursor-pointer select-none w-fit;
+}
+
+.label {
+  @apply text-foreground;
+}
+
+.input {
+  @apply absolute opacity-0 w-4 h-4 m-0 cursor-pointer;
+}
+
+.box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--color-clear);
+  border-radius: 4px;
+  background-color: transparent;
+  color: var(--color-primary-foreground);
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.checkIcon {
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition:
+    opacity 0.1s ease,
+    transform 0.1s ease;
+}
+
+.input:checked + .box {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.input:checked + .box .checkIcon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.input:focus-visible + .box {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}
+
+.checkbox:hover .box {
+  border-color: var(--color-primary);
+}
+
+.checkboxVariantPrimary .box {
+  color: var(--color-primary-foreground);
+}
+
+.checkboxVariantPrimary .input:checked + .box {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkboxVariantPrimary:hover .box {
+  border-color: var(--color-primary);
+}
+
+.checkboxVariantSecondary .box {
+  color: var(--color-secondary-foreground);
+}
+
+.checkboxVariantSecondary .input:checked + .box {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+.checkboxVariantSecondary:hover .box {
+  border-color: var(--color-secondary);
+}
+
+.checkboxVariantAccent .box {
+  color: var(--color-accent-foreground);
+}
+
+.checkboxVariantAccent .input:checked + .box {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.checkboxVariantAccent:hover .box {
+  border-color: var(--color-accent);
+}
+
+.checkboxVariantDanger .box {
+  color: var(--color-danger-foreground);
+}
+
+.checkboxVariantDanger .input:checked + .box {
+  background-color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.checkboxVariantDanger:hover .box {
+  border-color: var(--color-danger);
+}
+
+.checkboxVariantMuted .box {
+  color: var(--color-foreground);
+}
+
+.checkboxVariantMuted .input:checked + .box {
+  background-color: var(--color-muted);
+  border-color: var(--color-muted);
+}
+
+.checkboxVariantMuted:hover .box {
+  border-color: var(--color-muted-foreground);
+}
+
+.checkboxTextForeground .label {
+  color: var(--color-foreground);
+}
+
+.checkboxTextMuted .label {
+  color: var(--color-muted-foreground);
+}
+
+.checkboxTextPrimary .label {
+  color: var(--color-primary);
+}
+
+.checkboxTextSecondary .label {
+  color: var(--color-secondary);
+}
+
+.checkboxTextAccent .label {
+  color: var(--color-accent);
+}
+
+.checkboxTextDanger .label {
+  color: var(--color-danger);
+}
+
+.checkboxTextTertiary .label {
+  color: var(--color-tertiary);
+}
+
+.checkboxVariantTertiary .box {
+  color: var(--color-tertiary-foreground);
+}
+
+.checkboxVariantTertiary .input:checked + .box {
+  background-color: var(--color-tertiary);
+  border-color: var(--color-tertiary);
+}
+
+.checkboxVariantTertiary:hover .box {
+  border-color: var(--color-tertiary);
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

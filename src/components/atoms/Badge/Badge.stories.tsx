@@ -1,94 +1,46 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { VARIANTS } from "@/constant/style";
-import { Badge } from "./Badge";
-import { BadgeProps } from "./Badge.type";
 
-const meta: Meta<BadgeProps> = {
-  component: Badge,
+import { Badge } from "./Badge";
+import { BADGE_SIZES, BADGE_VARIANTS } from "./Badge.constants";
+
+const meta = {
   title: "Atoms/Badge",
+  component: Badge,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
   argTypes: {
-    variant: {
-      options: Object.keys(VARIANTS),
-      control: { type: "select" },
-    },
     size: {
-      control: {
-        type: "select",
-        options: ["small", "medium", "large"],
-      },
+      control: "select",
+      options: BADGE_SIZES,
+    },
+    variant: {
+      control: "select",
+      options: BADGE_VARIANTS,
     },
   },
-};
-const count = [1, 2, 3, 4, 5];
+} satisfies Meta<typeof Badge>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
-    content: ["Default Badge"],
+    children: "3",
   },
 };
 
-export const WithVariant: Story = {
+export const Overflow: Story = {
   args: {
-    content: ["Primary Badge"],
-    variant: "primary",
+    children: "99+",
   },
 };
 
-export const WithSize: Story = {
+export const Muted: Story = {
   args: {
-    content: ["Large Badge"],
-    size: "large",
-  },
-};
-
-export const WithVisibility: Story = {
-  args: {
-    content: ["Visible Badge"],
-    visible: true,
-  },
-};
-
-export const HiddenBadge: Story = {
-  args: {
-    content: ["Hidden Badge"],
-    visible: false,
-  },
-};
-
-export const WithCustomStyles: Story = {
-  args: {
-    content: ["Custom Styled Badge"],
-    className: "bg-green-500 text-white",
-    style: { fontSize: "18px", padding: "10px 20px" },
-  },
-};
-
-export const WithOnClick: Story = {
-  args: {
-    content: ["Clickable Badge"],
-    onClick: () => alert("Badge clicked!"),
-  },
-};
-
-export const HorizontalLayout: Story = {
-  args: {
-    content: ["Badge 1", "Badge 2", "Badge 3"],
-    horizontal: true,
-    gap: 4,
-  },
-};
-
-export const VerticalLayout: Story = {
-  args: {
-    content: ["Badge 1", "Badge 2", "Badge 3"],
-    horizontal: false,
-    gap: 4,
+    children: "New",
+    variant: "muted",
   },
 };

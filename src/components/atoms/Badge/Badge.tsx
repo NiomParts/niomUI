@@ -1,40 +1,45 @@
-import { BadgeProps } from "./Badge.type";
-import { VARIANTS, SIZE } from "@/constant/style";
-import { cn } from "@/utils";
+import {
+  forwardRef,
+  type ElementType,
+  type ForwardedRef,
+} from "react";
 
-export const Badge = ({
-  content,
-  variant = "primary",
-  size = "medium",
-  visible = true,
-  horizontal = false,
-  gap = 2,
-  ...props
-}: BadgeProps) => {
-  return visible ? (
-    <section
-      className={cn(horizontal ? "flex" : "flex flex-col")}
-      style={{ gap: `${gap}` }}
-      data-testid={`${props.id}-container`}
+import { cn } from "@utils";
+import type { BadgeComponent, BadgeProps } from "@type/components/atoms";
+
+import { BADGE_SIZE_CLASSES, BADGE_VARIANT_CLASSES } from "./Badge.constants";
+
+const BadgeImpl = <C extends ElementType = "span">(
+  {
+    as,
+    children,
+    className = "",
+    size = "sm",
+    variant = "primary",
+    ...props
+  }: BadgeProps<C>,
+  forwardedRef: ForwardedRef<HTMLElement>,
+) => {
+  const Component = (as || "span") as ElementType;
+
+  return (
+    <Component
+      ref={forwardedRef}
+      className={cn(
+        "inline-grid place-items-center rounded-full font-black leading-none",
+        BADGE_VARIANT_CLASSES[variant],
+        BADGE_SIZE_CLASSES[size],
+        className,
+      )}
+      {...props}
     >
-      {content.map((item, index) => (
-        <span
-          id={props.id}
-          key={index}
-          ref={props.ref}
-          data-testid={props.id}
-          className={cn(
-            "inline-flex items-center justify-center rounded-full font-semibold w-fit h-fit",
-            VARIANTS[variant || "primary"],
-            SIZE[size || "medium"],
-            props.className,
-          )}
-          style={props.style}
-          onClick={props.onClick}
-        >
-          {item}
-        </span>
-      ))}
-    </section>
-  ) : null;
+      {children}
+    </Component>
+  );
 };
+
+export const Badge = forwardRef(BadgeImpl) as BadgeComponent & {
+  displayName?: string;
+};
+
+Badge.displayName = "Badge";

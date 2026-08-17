@@ -1,2 +1,2 @@
 export * from "./Table";
-export * from "./Table.type";
+export type * from "../../../type/components/organisms/Table.type";

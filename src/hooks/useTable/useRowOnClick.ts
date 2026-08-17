@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   TableSelectMode,
   PrimitiveValue,
-} from "@/components/organisms/Table/Table.type";
+} from "@/type/components/organisms/Table.type";
 
 interface Props {
   selectMode: TableSelectMode;

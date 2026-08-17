@@ -1,42 +1,96 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Skeleton } from "./Skeleton";
-import { SkeletonProps } from "./Skeleton.type";
 
-const meta: Meta<SkeletonProps> = {
-  component: Skeleton,
-  title: "Atoms/Skeleton",
-  parameters: {
-    layout: "centered",
-  },
-  tags: ["autodocs"],
+const meta: Meta<typeof Skeleton> = {
+    title: "Atoms/Skeleton",
+    component: Skeleton,
+    tags: ["autodocs"],
+    argTypes: {
+    rounded: {
+      control: "select",
+      options: ["none", "sm", "md", "lg", "full"],
+    },
+     animated: {
+      control: "boolean",
+    },
+},
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Skeleton>;
 
 export const Default: Story = {
+    args: {
+        className: "h-40 w-40",
+    },
+};
+export const Animated: Story = {
   args: {
-    animation: "pulse",
-    borderRadius: "0.5em",
-    count: 1,
+    className: "h-40 w-40",
+    animated: true,
   },
 };
 
-export const WithMultipleLines: Story = {
+export const AnimationDisabled: Story = {
   args: {
-    animation: "wave",
-    borderRadius: "0.5em",
-    count: 3,
-    gap: 4,
+    className: "h-40 w-40",
+    animated: false,
   },
 };
 
-export const Circle: Story = {
+// Rounded Configurations
+export const RoundedNone: Story = {
   args: {
-    animation: "pulse",
-    width: "5em",
-    height: "5em",
-    borderRadius: "100%",
-    count: 1,
+    className: "h-12 w-12",
+    rounded: "none",
+  },
+};
+
+export const RoundedSmall: Story = {
+  args: {
+    className: "h-10 w-24",
+    rounded: "sm",
+  },
+};
+
+export const RoundedMedium: Story = {
+  args: {
+    className: "h-20 w-30",
+    rounded: "md",
+  },
+};
+
+export const RoundedFull: Story = {
+  args: {
+    className: "h-40 w-40",
+    rounded: "full",
+  },
+};
+
+// UX Layout Mock Placeholders
+export const TextPlaceholder: Story = {
+  args: {
+    className: "h-4 w-32",
+  },
+};
+
+export const AvatarPlaceholder: Story = {
+  args: {
+    className: "size-20",
+    rounded: "full",
+  },
+};
+
+export const ButtonPlaceholder: Story = {
+  args: {
+    className: "h-10 w-28",
+    rounded: "md",
+  },
+};
+
+export const CardPlaceholder: Story = {
+  args: {
+    className: "h-96 w-72",
+    rounded: "lg",
   },
 };

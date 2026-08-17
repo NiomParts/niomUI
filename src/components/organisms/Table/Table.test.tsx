@@ -1,162 +1,215 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  within,
-  cleanup,
-} from "@testing-library/react";
-import { describe, it, expect, vi, afterEach } from "vitest";
-import Table from "./Table";
+import { fireEvent, render, screen, within } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+
+import type {
+  ColumnProps,
+  RowData,
+} from "@/type/components/organisms/Table.type";
+import { Table } from "./Table";
 
 const columns = [
-  { key: "1", title: "Column 1", dataIndex: "col1" },
-  { key: "2", title: "Column 2", dataIndex: "col2" },
-];
+  { key: "name", title: "Name", dataIndex: "name" },
+  { key: "status", title: "Status", dataIndex: "status" },
+  {
+    key: "total",
+    title: "Total",
+    dataIndex: "total",
+    render: (value) => <strong>{String(value)}</strong>,
+  },
+] satisfies ColumnProps[];
 
 const data = [
-  { key: 1, col1: "Data 1", col2: "Data 2" },
-  { key: 2, col1: "Data 3", col2: "Data 4" },
-];
+  { id: "row-1", name: "Maya Chen", status: "Paid", total: "MUR 12,400" },
+  { id: "row-2", name: "Noah Patel", status: "Packed", total: "MUR 8,250" },
+  { id: "row-3", name: "Ava Morel", status: "Pending", total: "MUR 3,980" },
+] satisfies RowData[];
 
-describe("Table Component", () => {
-  afterEach(() => {
-    cleanup();
-  });
-  it("should apply the correct variant class", () => {
-    render(
-      <Table id="test-table" columns={columns} data={data} variant="striped" />,
-    );
-    const tableContainer = screen.getByTestId("test-table");
-    expect(within(tableContainer).getByRole("table")).toHaveClass(
-      "table--striped",
-    );
+describe("Table", () => {
+  it("renders column headers and row data", () => {
+    render(<Table columns={columns} data={data} id="orders-table" />);
+
+    expect(
+      screen.getByRole("columnheader", { name: "Name" }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Maya Chen")).toBeInTheDocument();
+    expect(screen.getByText("MUR 12,400")).toBeInTheDocument();
   });
 
-  it("should have sticky header", () => {
-    render(
-      <Table id="test-table" columns={columns} data={data} stickyHeader />,
-    );
-    const tableContainer = screen.getByTestId("test-table");
-    expect(within(tableContainer).getByRole("table")).toHaveClass(
-      "table--sticky-header",
-    );
-  });
-
-  it("should have sticky column", () => {
-    render(
-      <Table id="test-table" columns={columns} data={data} stickyColumn />,
-    );
-    const tableContainer = screen.getByTestId("test-table");
-    expect(within(tableContainer).getByRole("table")).toHaveClass(
-      "table--sticky-column",
-    );
-  });
-
-  it("should apply the correct size class", () => {
-    render(
-      <Table id="test-table" columns={columns} data={data} size="large" />,
-    );
-    const tableContainer = screen.getByTestId("test-table");
-    expect(within(tableContainer).getByRole("table")).toHaveClass(
-      "table--large",
-    );
-  });
-
-  it("should display the empty message if no data is passed", () => {
+  it("applies variant, size, sticky, and selectable classes", () => {
     render(
       <Table
-        id="test-table"
+        columns={columns}
+        data={data}
+        id="orders-table"
+        selectable
+        size="large"
+        stickyColumn
+        stickyHeader
+        variant="striped"
+      />,
+    );
+
+    const table = within(screen.getByTestId("orders-table")).getByRole("table");
+
+    expect(table).toHaveClass("table--striped");
+    expect(table).toHaveClass("table--large");
+    expect(table).toHaveClass("table--sticky-column");
+    expect(table).toHaveClass("table--sticky-header");
+    expect(table).toHaveClass("table--selectable");
+  });
+
+  it("applies a color scheme class", () => {
+    render(
+      <Table
+        colorScheme="accent"
+        columns={columns}
+        data={data}
+        id="orders-table"
+      />,
+    );
+
+    expect(
+      within(screen.getByTestId("orders-table")).getByRole("table"),
+    ).toHaveClass("table--scheme-accent");
+  });
+
+  it("supports color variants", () => {
+    render(
+      <Table
+        columns={columns}
+        data={data}
+        id="orders-table"
+        variant="secondary"
+      />,
+    );
+
+    const table = within(screen.getByTestId("orders-table")).getByRole("table");
+
+    expect(table).toHaveClass("table--color-variant");
+    expect(table).toHaveClass("table--scheme-secondary");
+  });
+
+  it("sets custom striped row colors as CSS variables", () => {
+    render(
+      <Table
+        columns={columns}
+        data={data}
+        id="orders-table"
+        stripedEvenRowColor="#182641"
+        stripedOddRowColor="#111c30"
+        variant="striped"
+      />,
+    );
+
+    expect(screen.getByTestId("orders-table")).toHaveStyle({
+      "--table-striped-even-bg": "#182641",
+      "--table-striped-odd-bg": "#111c30",
+    });
+  });
+
+  it("renders an empty message", () => {
+    render(
+      <Table
         columns={columns}
         data={[]}
-        emptyMessage="No records found"
-      />,
-    );
-    expect(screen.getByText("No records found")).toBeInTheDocument();
-  });
-
-  it("should apply correct width and height", () => {
-    const width = "500px";
-    const height = "300px";
-
-    render(
-      <Table
-        id="test-table"
-        columns={columns}
-        data={data}
-        width={width}
-        height={height}
+        emptyMessage="No orders available"
+        id="orders-table"
       />,
     );
 
-    const tableContainer = screen.getByTestId("test-table");
-
-    expect(tableContainer).toHaveStyle(`width: ${width}`);
-    expect(tableContainer).toHaveStyle(`height: ${height}`);
+    expect(screen.getByText("No orders available")).toBeInTheDocument();
   });
 
-  it("should handle pagination controls correctly", () => {
+  it("applies container dimensions", () => {
     render(
       <Table
-        id="test-table"
         columns={columns}
         data={data}
-        pagination
-        pageSize={1}
+        height="20rem"
+        id="orders-table"
+        width="40rem"
       />,
     );
-    const prevButton = screen.getByText("Prev");
-    const nextButton = screen.getByText("Next");
-    expect(prevButton).toBeDisabled();
-    fireEvent.click(nextButton);
-    expect(screen.getByText("Page 2 of 2")).toBeInTheDocument();
+
+    expect(screen.getByTestId("orders-table")).toHaveStyle({
+      height: "20rem",
+      width: "40rem",
+    });
   });
 
-  it("should render custom header and footer templates", () => {
-    const headerTemplate = <div>Custom Header</div>;
-    const footerTemplate = <div>Custom Footer</div>;
+  it("renders caption, header template, and footer template", () => {
     render(
       <Table
-        id="test-table"
+        caption="Recent orders"
         columns={columns}
         data={data}
-        headerTemplate={headerTemplate}
-        footerTemplate={footerTemplate}
+        footerTemplate={<span>End of orders</span>}
         headerIndex={0}
+        headerTemplate={<th colSpan={columns.length}>Custom report header</th>}
+        id="orders-table"
       />,
     );
-    expect(screen.getByText("Custom Header")).toBeInTheDocument();
-    expect(screen.getByText("Custom Footer")).toBeInTheDocument();
+
+    expect(screen.getByText("Recent orders")).toBeInTheDocument();
+    expect(screen.getByText("Custom report header")).toBeInTheDocument();
+    expect(screen.getByText("End of orders")).toBeInTheDocument();
   });
 
-  it("should apply selectable class when selectable prop is true", () => {
-    render(<Table id="test-table" columns={columns} data={data} selectable />);
-    const tableContainer = screen.getByTestId("test-table");
-    expect(within(tableContainer).getByRole("table")).toHaveClass(
-      "table--selectable",
-    );
-  });
-
-  it("should call onRowClick when a row is clicked", () => {
-    const mockOnRowClick = vi.fn();
+  it("calls onRowClick when a selectable row is clicked", () => {
+    const handleRowClick = vi.fn();
 
     render(
       <Table
-        id="test-table"
         columns={columns}
         data={data}
+        id="orders-table"
+        onRowClick={handleRowClick}
         selectable
-        onRowClick={mockOnRowClick}
       />,
     );
 
-    const tableContainer = screen.getByTestId("test-table");
-    const row = within(tableContainer).getByText("Data 1").closest("tr");
-    expect(row).not.toBeNull();
+    fireEvent.click(screen.getByText("Maya Chen").closest("tr")!);
 
-    if (row) {
-      fireEvent.click(row);
-      expect(mockOnRowClick).toHaveBeenCalledTimes(1);
-      expect(mockOnRowClick).toHaveBeenCalledWith(data[0]);
-    }
+    expect(handleRowClick).toHaveBeenCalledWith(data[0]);
+  });
+
+  it("selects a row with keyboard interaction", () => {
+    render(
+      <Table
+        columns={columns}
+        data={data}
+        highlightRowBorder
+        id="orders-table"
+        selectable
+      />,
+    );
+
+    const row = screen.getByText("Maya Chen").closest("tr")!;
+
+    fireEvent.keyDown(row, { key: "Enter" });
+
+    expect(row).toHaveClass("row--selected");
+  });
+
+  it("paginates table rows", () => {
+    render(
+      <Table
+        columns={columns}
+        data={data}
+        id="orders-table"
+        pageSize={1}
+        pagination
+      />,
+    );
+
+    expect(screen.getByText("Maya Chen")).toBeInTheDocument();
+    expect(screen.queryByText("Noah Patel")).not.toBeInTheDocument();
+    expect(screen.getByText("Page 1 of 3")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Next Page" }));
+
+    expect(screen.getByText("Noah Patel")).toBeInTheDocument();
+    expect(screen.queryByText("Maya Chen")).not.toBeInTheDocument();
+    expect(screen.getByText("Page 2 of 3")).toBeInTheDocument();
   });
 });

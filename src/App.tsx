@@ -1,6 +1,6 @@
-import { Button } from "./components/atoms/Button/Button";
 import { useState } from "react";
-import { Menu, Cross } from "./components/atoms/Icons/Icons";
+
+import { Button, Cross, Menu } from "./components";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
