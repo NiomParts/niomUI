@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/fr", "destination": "/fr/index.html" },
+    { "source": "/en", "destination": "/en/index.html" },
+    { "source": "/docs", "destination": "/docs/index.html" },
+    { "source": "/fr/docs", "destination": "/fr/docs/index.html" },
+    { "source": "/en/docs", "destination": "/en/docs/index.html" },
+    { "source": "/fr/:path*", "destination": "/fr/:path*.html" },
+    { "source": "/en/:path*", "destination": "/en/:path*.html" },
+    { "source": "/docs/:path*", "destination": "/docs/:path*.html" },
+    { "source": "/:path*", "destination": "/:path*.html" }
+  ]
+}
