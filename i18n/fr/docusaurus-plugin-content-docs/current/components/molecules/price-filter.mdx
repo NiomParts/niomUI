@@ -1,0 +1,92 @@
+---
+title: PrixFilter
+description: Controle d'intervalle de prix localise.
+---
+
+# PrixFilter
+
+PrixFilter combine un Slider a intervalle avec un affichage monetaire localise.
+
+```jsx live
+function PrixFilterExample() {
+  const [range, setRange] = React.useState([500, 5000]);
+
+  return (
+    <PrixFilter
+      label="Budget"
+      value={range}
+      min={0}
+      max={10000}
+      step={250}
+      currency="MUR"
+      locale="en-MU"
+      onChange={setRange}
+    />
+  );
+}
+```
+
+```tsx
+import { PrixFilter } from "niom-parts";
+
+<PrixFilter
+  value={range}
+  min={0}
+  max={10000}
+  step={250}
+  currency="MUR"
+  locale="en-MU"
+  onChange={setRange}
+/>
+```
+
+## Cas d'utilisation courants
+
+Definissez `currency` et `locale` ensemble pour les boutiques locales, et utilisez `disabled` pendant l'application des filtres.
+
+```jsx live
+function PrixFilterUseCases() {
+  const [eurRange, setEurRange] = React.useState([25, 175]);
+
+  return (
+    <div className="grid w-full gap-7 sm:grid-cols-2">
+      <PrixFilter
+        label="European catalog"
+        value={eurRange}
+        min={0}
+        max={250}
+        step={5}
+        currency="EUR"
+        locale="fr-FR"
+        onChange={setEurRange}
+      />
+      <PrixFilter
+        label="Locked budget"
+        value={[500, 2500]}
+        min={0}
+        max={5000}
+        step={100}
+        currency="MUR"
+        locale="en-MU"
+        onChange={() => {}}
+        disabled
+      />
+    </div>
+  );
+}
+```
+
+## Proprietes
+
+| Propriete | Type | Valeur par defaut |
+| --- | --- | --- |
+| `value` | `[number, number]` | requis |
+| `onChange` | `(value: [number, number]) => void` | requis |
+| `min` | `number` | `0` |
+| `max` | `number` | `100` |
+| `step` | `number` | `1` |
+| `label` | `ReactNode` | `"Prix"` |
+| `currency` | `string` | `"USD"` |
+| `locale` | `string` | langue d'execution |
+| `disabled` | `boolean` | `false` |
+| `className` | `string` | - |

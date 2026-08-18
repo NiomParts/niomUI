@@ -1,0 +1,20 @@
+---
+title: Bandes du tableau
+description: Personnalisez les couleurs des lignes paires et impaires d'un tableau a bandes.
+---
+
+# Couleurs des bandes du tableau
+
+Definissez `variant="striped"`, puis transmettez une couleur CSS valide a `stripedOddRowColor` et `stripedEvenRowColor`.
+
+```tsx
+<Table
+  variant="striped"
+  stripedOddRowColor="color-mix(in srgb, var(--color-primary) 12%, var(--color-surface))"
+  stripedEvenRowColor="color-mix(in srgb, var(--color-secondary) 16%, var(--color-surface))"
+  columns={columns}
+  data={data}
+/>
+```
+
+Vous pouvez utiliser des valeurs hexadecimales, RGB, HSL, des variables CSS ou `color-mix()`.

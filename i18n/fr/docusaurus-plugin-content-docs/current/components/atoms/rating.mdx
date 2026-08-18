@@ -1,0 +1,66 @@
+---
+title: Rating
+description: Notes en lecture seule avec etoiles entieres et demi-etoiles.
+---
+
+# Rating
+
+Rating affiche une note numerique bornee avec des etoiles pleines, a moitie remplies et vides.
+
+```jsx live
+function RatingExample() {
+  const [value, setValue] = React.useState(4.5);
+
+  return (
+    <div className="grid gap-4">
+      <Rating value={value} showValue reviewCount={128} size={24} />
+      <input
+        aria-label="Rating value"
+        type="range"
+        min="0"
+        max="5"
+        step="0.5"
+        value={value}
+        onChange={(event) => setValue(Number(event.target.value))}
+      />
+    </div>
+  );
+}
+```
+
+```tsx
+import { Rating } from "niom-parts";
+
+<Rating value={4.5} showValue reviewCount={128} />
+```
+
+## Cas d'utilisation courants
+
+Les notes peuvent afficher un resume compact des avis, des valeurs entieres ou une couleur semantique personnalisee.
+
+```jsx live
+function RatingUseCases() {
+  return (
+    <div className="grid gap-4">
+      <Rating value={4.8} showValue reviewCount={624} size={18} />
+      <Rating value={3} precision={1} showValue />
+      <Rating value={8.5} max={10} showValue color="var(--color-accent)" size={16} />
+      <Rating value={-2} showValue reviewCount={0} />
+    </div>
+  );
+}
+```
+
+## Proprietes
+
+| Propriete | Type | Valeur par defaut |
+| --- | --- | --- |
+| `value` | `number` | requis |
+| `max` | `number` | `5` |
+| `precision` | `1 \| 0.5` | `0.5` |
+| `size` | `number` | `20` |
+| `showValue` | `boolean` | `false` |
+| `reviewCount` | `number` | - |
+| `color` | `string` | `var(--color-highlight)` |
+| `className` | `string` | - |
+| `IconClassName` | `string` | - |

@@ -1,0 +1,91 @@
+---
+title: CheckboxGroup
+description: Un ensemble coordonne d'options a cocher.
+---
+
+# CheckboxGroup
+
+Le composant exporte se nomme `CheckBoxGroup`. Il gere un tableau de chaines et peut disposer les options horizontalement ou verticalement.
+
+```jsx live
+function CheckboxGroupExample() {
+  const [selected, setSélectionné] = React.useState(["audio"]);
+  const items = [
+    { label: "Audio", value: "audio", totalCount: 8 },
+    { label: "Graphics", value: "graphics", totalCount: 12 },
+    { label: "Legacy", value: "legacy", totalCount: 3, disabled: true },
+  ];
+
+  return (
+    <div className="grid gap-4">
+      <CheckBoxGroup
+        label="Departments"
+        items={items}
+        value={selected}
+        onChange={setSélectionné}
+        variant="secondary"
+      />
+      <span className="text-sm text-muted-foreground">{selected.join(", ") || "None selected"}</span>
+    </div>
+  );
+}
+```
+
+```tsx
+import { CheckBoxGroup } from "niom-parts";
+
+<CheckBoxGroup
+  label="Departments"
+  items={items}
+  value={selected}
+  onChange={setSélectionné}
+/>
+```
+
+## Cas d'utilisation courants
+
+Utilisez un groupe horizontal pour des autorisations ou reglages compacts. Desactivez tout le groupe lorsque le formulaire parent est en lecture seule.
+
+```jsx live
+function CheckboxGroupUseCases() {
+  const [permissions, setPermissions] = React.useState(["view"]);
+  const items = [
+    { label: "View", value: "view" },
+    { label: "Edit", value: "edit" },
+    { label: "Publish", value: "publish" },
+  ];
+
+  return (
+    <div className="grid w-full gap-6">
+      <CheckBoxGroup
+        label="Permissions"
+        items={items}
+        orientation="horizontal"
+        value={permissions}
+        onChange={setPermissions}
+        variant="accent"
+      />
+      <CheckBoxGroup
+        disabled
+        label="Locked plan options"
+        items={items.slice(0, 2)}
+        value={["view"]}
+      />
+    </div>
+  );
+}
+```
+
+## Proprietes
+
+| Propriete | Type | Valeur par defaut |
+| --- | --- | --- |
+| `items` | `CheckboxGroupItem[]` | requis |
+| `value` | `string[]` | `[]` |
+| `onChange` | `(values: string[]) => void` | - |
+| `label` | `ReactNode` | - |
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` |
+| `disabled` | `boolean` | `false` |
+| `variant` | `CheckboxVariant` | - |
+| `textVariant` | `CheckboxTextVariant` | - |
+| `className` | `string` | `""` |

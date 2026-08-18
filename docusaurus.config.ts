@@ -55,7 +55,7 @@ const config: Config = {
   title: "Niom Parts UI",
   tagline: "React components built for practical product interfaces.",
   favicon: "img/favicon.ico",
-  url: "https://niom-parts.vercel.app",
+  url: "https://niom-ui.vercel.app",
   baseUrl: "/",
   organizationName: "NiomParts",
   projectName: "niomUI",
@@ -80,7 +80,21 @@ const config: Config = {
     mermaid: false,
   },
   themes: ["@docusaurus/theme-live-codeblock"],
-  plugins: [niomSourceAliases],
+  plugins: [
+    niomSourceAliases,
+    [
+      "@cmfcmf/docusaurus-search-local",
+      {
+        indexDocs: true,
+        indexDocSidebarParentCategories: 2,
+        includeParentCategoriesInPageTitle: true,
+        indexBlog: false,
+        indexPages: true,
+        language: ["en", "fr"],
+        maxSearchResults: 8,
+      },
+    ],
+  ],
   presets: [
     [
       "classic",

@@ -1,0 +1,108 @@
+---
+title: ProductCard
+description: Image, statut, note, prix et actions d'un produit.
+---
+
+# ProductCard
+
+ProductCard combine l'image du produit, les badges, la note, le prix, l'etat favori et les actions du panier.
+
+```jsx live
+function ProductCardExample() {
+  const [favorite, setFavorite] = React.useState(false);
+
+  return (
+    <div className="w-full max-w-xs">
+      <ProductCard
+        id="serum-01"
+        name="Niom Hydrating Face Serum"
+        image={Stock}
+        price={36}
+        originalPrix={40}
+        discount={10}
+        rating={4.5}
+        reviewCount={128}
+        badge="New"
+        favorite={favorite}
+        onFavorite={() => setFavorite((current) => !current)}
+        onAddToCart={() => window.alert("Added to cart")}
+      />
+    </div>
+  );
+}
+```
+
+```tsx
+import { ProductCard } from "niom-parts";
+
+<ProductCard
+  id="serum-01"
+  name="Niom Hydrating Face Serum"
+  image="/products/serum.jpg"
+  price={36}
+  originalPrix={40}
+  discount={10}
+  rating={4.5}
+  reviewCount={128}
+  onAddToCart={addToCart}
+/>
+```
+
+## Cas d'utilisation courants
+
+ProductCard peut presenter les remises, l'etat favori et la disponibilite tout en separant les clics sur la carte et sur ses actions.
+
+```jsx live
+function ProductCardUseCases() {
+  const [favorite, setFavorite] = React.useState(true);
+
+  return (
+    <div className="grid w-full max-w-2xl grid-cols-1 gap-5 sm:grid-cols-2">
+      <ProductCard
+        id="sale-item"
+        name="Vitamin C Serum"
+        image={Stock}
+        price={28}
+        originalPrix={40}
+        discount={30}
+        badge="Sale"
+        rating={4.8}
+        reviewCount={64}
+        favorite={favorite}
+        onFavorite={() => setFavorite((current) => !current)}
+      />
+      <ProductCard
+        id="sold-out-item"
+        name="Night Repair Cream"
+        image={Stock}
+        price={45}
+        badge="Sold out"
+        inStock={false}
+        rating={4.2}
+        reviewCount={31}
+      />
+    </div>
+  );
+}
+```
+
+## Proprietes
+
+| Propriete | Type | Valeur par defaut |
+| --- | --- | --- |
+| `id` | `string` | requis |
+| `name` | `string` | requis |
+| `price` | `number` | requis |
+| `image` | `string` | image de remplacement incluse |
+| `originalPrix` | `number` | - |
+| `discount` | `number` | - |
+| `rating` | `number` | `4.5` |
+| `reviewCount` | `number` | `0` |
+| `inStock` | `boolean` | `true` |
+| `countdown` | `Date` | - |
+| `badge` | `ReactNode` | - |
+| `favorite` | `boolean` | `false` |
+| `onClick` | `() => void` | - |
+| `onFavorite` | `() => void` | - |
+| `onAddToCart` | `() => void` | - |
+| `className` | `string` | - |

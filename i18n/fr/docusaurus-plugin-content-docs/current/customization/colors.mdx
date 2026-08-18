@@ -1,0 +1,49 @@
+---
+title: Couleurs
+description: Jetons de couleur semantiques de Niom Parts.
+---
+
+import { ComponentPreview } from '@site/src/docusaurus/components/ComponentPreview';
+import { Badge } from '@site/src/components';
+
+# Couleurs
+
+Les composants Niom utilisent des proprietes CSS personnalisees semantiques. Les variantes restent ainsi coherentes et les applications disposent d'un emplacement unique pour personnaliser leur theme.
+
+<ComponentPreview>
+  <div className="flex flex-wrap items-center gap-3">
+    <Badge variant="primary">Primary</Badge>
+    <Badge variant="secondary">Secondary</Badge>
+    <Badge variant="tertiary">Tertiary</Badge>
+    <Badge variant="success">Accent</Badge>
+    <Badge variant="warning">Highlight</Badge>
+    <Badge variant="danger">Danger</Badge>
+  </div>
+</ComponentPreview>
+
+| Jeton | Valeur par defaut | Utilisation |
+| --- | --- | --- |
+| `--color-background` | `#08111f` | Arriere-plans de page et de controles |
+| `--color-foreground` | `#f5f7fb` | Texte principal |
+| `--color-surface` | `#111c30` | Cartes, panneaux et menus |
+| `--color-muted` | `#1d2a42` | Remplissages discrets et etats de chargement |
+| `--color-border` | `#2b3850` | Bordures et separateurs |
+| `--color-primary` | `#38bdf8` | Actions principales et etats selectionnes |
+| `--color-secondary` | `#a78bfa` | Accentuation secondaire |
+| `--color-tertiary` | `#10288c` | Accentuation forte alternative |
+| `--color-accent` | `#34d399` | Succes et etats positifs |
+| `--color-danger` | `#ef4444` | Erreurs et actions destructives |
+| `--color-highlight` | `#f5b942` | Notes et avertissements |
+
+## Surcharger les jetons
+
+Chargez vos surcharges apres la feuille de style Niom :
+
+```css title="theme.css"
+:root {
+  --color-primary: #0ea5e9;
+  --color-primary-hover: #38bdf8;
+  --color-secondary: #8b5cf6;
+  --color-accent: #10b981;
+}
+```

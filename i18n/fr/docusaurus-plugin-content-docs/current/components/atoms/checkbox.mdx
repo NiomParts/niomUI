@@ -1,0 +1,68 @@
+---
+title: Checkbox
+description: Case a cocher controlee ou non controlee.
+---
+
+# Checkbox
+
+Checkbox gere separement les variantes semantiques de la case et de son texte.
+
+```jsx live
+function CheckboxExample() {
+  const [checked, setChecked] = React.useState(true);
+
+  return (
+    <div className="grid gap-3">
+      <Checkbox checked={checked} onChange={setChecked}>
+        Email me product updates
+      </Checkbox>
+      <Checkbox defaultChecked variant="secondary" textVariant="secondary">
+        Include recommendations
+      </Checkbox>
+      <Checkbox disabled>Indisponible option</Checkbox>
+    </div>
+  );
+}
+```
+
+```tsx
+import { Checkbox } from "niom-parts";
+
+<Checkbox checked={accepted} onChange={setAccepted}>
+  Accept terms
+</Checkbox>
+```
+
+## Cas d'utilisation courants
+
+Les cases controlees conviennent a la validation, tandis que les valeurs non controlees sont pratiques pour les formulaires de preferences simples.
+
+```jsx live
+function CheckboxUseCases() {
+  const [accepted, setAccepted] = React.useState(false);
+
+  return (
+    <div className="grid gap-3">
+      <Checkbox checked={accepted} onChange={setAccepted} textVariant={accepted ? "accent" : "foreground"}>
+        I accept the terms
+      </Checkbox>
+      <Button size="sm" disabled={!accepted}>Continue</Button>
+      <Checkbox defaultChecked variant="accent">Remember this device</Checkbox>
+      <Checkbox disabled defaultChecked>Required by your organization</Checkbox>
+    </div>
+  );
+}
+```
+
+## Proprietes
+
+| Propriete | Type | Valeur par defaut |
+| --- | --- | --- |
+| `checked` | `boolean` | - |
+| `defaultChecked` | `boolean` | - |
+| `onChange` | `(checked: boolean) => void` | - |
+| `variant` | `"primary" \| "secondary" \| "tertiary" \| "accent" \| "danger" \| "muted"` | `"primary"` |
+| `textVariant` | `"foreground" \| "muted" \| "primary" \| "secondary" \| "tertiary" \| "accent" \| "danger"` | `"foreground"` |
+| `disabled` | `boolean` | `false` |
+| `children` | `ReactNode` | - |
+| `className` | `string` | - |

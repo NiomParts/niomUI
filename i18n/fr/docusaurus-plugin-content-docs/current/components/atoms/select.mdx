@@ -1,0 +1,82 @@
+---
+title: Select
+description: Liste de selection accessible avec navigation au clavier.
+---
+
+# Select
+
+Select prend en charge les valeurs controlees ou non, les options desactivees, la navigation au clavier et l'envoi natif du formulaire via un champ masque.
+
+```jsx live
+function SélectionnerExample() {
+  const [value, setValue] = React.useState();
+  const options = [
+    { value: "audio", label: "Audio" },
+    { value: "graphics", label: "Graphics" },
+    { value: "legacy", label: "Legacy", disabled: true },
+  ];
+
+  return (
+    <div className="grid w-full max-w-sm gap-3">
+      <Select
+        aria-label="Product category"
+        options={options}
+        value={value}
+        onChange={setValue}
+        placeholder="Sélectionner a category"
+        variant="outlined"
+      />
+      <span className="text-sm text-muted-foreground">Sélectionné: {value || "none"}</span>
+    </div>
+  );
+}
+```
+
+```tsx
+import { Select } from "niom-parts";
+
+<Select
+  name="category"
+  options={[{ value: "audio", label: "Audio" }]}
+  placeholder="Sélectionner a category"
+  onChange={setCategory}
+/>
+```
+
+## Cas d'utilisation courants
+
+Select gere les variantes semantiques, les valeurs initiales, les champs obligatoires et les controles indisponibles.
+
+```jsx live
+function SélectionnerUseCases() {
+  const options = [
+    { value: "mu", label: "Mauritius" },
+    { value: "fr", label: "France" },
+    { value: "archive", label: "Archived region", disabled: true },
+  ];
+
+  return (
+    <div className="grid w-full max-w-sm gap-3">
+      <Select options={options} defaultValue="mu" name="country" variant="secondary" />
+      <Select options={options} placeholder="Région obligatoire" required variant="outlined" />
+      <Select options={options} placeholder="Indisponible" disabled />
+    </div>
+  );
+}
+```
+
+## Proprietes
+
+| Propriete | Type | Valeur par defaut |
+| --- | --- | --- |
+| `options` | `SelectOption[]` | requis |
+| `value` | `string \| number` | - |
+| `defaultValue` | `string \| number` | - |
+| `placeholder` | `string` | `"Sélectionner"` |
+| `onChange` | `(value: string \| number) => void` | - |
+| `variant` | `"outlined" \| "primary" \| "secondary" \| "tertiary"` | `"primary"` |
+| `disabled` | `boolean` | - |
+| `required` | `boolean` | - |
+| `name` | `string` | - |
+| `dropdownClassName` | `string` | - |
+| `optionClassName` | `string` | - |

@@ -1,0 +1,89 @@
+---
+title: Toaster
+description: Messages de notification de succes et d'erreur.
+---
+
+# Toaster
+
+Utilisez Toaster directement pour un message, ou `ToastProvider` avec `useToast` pour les notifications au niveau de l'application.
+
+```jsx live
+function ToasterExample() {
+  const [visible, setVisible] = React.useState(true);
+
+  return (
+    <div className="grid min-h-28 place-items-center gap-4">
+      {visible ? (
+        <Toaster
+          message="Your changes were saved successfully."
+          variant="success"
+          autoFermerMs={5000}
+          onClose={() => setVisible(false)}
+        />
+      ) : (
+        <Button onClick={() => setVisible(true)}>Show toast</Button>
+      )}
+    </div>
+  );
+}
+```
+
+```tsx
+import { ToastProvider, useToast } from "niom-parts";
+
+function SaveButton() {
+  const { showToast } = useToast();
+
+  return (
+    <button onClick={() => showToast({ message: "Saved", variant: "success" })}>
+      Save
+    </button>
+  );
+}
+
+export function App() {
+  return <ToastProvider><SaveButton /></ToastProvider>;
+}
+```
+
+## Cas d'utilisation courants
+
+Utilisez les notifications de succes pour confirmer une action et celles d'erreur pour les problemes qui demandent une intervention.
+
+```jsx live
+function ToasterUseCases() {
+  const [toast, setToast] = React.useState(null);
+
+  return (
+    <div className="grid min-h-32 place-items-center gap-4">
+      <div className="flex flex-wrap gap-3">
+        <Button onClick={() => setToast({ message: "Profile saved.", variant: "success" })}>
+          Save profile
+        </Button>
+        <Button variant="danger" onClick={() => setToast({ message: "Payment failed. Réessayer.", variant: "error" })}>
+          Simulate error
+        </Button>
+      </div>
+      {toast && (
+        <Toaster
+          key={`${toast.variant}-${toast.message}`}
+          {...toast}
+          autoFermerMs={5000}
+          onClose={() => setToast(null)}
+        />
+      )}
+    </div>
+  );
+}
+```
+
+## Proprietes de Toaster
+
+| Propriete | Type | Valeur par defaut |
+| --- | --- | --- |
+| `message` | `string` | requis |
+| `variant` | `"success" \| "error"` | requis |
+| `onClose` | `() => void` | - |
+| `autoFermerMs` | `number` | `3500` |
+
+`ToastProvider` accepte `children`. Le hook `useToast` renvoie `toast`, `showToast(options)` et `dismissToast()`.

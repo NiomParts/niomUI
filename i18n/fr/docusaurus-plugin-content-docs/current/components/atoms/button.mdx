@@ -1,0 +1,75 @@
+---
+title: Button
+description: Boutons pour les actions, les liens et les etats de chargement.
+---
+
+# Button
+
+Les boutons prennent en charge plusieurs variantes visuelles, trois tailles, les icones, l'etat de chargement et le rendu polymorphe.
+
+```jsx live
+function ButtonExample() {
+  const [loading, setLoading] = React.useState(false);
+
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      <Button
+        loading={loading}
+        loadingText="Enregistrement..."
+        onClick={() => {
+          setLoading(true);
+          window.setTimeout(() => setLoading(false), 900);
+        }}
+      >
+        Enregistrer
+      </Button>
+      <Button variant="secondary">Aperçu</Button>
+      <Button variant="outline">Annuler</Button>
+      <Button variant="danger">Supprimer</Button>
+    </div>
+  );
+}
+```
+
+```tsx
+import { Button, Cart } from "niom-parts";
+
+<Button leftIcon={<Cart size={18} />} size="lg">
+  Ajouter au panier
+</Button>
+```
+
+## Cas d'utilisation courants
+
+Les boutons peuvent etre rendus comme des liens, proposer des actions avec une icone seule, remplir un conteneur ou signaler une action indisponible.
+
+```jsx live
+function ButtonUseCases() {
+  return (
+    <div className="grid w-full max-w-sm gap-3">
+      <Button leftIcon={<Cart size={18} />} className="w-full">
+        Ajouter au panier
+      </Button>
+      <div className="flex flex-wrap gap-2">
+        <Button as="a" href="#props" variant="link">Voir l’API</Button>
+        <Button aria-label="Rechercher" variant="ghost"><Search size={18} /></Button>
+        <Button disabled variant="secondary">Indisponible</Button>
+      </div>
+    </div>
+  );
+}
+```
+
+## Proprietes
+
+| Propriete | Type | Valeur par defaut |
+| --- | --- | --- |
+| `as` | `ElementType` | `"button"` |
+| `variant` | `"primary" \| "secondary" \| "tertiary" \| "outline" \| "ghost" \| "danger" \| "link" \| "accent"` | `"primary"` |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` |
+| `leftIcon` | `ReactNode` | - |
+| `rightIcon` | `ReactNode` | - |
+| `disabled` | `boolean` | `false` |
+| `loading` | `boolean` | `false` |
+| `loadingText` | `string` | `"Chargement..."` |
+| `className` | `string` | `""` |

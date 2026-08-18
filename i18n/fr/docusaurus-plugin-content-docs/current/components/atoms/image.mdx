@@ -1,0 +1,65 @@
+---
+title: Image
+description: Images responsives avec ajustement et image de remplacement.
+---
+
+import { ComponentPreview } from '@site/src/docusaurus/components/ComponentPreview';
+import { Image } from '@site/src/components';
+import { Stock, Logo } from '@site/src/media';
+
+# Image
+
+Image enveloppe l'element image natif et gere l'ajustement, le ratio, le chargement differe et une image de remplacement.
+
+<ComponentPreview>
+  <Image
+    src={Stock}
+    fallbackSrc={Logo}
+    alt="Skincare products arranged on a pale surface"
+    width={320}
+    height={240}
+    aspectRatio="4/3"
+    className="rounded-md"
+  />
+</ComponentPreview>
+
+```tsx
+import { Image } from "niom-parts";
+
+<Image
+  src="/products/serum.jpg"
+  fallbackSrc="/images/fallback.jpg"
+  alt="Hydrating face serum"
+  aspectRatio="4/3"
+  objectFit="cover"
+/>
+```
+
+## Cas d'utilisation courants
+
+Choisissez `cover` pour les photos de produits, `contain` pour les logos et fournissez une image de remplacement pour les medias distants.
+
+```jsx live
+function ImageUseCases() {
+  return (
+    <div className="grid w-full max-w-xl grid-cols-2 gap-4">
+      <Image src={Stock} alt="Product arrangement" aspectRatio="1/1" objectFit="cover" className="rounded-md" />
+      <Image src="/missing-image.jpg" fallbackSrc={Logo} alt="Niom Parts" aspectRatio="1/1" objectFit="contain" className="rounded-md bg-surface p-6" />
+    </div>
+  );
+}
+```
+
+## Proprietes
+
+| Propriete | Type | Valeur par defaut |
+| --- | --- | --- |
+| `src` | `string` | requis |
+| `alt` | `string` | requis |
+| `fallbackSrc` | `string` | - |
+| `loading` | `"lazy" \| "eager"` | `"lazy"` |
+| `objectFit` | `"cover" \| "contain" \| "fill" \| "none" \| "scale-down"` | `"cover"` |
+| `width` | `number` | - |
+| `height` | `number` | - |
+| `aspectRatio` | `string` | - |
+| `className` | `string` | - |

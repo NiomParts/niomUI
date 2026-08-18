@@ -1,0 +1,78 @@
+---
+title: Drawer
+description: Panneaux lateraux modaux a gauche ou a droite.
+---
+
+# Drawer
+
+Drawer affiche un panneau lateral modal avec un voile, la gestion de la touche Echap et le focus sur son bouton de fermeture.
+
+```jsx live
+function DrawerExample() {
+  const [open, setOuvrir] = React.useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOuvrir(true)}>Ouvrir drawer</Button>
+      <Drawer isOpen={open} onClose={() => setOuvrir(false)} side="right">
+        <h2 className="mt-2 text-xl font-bold">Your cart</h2>
+        <p className="mt-2 text-muted-foreground">The drawer can contain any React content.</p>
+      </Drawer>
+    </>
+  );
+}
+```
+
+```tsx
+import { Button, Drawer } from "niom-parts";
+
+<Button onClick={() => setOuvrir(true)}>Ouvrir drawer</Button>
+<Drawer isOpen={open} onClose={() => setOuvrir(false)} side="right">
+  Drawer content
+</Drawer>
+```
+
+## Cas d'utilisation courants
+
+Les panneaux a gauche conviennent a la navigation ou aux filtres ; ceux a droite aux paniers et aux details contextuels.
+
+```jsx live
+function DrawerUseCases() {
+  const [side, setSide] = React.useState(null);
+
+  return (
+    <div className="flex flex-wrap gap-3">
+      <Button variant="secondary" onClick={() => setSide("left")}>Ouvrir filters</Button>
+      <Button onClick={() => setSide("right")}>Ouvrir cart</Button>
+      <Drawer isOpen={side !== null} onClose={() => setSide(null)} side={side || "left"}>
+        {side === "left" ? (
+          <div className="grid gap-4">
+            <h2 className="text-xl font-bold">Filters</h2>
+            <CheckBoxGroup
+              label="Availability"
+              items={[{ label: "En stock", value: "stock" }, { label: "On sale", value: "sale" }]}
+              value={["stock"]}
+            />
+          </div>
+        ) : (
+          <div className="grid gap-4">
+            <h2 className="text-xl font-bold">Your cart</h2>
+            <p className="text-muted-foreground">Two products are ready for checkout.</p>
+            <Button>Checkout</Button>
+          </div>
+        )}
+      </Drawer>
+    </div>
+  );
+}
+```
+
+## Proprietes
+
+| Propriete | Type | Valeur par defaut |
+| --- | --- | --- |
+| `isOpen` | `boolean` | requis |
+| `onClose` | `() => void` | requis |
+| `side` | `"left" \| "right"` | `"left"` |
+| `children` | `ReactNode` | - |
+| `className` | `string` | - |

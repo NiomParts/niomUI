@@ -1,0 +1,61 @@
+---
+title: Card
+description: Surfaces bordees pour regrouper du contenu.
+---
+
+# Card
+
+Card fournit une surface sobre avec un espacement interne et un arriere-plan configurables.
+
+```jsx live
+function CardExample() {
+  return (
+    <div className="grid w-full max-w-2xl gap-4 sm:grid-cols-3">
+      <Card><strong>Default</strong><p className="mt-2 text-sm text-muted-foreground">Standard surface.</p></Card>
+      <Card variant="muted"><strong>Muted</strong><p className="mt-2 text-sm text-muted-foreground">Lower emphasis.</p></Card>
+      <Card variant="outline"><strong>Outline</strong><p className="mt-2 text-sm text-muted-foreground">Transparent fill.</p></Card>
+    </div>
+  );
+}
+```
+
+```tsx
+import { Card } from "niom-parts";
+
+<Card padding="lg" variant="default">
+  <h2>Order summary</h2>
+</Card>
+```
+
+## Cas d'utilisation courants
+
+Composez des cartes avec du contenu et des actions ; utilisez `padding="none"` lorsque le media doit toucher le bord de la carte.
+
+```jsx live
+function CardUseCases() {
+  return (
+    <div className="grid w-full max-w-xl gap-4 sm:grid-cols-2">
+      <Card padding="lg" className="grid gap-3">
+        <Badge variant="success">Ready</Badge>
+        <strong>Order #1042</strong>
+        <p className="text-sm text-muted-foreground">Two items are ready to ship.</p>
+        <Button size="sm">View order</Button>
+      </Card>
+      <Card padding="none" className="overflow-hidden">
+        <Image src={Stock} alt="Featured products" aspectRatio="4/3" />
+        <div className="grid gap-2 p-4"><strong>Featured collection</strong><span className="text-sm text-muted-foreground">New arrivals</span></div>
+      </Card>
+    </div>
+  );
+}
+```
+
+## Proprietes
+
+| Propriete | Type | Valeur par defaut |
+| --- | --- | --- |
+| `as` | `ElementType` | `"article"` |
+| `variant` | `"default" \| "muted" \| "outline"` | `"default"` |
+| `padding` | `"none" \| "sm" \| "md" \| "lg"` | `"md"` |
+| `children` | `ReactNode` | - |
+| `className` | `string` | `""` |

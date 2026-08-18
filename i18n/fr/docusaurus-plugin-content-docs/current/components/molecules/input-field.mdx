@@ -1,0 +1,79 @@
+---
+title: InputField
+description: Composition d'un champ, d'un libelle et d'un message d'erreur.
+---
+
+# InputField
+
+InputField combine Input et Label avec des libelles fixes ou flottants et un message d'erreur accessible.
+
+```jsx live
+function InputFieldExample() {
+  const [email, setEmail] = React.useState("");
+  const invalid = email.length > 0 && !email.includes("@");
+
+  return (
+    <div className="w-full max-w-sm">
+      <InputField
+        floatingLabel="Email address"
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+        error={invalid}
+        errorMessage="Enter a valid email address."
+        type="email"
+        required
+      />
+    </div>
+  );
+}
+```
+
+```tsx
+import { InputField } from "niom-parts";
+
+<InputField
+  floatingLabel="Email address"
+  type="email"
+  error={invalid}
+  errorMessage="Enter a valid email address."
+/>
+```
+
+## Cas d'utilisation courants
+
+InputField gere les libelles standard ou flottants, les messages de validation et les valeurs de formulaire desactivees.
+
+```jsx live
+function InputFieldUseCases() {
+  const [password, setPassword] = React.useState("");
+
+  return (
+    <div className="grid w-full max-w-md gap-5">
+      <InputField label="Full name" placeholder="Maya Chen" required />
+      <InputField
+        floatingLabel="Password"
+        type="password"
+        value={password}
+        onChange={(event) => setPassword(event.target.value)}
+        error={password.length > 0 && password.length < 8}
+        errorMessage="Use at least 8 characters."
+      />
+      <InputField label="Workspace" value="Niom" disabled readOnly />
+    </div>
+  );
+}
+```
+
+## Proprietes
+
+InputField accepte les proprietes publiques de Input ainsi que les proprietes de composition suivantes.
+
+| Propriete | Type | Valeur par defaut |
+| --- | --- | --- |
+| `label` | `ReactNode` | - |
+| `floatingLabel` | `ReactNode` | - |
+| `error` | `boolean` | `false` |
+| `errorMessage` | `string` | - |
+| `required` | `boolean` | - |
+| `disabled` | `boolean` | `false` |
+| `className` | `string` | - |

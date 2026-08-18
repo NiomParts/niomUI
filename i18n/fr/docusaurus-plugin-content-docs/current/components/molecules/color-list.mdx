@@ -1,0 +1,88 @@
+---
+title: ColorList
+description: Nuanciers de couleurs selectionnables.
+---
+
+# ColorList
+
+ColorList affiche des boutons de couleur accessibles et peut indiquer la selection actuelle avec une coche.
+
+```jsx live
+function ColorListExample() {
+  const [color, setColor] = React.useState("var(--color-primary)");
+  const colors = [
+    "var(--color-primary)",
+    "var(--color-secondary)",
+    "var(--color-accent)",
+    "var(--color-danger)",
+  ];
+
+  return (
+    <div className="grid gap-4">
+      <ColorList
+        title="Color"
+        colors={colors}
+        canCheck
+        orientation="horizontal"
+        onColorSelect={setColor}
+      />
+      <span className="text-sm text-muted-foreground">Sélectionné: {color}</span>
+    </div>
+  );
+}
+```
+
+```tsx
+import { ColorList } from "niom-parts";
+
+<ColorList
+  title="Color"
+  colors={["#38bdf8", "#a78bfa", "#34d399"]}
+  canCheck
+  onColorSelect={setColor}
+/>
+```
+
+## Cas d'utilisation courants
+
+Les nuanciers peuvent representer des variantes de produit, des palettes de marque ou tout petit ensemble de couleurs CSS.
+
+```jsx live
+function ColorListUseCases() {
+  const [productColor, setProductColor] = React.useState("#111827");
+  const [brandColor, setBrandColor] = React.useState("#0ea5e9");
+
+  return (
+    <div className="grid w-full gap-7 sm:grid-cols-2">
+      <div className="grid content-start gap-3">
+        <ColorList
+          title="Phone finish"
+          colors={["#111827", "#e5e7eb", "#86efac", "#fda4af"]}
+          canCheck
+          orientation="horizontal"
+          onColorSelect={setProductColor}
+        />
+        <span className="text-sm text-muted-foreground">Sélectionné: {productColor}</span>
+      </div>
+      <ColorList
+        title={`Brand palette: ${brandColor}`}
+        colors={["#0ea5e9", "#14b8a6", "#f59e0b"]}
+        orientation="vertical"
+        onColorSelect={setBrandColor}
+      />
+    </div>
+  );
+}
+```
+
+## Proprietes
+
+| Propriete | Type | Valeur par defaut |
+| --- | --- | --- |
+| `title` | `string` | requis |
+| `colors` | `string[]` | requis |
+| `onColorSelect` | `(color: string) => void` | requis |
+| `canCheck` | `boolean` | `false` |
+| `orientation` | `"horizontal" \| "vertical"` | - |
+| `className` | `string` | - |
+| `badgeClassName` | `string` | - |

@@ -1,0 +1,57 @@
+---
+title: Label
+description: Libelles accessibles pour les controles de formulaire.
+---
+
+import { ComponentPreview } from '@site/src/docusaurus/components/ComponentPreview';
+import { Input, Label } from '@site/src/components';
+
+# Label
+
+Utilisez Label pour associer un texte lisible a un champ. Les champs obligatoires recoivent un indicateur visible.
+
+<ComponentPreview>
+  <div className="grid w-full max-w-sm gap-2">
+    <Label htmlFor="docs-email" required>Email address</Label>
+    <Input id="docs-email" type="email" placeholder="name@example.com" />
+  </div>
+</ComponentPreview>
+
+```tsx
+import { Input, Label } from "niom-parts";
+
+<Label htmlFor="email" required>Email address</Label>
+<Input id="email" type="email" />
+```
+
+## Cas d'utilisation courants
+
+Utilisez les proprietes d'etat pour harmoniser le style du libelle avec celui du controle associe.
+
+<ComponentPreview className="component-preview--column">
+  <div className="grid w-full max-w-sm gap-5">
+    <div className="grid gap-2">
+      <Label htmlFor="profile-name">Display name</Label>
+      <Input id="profile-name" defaultValue="Maya" />
+    </div>
+    <div className="grid gap-2">
+      <Label htmlFor="required-phone" required>Phone number</Label>
+      <Input id="required-phone" type="tel" />
+    </div>
+    <div className="grid gap-2">
+      <Label htmlFor="locked-field" disabled>Organization</Label>
+      <Input id="locked-field" disabled value="Niom" readOnly />
+    </div>
+  </div>
+</ComponentPreview>
+
+## Proprietes
+
+| Propriete | Type | Valeur par defaut |
+| --- | --- | --- |
+| `children` | `ReactNode` | requis |
+| `htmlFor` | `string` | - |
+| `required` | `boolean` | - |
+| `disabled` | `boolean` | - |
+| `className` | `string` | - |
+| `forwardedRef` | `ForwardedRef<HTMLLabelElement>` | - |
