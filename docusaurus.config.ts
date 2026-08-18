@@ -55,7 +55,7 @@ const config: Config = {
   title: "Niom Parts UI",
   tagline: "React components built for practical product interfaces.",
   favicon: "img/favicon.ico",
-  url: "https://niom-ui.vercel.app",
+  url: "https://docs.niomparts.com",
   baseUrl: "/",
   organizationName: "NiomParts",
   projectName: "niomUI",

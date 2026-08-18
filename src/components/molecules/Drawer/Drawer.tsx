@@ -52,7 +52,7 @@ export function Drawer({
   }
 
   return (
-    <div className={cn("fixed inset-0 z-50 flex items-start justify-start")}>
+    <div className={cn("fixed inset-0 z-999 flex items-start justify-start")}>
       <button
         type="button"
         tabIndex={-1}
