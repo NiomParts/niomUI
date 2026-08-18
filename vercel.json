@@ -1,14 +1,14 @@
 {
-  "routes": [
-    { "src": "/", "dest": "/index.html" },
-    { "src": "/fr", "dest": "/fr/index.html" },
-    { "src": "/en", "dest": "/en/index.html" },
-    { "src": "/docs", "dest": "/docs/index.html" },
-    { "src": "/fr/docs", "dest": "/fr/docs/index.html" },
-    { "src": "/en/docs", "dest": "/en/docs/index.html" },
-    { "handle": "filesystem" },
-    { "src": "/fr/(.*)", "dest": "/fr/$1.html" },
-    { "src": "/en/(.*)", "dest": "/en/$1.html" },
-    { "src": "/(.*)", "dest": "/$1.html" }
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/fr", "destination": "/fr/index.html" },
+    { "source": "/en", "destination": "/en/index.html" },
+    { "source": "/docs", "destination": "/docs/index.html" },
+    { "source": "/fr/docs", "destination": "/fr/docs/index.html" },
+    { "source": "/en/docs", "destination": "/en/docs/index.html" },
+    { "source": "/fr/:path*", "destination": "/fr/:path*.html" },
+    { "source": "/en/:path*", "destination": "/en/:path*.html" },
+    { "source": "/docs/:path*", "destination": "/docs/:path*.html" },
+    { "source": "/:path*", "destination": "/:path*.html" }
   ]
 }
