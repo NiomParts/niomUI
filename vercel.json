@@ -1,7 +1,14 @@
 {
   "routes": [
-    {
-      "handle": "filesystem"
-    }
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/fr", "dest": "/fr/index.html" },
+    { "src": "/en", "dest": "/en/index.html" },
+    { "src": "/docs", "dest": "/docs/index.html" },
+    { "src": "/fr/docs", "dest": "/fr/docs/index.html" },
+    { "src": "/en/docs", "dest": "/en/docs/index.html" },
+    { "handle": "filesystem" },
+    { "src": "/fr/(.*)", "dest": "/fr/$1.html" },
+    { "src": "/en/(.*)", "dest": "/en/$1.html" },
+    { "src": "/(.*)", "dest": "/$1.html" }
   ]
 }
