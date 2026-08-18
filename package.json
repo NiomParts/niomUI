@@ -1,6 +1,6 @@
 {
   "name": "niom-parts",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -34,7 +34,7 @@
     "type": "git",
     "url": "git+https://github.com/NiomParts/niomUI.git"
   },
-  "homepage": "https://niom-parts.vercel.app",
+  "homepage": "https://docs.niomparts.com",
   "license": "MIT",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
