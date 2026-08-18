@@ -31,7 +31,7 @@ export default function Home() {
                 </Translate>
               </span>
               <Badge className={styles.version} variant="secondary">
-                v0.1.6
+                v0.1.7
               </Badge>
             </div>
             <div className={styles.brand}>
