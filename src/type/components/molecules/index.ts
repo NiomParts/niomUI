@@ -6,3 +6,4 @@ export type * from "./PriceFilter.type";
 export type * from "./Toaster.type";
 export type * from "./Accordion.type";
 export type * from "./ColorList.type";
+export type * from "./TextAreaField.type";

@@ -6,3 +6,4 @@ export * from "./PriceFilter";
 export * from "./Toaster";
 export * from "./ColorList";
 export * from "./Accordion";
+export * from "./TextAreaField";

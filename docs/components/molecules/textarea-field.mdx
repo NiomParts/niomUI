@@ -1,0 +1,98 @@
+---
+title: TextAreaField
+description: Composition of a textarea, label, character count, and error message.
+---
+
+# TextAreaField
+
+TextAreaField combines TextArea and Label with an optional character count, clear button, and accessible error message.
+
+```jsx live
+function TextAreaFieldExample() {
+  const [message, setMessage] = React.useState("");
+  const invalid = message.length > 0 && message.length < 10;
+
+  return (
+    <div className="w-full max-w-sm">
+      <TextAreaField
+        id="message"
+        label="Message"
+        value={message}
+        onChange={(event) => setMessage(event.target.value)}
+        error={invalid}
+        errorMessage="Enter at least 10 characters."
+        maxLength={200}
+        showCount
+        required
+      />
+    </div>
+  );
+}
+```
+
+```tsx
+import { TextAreaField } from "niom-parts";
+
+<TextAreaField
+  id="message"
+  label="Message"
+  maxLength={200}
+  showCount
+  error={invalid}
+  errorMessage="Enter at least 10 characters."
+/>;
+```
+
+## Common use cases
+
+TextAreaField handles labels, character counts, clear buttons, validation messages, and disabled form values.
+
+```jsx live
+function TextAreaFieldUseCases() {
+  const [feedback, setFeedback] = React.useState("");
+
+  return (
+    <div className="grid w-full max-w-md gap-5">
+      <TextAreaField
+        id="description"
+        label="Description"
+        placeholder="Write a description"
+        required
+      />
+
+      <TextAreaField
+        id="feedback"
+        label="Feedback"
+        value={feedback}
+        onChange={(event) => setFeedback(event.target.value)}
+        maxLength={150}
+        showCount
+        clearButton
+      />
+
+      <TextAreaField
+        id="notes"
+        label="Notes"
+        value="Managed by your organization"
+        disabled
+        readOnly
+      />
+    </div>
+  );
+}
+```
+
+## Props
+
+TextAreaField accepts the public props of TextArea in addition to the following composition props.
+
+| Prop           | Type        | Default |
+| -------------- | ----------- | ------- |
+| `label`        | `ReactNode` | -       |
+| `showCount`    | `boolean`   | `false` |
+| `clearButton`  | `boolean`   | `false` |
+| `error`        | `boolean`   | `false` |
+| `errorMessage` | `string`    | -       |
+| `required`     | `boolean`   | -       |
+| `disabled`     | `boolean`   | `false` |
+| `className`    | `string`    | -       |
