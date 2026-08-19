@@ -107,6 +107,13 @@ const config: Config = {
         theme: {
           customCss: "./src/docusaurus/styles.css",
         },
+        sitemap: {
+          lastmod: "date",
+          changefreq: "weekly",
+          priority: 0.5,
+          ignorePatterns: ["/tags/**"],
+          filename: "sitemap.xml",
+        },
       },
     ],
   ],
@@ -147,6 +154,29 @@ const config: Config = {
       playgroundPosition: "bottom",
     },
   },
+  headTags: [
+    {
+      tagName: "script",
+      attributes: {
+        type: "application/ld+json",
+      },
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "Niom Parts UI Documentation",
+        url: "https://docs.niomparts.com",
+        author: {
+          "@type": "Person",
+          name: "Nomekuma",
+          url: "https://github.com/Nomekuma",
+        },
+        sameAs: [
+          "https://www.npmjs.com/package/niom-parts",
+          "https://github.com/NiomParts/niomUI",
+        ],
+      }),
+    },
+  ],
 };
 
 export default config;
