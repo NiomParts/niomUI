@@ -1,0 +1,98 @@
+---
+title: TextAreaField
+description: Composition d'une zone de texte, d'un libelle, d'un compteur de caracteres et d'un message d'erreur.
+---
+
+# TextAreaField
+
+TextAreaField combine TextArea et Label avec un compteur de caracteres facultatif, un bouton d'effacement et un message d'erreur accessible.
+
+```jsx live
+function TextAreaFieldExample() {
+  const [message, setMessage] = React.useState("");
+  const invalid = message.length > 0 && message.length < 10;
+
+  return (
+    <div className="w-full max-w-sm">
+      <TextAreaField
+        id="message"
+        label="Message"
+        value={message}
+        onChange={(event) => setMessage(event.target.value)}
+        error={invalid}
+        errorMessage="Enter at least 10 characters."
+        maxLength={200}
+        showCount
+        required
+      />
+    </div>
+  );
+}
+```
+
+```tsx
+import { TextAreaField } from "niom-parts";
+
+<TextAreaField
+  id="message"
+  label="Message"
+  maxLength={200}
+  showCount
+  error={invalid}
+  errorMessage="Enter at least 10 characters."
+/>;
+```
+
+## Cas d'utilisation courants
+
+TextAreaField gere les libelles, les compteurs de caracteres, les boutons d'effacement, les messages de validation et les valeurs de formulaire desactivees.
+
+```jsx live
+function TextAreaFieldUseCases() {
+  const [feedback, setFeedback] = React.useState("");
+
+  return (
+    <div className="grid w-full max-w-md gap-5">
+      <TextAreaField
+        id="description"
+        label="Description"
+        placeholder="Write a description"
+        required
+      />
+
+      <TextAreaField
+        id="feedback"
+        label="Feedback"
+        value={feedback}
+        onChange={(event) => setFeedback(event.target.value)}
+        maxLength={150}
+        showCount
+        clearButton
+      />
+
+      <TextAreaField
+        id="notes"
+        label="Notes"
+        value="Managed by your organization"
+        disabled
+        readOnly
+      />
+    </div>
+  );
+}
+```
+
+## Proprietes
+
+TextAreaField accepte les proprietes publiques de TextArea ainsi que les proprietes de composition suivantes.
+
+| Propriete      | Type        | Valeur par defaut |
+| -------------- | ----------- | ----------------- |
+| `label`        | `ReactNode` | -                 |
+| `showCount`    | `boolean`   | `false`           |
+| `clearButton`  | `boolean`   | `false`           |
+| `error`        | `boolean`   | `false`           |
+| `errorMessage` | `string`    | -                 |
+| `required`     | `boolean`   | -                 |
+| `disabled`     | `boolean`   | `false`           |
+| `className`    | `string`    | -                 |

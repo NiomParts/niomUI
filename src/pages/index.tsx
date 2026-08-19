@@ -2,7 +2,7 @@ import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import Translate, { translate } from "@docusaurus/Translate";
 import CodeBlock from "@theme/CodeBlock";
-
+import packageJson from "../../package.json";
 import { ArrowRight, Badge, Button } from "../components";
 import { Logo } from "../media";
 
@@ -31,7 +31,7 @@ export default function Home() {
                 </Translate>
               </span>
               <Badge className={styles.version} variant="secondary">
-                v0.1.9
+                v{packageJson.version}
               </Badge>
             </div>
             <div className={styles.brand}>
