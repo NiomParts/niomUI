@@ -1,0 +1,96 @@
+---
+title: TextArea
+description: Zone de texte multiligne avec des etats d'erreur, de desactivation et de lecture seule.
+---
+
+# TextArea
+
+TextArea permet de saisir du contenu sur plusieurs lignes. Il prend en charge les valeurs controlees et non controlees, les etats d'erreur, de desactivation et de lecture seule, ainsi que les champs obligatoires et les limites de caracteres.
+
+```jsx live
+function TextAreaExample() {
+  const [value, setValue] = React.useState("");
+
+  return (
+    <div className="grid w-full max-w-sm gap-4">
+      <TextArea
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+        placeholder="Ecrire une description"
+      />
+
+      <TextArea
+        error
+        placeholder="Ce champ contient une erreur"
+        aria-label="Description invalide"
+      />
+
+      <TextArea
+        disabled
+        value="Cette zone de texte est desactivee"
+        aria-label="Description desactivee"
+        readOnly
+      />
+    </div>
+  );
+}
+```
+
+```tsx
+import { TextArea } from "niom-parts";
+
+<TextArea placeholder="Parlez-nous de vous" rows={6} maxLength={500} />;
+```
+
+## Cas d'utilisation courants
+
+TextArea peut etre utilise pour les descriptions, les commentaires, les notes, les avis et tout autre contenu necessitant plusieurs lignes.
+
+```jsx live
+function TextAreaUseCases() {
+  return (
+    <div className="grid w-full max-w-sm gap-3">
+      <TextArea placeholder="Ajouter un commentaire" aria-label="Commentaire" />
+
+      <TextArea
+        defaultValue="Ce contenu peut etre consulte mais ne peut pas etre modifie."
+        readOnly
+        aria-label="Contenu en lecture seule"
+      />
+
+      <TextArea
+        placeholder="Votre avis est obligatoire"
+        required
+        aria-label="Avis obligatoire"
+      />
+
+      <TextArea
+        placeholder="Maximum 200 caracteres"
+        maxLength={200}
+        aria-label="Avis limite a 200 caracteres"
+      />
+    </div>
+  );
+}
+```
+
+## Proprietes
+
+TextArea accepte les attributs natifs d'une zone de texte en plus des proprietes suivantes.
+
+| Propriete      | Type                                                      | Valeur par defaut |
+| -------------- | --------------------------------------------------------- | ----------------- |
+| `value`        | `string`                                                  | -                 |
+| `defaultValue` | `string`                                                  | -                 |
+| `placeholder`  | `string`                                                  | -                 |
+| `cols`         | `number`                                                  | `50`              |
+| `rows`         | `number`                                                  | `4`               |
+| `disabled`     | `boolean`                                                 | `false`           |
+| `required`     | `boolean`                                                 | `false`           |
+| `readOnly`     | `boolean`                                                 | `false`           |
+| `maxLength`    | `number`                                                  | -                 |
+| `id`           | `string`                                                  | -                 |
+| `name`         | `string`                                                  | -                 |
+| `className`    | `string`                                                  | -                 |
+| `onChange`     | `(event: React.ChangeEvent<HTMLTextAreaElement>) => void` | -                 |
+| `error`        | `boolean`                                                 | `false`           |

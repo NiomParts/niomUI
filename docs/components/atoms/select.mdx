@@ -12,8 +12,6 @@ function SelectExample() {
   const [value, setValue] = React.useState();
   const options = [
     { value: "audio", label: "Audio" },
-    { value: "graphics", label: "Graphics" },
-    { value: "legacy", label: "Legacy", disabled: true },
   ];
 
   return (
@@ -51,7 +49,6 @@ Select supports semantic variants, initial values, required form fields, and una
 function SelectUseCases() {
   const options = [
     { value: "mu", label: "Mauritius" },
-    { value: "fr", label: "France" },
     { value: "archive", label: "Archived region", disabled: true },
   ];
 

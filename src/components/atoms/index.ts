@@ -10,3 +10,4 @@ export * from "./Slider";
 export * from "./Rating";
 export * from "./Skeleton";
 export * from "./Select";
+export * from "./TextArea";

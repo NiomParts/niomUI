@@ -1,0 +1,96 @@
+---
+title: TextArea
+description: Multi-line text input with error, disabled, and read-only states.
+---
+
+# TextArea
+
+TextArea provides a multi-line text input for longer content. It supports controlled and uncontrolled values, error styling, disabled and read-only states, required fields, and character limits.
+
+```jsx live
+function TextAreaExample() {
+  const [value, setValue] = React.useState("");
+
+  return (
+    <div className="grid w-full max-w-sm gap-4">
+      <TextArea
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+        placeholder="Write a description"
+      />
+
+      <TextArea
+        error
+        placeholder="This field has an error"
+        aria-label="Invalid description"
+      />
+
+      <TextArea
+        disabled
+        value="This textarea is disabled"
+        aria-label="Disabled description"
+        readOnly
+      />
+    </div>
+  );
+}
+```
+
+```tsx
+import { TextArea } from "niom-parts";
+
+<TextArea placeholder="Tell us about yourself" rows={6} maxLength={500} />;
+```
+
+## Common use cases
+
+TextArea can be used for descriptions, comments, notes, feedback, and other multi-line content.
+
+```jsx live
+function TextAreaUseCases() {
+  return (
+    <div className="grid w-full max-w-sm gap-3">
+      <TextArea placeholder="Add a comment" aria-label="Comment" />
+
+      <TextArea
+        defaultValue="This content can be viewed but not edited."
+        readOnly
+        aria-label="Read-only content"
+      />
+
+      <TextArea
+        placeholder="Required feedback"
+        required
+        aria-label="Required feedback"
+      />
+
+      <TextArea
+        placeholder="Maximum 200 characters"
+        maxLength={200}
+        aria-label="Limited feedback"
+      />
+    </div>
+  );
+}
+```
+
+## Props
+
+TextArea accepts native textarea attributes in addition to these props.
+
+| Prop           | Type                                                      | Default |
+| -------------- | --------------------------------------------------------- | ------- |
+| `value`        | `string`                                                  | -       |
+| `defaultValue` | `string`                                                  | -       |
+| `placeholder`  | `string`                                                  | -       |
+| `cols`         | `number`                                                  | `50`    |
+| `rows`         | `number`                                                  | `4`     |
+| `disabled`     | `boolean`                                                 | `false` |
+| `required`     | `boolean`                                                 | `false` |
+| `readOnly`     | `boolean`                                                 | `false` |
+| `maxLength`    | `number`                                                  | -       |
+| `id`           | `string`                                                  | -       |
+| `name`         | `string`                                                  | -       |
+| `className`    | `string`                                                  | -       |
+| `onChange`     | `(event: React.ChangeEvent<HTMLTextAreaElement>) => void` | -       |
+| `error`        | `boolean`                                                 | `false` |
