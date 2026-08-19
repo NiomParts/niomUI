@@ -10,3 +10,4 @@ export type * from "./Rating.type";
 export type * from "./Image.type";
 export type * from "./Skeleton.type";
 export type * from "./Select.type";
+export type * from "./TextArea.type";
