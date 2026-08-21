@@ -7,116 +7,251 @@ describe("InputField", () => {
   it("renders the input field with the provided value", () => {
     render(<InputField value="Test Value" onChange={() => {}} />);
 
-    const inputElement = screen.getByRole("textbox") as HTMLInputElement;
-    expect(inputElement).toBeInTheDocument();
-    expect(inputElement.value).toBe("Test Value");
+    const input = screen.getByRole("textbox");
+
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveValue("Test Value");
+  });
+
+  it("renders the input with the provided defaultValue", () => {
+    render(<InputField defaultValue="Default Value" />);
+
+    expect(screen.getByRole("textbox")).toHaveValue("Default Value");
   });
 
   it("calls onChange when the input value changes", () => {
     const handleChange = vi.fn();
+
     render(<InputField onChange={handleChange} />);
 
-    const inputElement = screen.getByRole("textbox") as HTMLInputElement;
-    fireEvent.change(inputElement, { target: { value: "New Value" } });
+    fireEvent.change(screen.getByRole("textbox"), {
+      target: { value: "New Value" },
+    });
 
     expect(handleChange).toHaveBeenCalledTimes(1);
   });
 
+  it("updates the input value after change when uncontrolled", () => {
+    const handleChange = vi.fn();
+
+    render(<InputField onChange={handleChange} />);
+
+    const input = screen.getByRole("textbox");
+
+    fireEvent.change(input, {
+      target: { value: "New Value" },
+    });
+
+    expect(input).toHaveValue("New Value");
+    expect(handleChange).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not update the displayed value internally when controlled", () => {
+    const handleChange = vi.fn();
+
+    render(<InputField value="Controlled Value" onChange={handleChange} />);
+
+    const input = screen.getByRole("textbox");
+
+    fireEvent.change(input, {
+      target: { value: "New Value" },
+    });
+
+    expect(handleChange).toHaveBeenCalledTimes(1);
+    expect(input).toHaveValue("Controlled Value");
+  });
+
   it("displays the error message when error is true", () => {
+    render(<InputField error errorMessage="This is an error message" />);
+
+    expect(screen.getByText("This is an error message")).toBeInTheDocument();
+  });
+
+  it("does not display the error message when error is false", () => {
+    render(
+      <InputField error={false} errorMessage="This is an error message" />,
+    );
+
+    expect(
+      screen.queryByText("This is an error message"),
+    ).not.toBeInTheDocument();
+  });
+
+  it("sets aria-invalid when error is true", () => {
+    render(<InputField error />);
+
+    expect(screen.getByRole("textbox")).toHaveAttribute("aria-invalid", "true");
+  });
+
+  it("connects the error message through aria-describedby", () => {
+    render(<InputField id="email" error errorMessage="Email is required" />);
+
+    expect(screen.getByRole("textbox")).toHaveAttribute(
+      "aria-describedby",
+      "email-error",
+    );
+
+    expect(screen.getByText("Email is required")).toHaveAttribute(
+      "id",
+      "email-error",
+    );
+  });
+
+  it("preserves an existing aria-describedby value alongside the error message", () => {
     render(
       <InputField
-        onChange={() => {}}
-        error={true}
-        errorMessage="This is an error message"
+        id="email"
+        aria-describedby="email-help"
+        error
+        errorMessage="Email is required"
       />,
     );
 
-    const errorMessageElement = screen.getByText("This is an error message");
-    expect(errorMessageElement).toBeInTheDocument();
+    expect(screen.getByRole("textbox")).toHaveAttribute(
+      "aria-describedby",
+      "email-help email-error",
+    );
   });
 
   it("disables the input field when disabled is true", () => {
-    render(<InputField onChange={() => {}} disabled={true} />);
+    render(<InputField disabled />);
 
-    const inputElement = screen.getByRole("textbox") as HTMLInputElement;
-    expect(inputElement).toBeDisabled();
+    expect(screen.getByRole("textbox")).toBeDisabled();
   });
 
   it("renders the floating label when provided", () => {
-    render(<InputField onChange={() => {}} floatingLabel="Floating Label" />);
+    render(<InputField floatingLabel="Floating Label" />);
 
-    const floatingLabelElement = screen.getByText("Floating Label");
-    expect(floatingLabelElement).toBeInTheDocument();
+    expect(screen.getByText("Floating Label")).toBeInTheDocument();
   });
 
-  it("renders the label when provided", () => {
-    render(<InputField onChange={() => {}} label="Input Label" />);
+  it("renders the static label when provided", () => {
+    render(<InputField id="username" label="Input Label" />);
 
-    const labelElement = screen.getByText("Input Label");
-    expect(labelElement).toBeInTheDocument();
+    expect(screen.getByText("Input Label")).toBeInTheDocument();
+    expect(screen.getByLabelText("Input Label")).toBeInTheDocument();
+  });
+
+  it("associates a generated id with the label", () => {
+    render(<InputField label="Email" />);
+
+    const input = screen.getByLabelText("Email");
+
+    expect(input).toHaveAttribute("id");
+    expect(input.getAttribute("id")).toBeTruthy();
+  });
+
+  it("hides the placeholder while an empty floating label is inactive", () => {
+    render(
+      <InputField floatingLabel="Email" placeholder="email@example.com" />,
+    );
+
+    expect(screen.getByRole("textbox")).not.toHaveAttribute("placeholder");
+  });
+
+  it("shows the placeholder when a floating-label input receives focus", () => {
+    render(
+      <InputField floatingLabel="Email" placeholder="email@example.com" />,
+    );
+
+    const input = screen.getByRole("textbox");
+
+    fireEvent.focus(input);
+
+    expect(input).toHaveAttribute("placeholder", "email@example.com");
+  });
+
+  it("keeps the floating label active when the uncontrolled input has a value", () => {
+    render(
+      <InputField floatingLabel="Email" placeholder="email@example.com" />,
+    );
+
+    const input = screen.getByRole("textbox");
+
+    fireEvent.change(input, {
+      target: { value: "test@example.com" },
+    });
+
+    fireEvent.blur(input);
+
+    expect(input).toHaveAttribute("placeholder", "email@example.com");
+  });
+
+  it("calls onFocus when the input receives focus", () => {
+    const handleFocus = vi.fn();
+
+    render(<InputField onFocus={handleFocus} />);
+
+    fireEvent.focus(screen.getByRole("textbox"));
+
+    expect(handleFocus).toHaveBeenCalledTimes(1);
+  });
+
+  it("calls onBlur when the input loses focus", () => {
+    const handleBlur = vi.fn();
+
+    render(<InputField onBlur={handleBlur} />);
+
+    const input = screen.getByRole("textbox");
+
+    fireEvent.focus(input);
+    fireEvent.blur(input);
+
+    expect(handleBlur).toHaveBeenCalledTimes(1);
   });
 
   it.each(["text", "password", "email", "number", "search", "tel"] as const)(
     "renders %s input",
     (type) => {
-      render(<InputField onChange={() => {}} type={type} />);
+      render(<InputField type={type} />);
 
-      const input = document.querySelector("input") as HTMLInputElement;
+      const input = document.querySelector("input");
 
-      expect(input.type).toBe(type);
+      expect(input).toHaveAttribute("type", type);
     },
   );
 
-  it("checks if the input has the correct placeholder", () => {
-    render(
-      <InputField onChange={() => {}} placeholder="Enter your text here" />,
-    );
+  it("applies the provided placeholder", () => {
+    render(<InputField placeholder="Enter your text here" />);
 
-    const inputElement = screen.getByPlaceholderText(
-      "Enter your text here",
-    ) as HTMLInputElement;
-    expect(inputElement).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText("Enter your text here"),
+    ).toBeInTheDocument();
   });
 
-  it("checks if the input has the correct name attribute", () => {
-    render(<InputField onChange={() => {}} name="test-input" />);
+  it("applies the provided name attribute", () => {
+    render(<InputField name="test-input" />);
 
-    const inputElement = screen.getByRole("textbox") as HTMLInputElement;
-    expect(inputElement.name).toBe("test-input");
+    expect(screen.getByRole("textbox")).toHaveAttribute("name", "test-input");
   });
 
-  it("checks if the input has the correct id attribute", () => {
-    render(<InputField onChange={() => {}} />);
+  it("uses the provided id", () => {
+    render(<InputField id="custom-input" />);
 
-    const inputElement = screen.getByRole("textbox") as HTMLInputElement;
-    expect(inputElement.id).toBeTruthy();
+    expect(screen.getByRole("textbox")).toHaveAttribute("id", "custom-input");
   });
 
-  it("updates the input value after change when uncontrolled", () => {
-    const handleChange = vi.fn();
-    render(<InputField onChange={handleChange} />);
+  it("generates an id when one is not provided", () => {
+    render(<InputField />);
 
-    const inputElement = screen.getByRole("textbox") as HTMLInputElement;
-    fireEvent.change(inputElement, { target: { value: "New Value" } });
+    const input = screen.getByRole("textbox");
 
-    expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(inputElement.value).toBe("New Value");
+    expect(input.getAttribute("id")).toBeTruthy();
   });
 
-  it("checks if class names are applied correctly", () => {
-    const { container } = render(
-      <InputField
-        onChange={() => {}}
-        className="custom-class"
-        disabled={true}
-        error={true}
-      />,
-    );
+  it("applies className to the native input", () => {
+    render(<InputField className="custom-class" disabled error />);
 
-    const inputElement = screen.getByRole("textbox");
-    expect(container.querySelector(".custom-class")).toBeInTheDocument();
-    expect(inputElement).not.toHaveClass("custom-class");
-    expect(inputElement).toBeDisabled();
-    expect(inputElement).toHaveAttribute("aria-invalid", "true");
+    const input = screen.getByRole("textbox");
+
+    expect(input).toHaveClass("custom-class");
+    expect(input).toBeDisabled();
+    expect(input).toHaveAttribute("aria-invalid", "true");
+  });
+
+  it("marks the native input as required", () => {
+    render(<InputField label="Email" required />);
+
+    expect(screen.getByLabelText(/Email/)).toBeRequired();
   });
 });

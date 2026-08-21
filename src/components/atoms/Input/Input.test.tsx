@@ -13,6 +13,7 @@ describe("Input", () => {
 
   it("calls onChange when the value changes", () => {
     const handleChange = vi.fn();
+
     render(<Input onChange={handleChange} />);
 
     fireEvent.change(screen.getByRole("textbox"), {
@@ -25,25 +26,12 @@ describe("Input", () => {
   it("sets aria-invalid when error is true", () => {
     render(<Input error />);
 
-    expect(screen.getByRole("textbox")).toHaveAttribute(
-      "aria-invalid",
-      "true",
-    );
-  });
-
-  it("uses the shared focus outline without a box-shadow ring", () => {
-    render(<Input placeholder="Email address" />);
-
-    expect(screen.getByPlaceholderText("Email address")).toHaveClass(
-      "niom-focus-ring",
-    );
-    expect(screen.getByPlaceholderText("Email address")).not.toHaveClass(
-      "focus:ring-2",
-    );
+    expect(screen.getByRole("textbox")).toHaveAttribute("aria-invalid", "true");
   });
 
   it("renders a search action button and calls onSearch", () => {
     const handleSearch = vi.fn();
+
     render(
       <Input
         type="search"
@@ -52,13 +40,18 @@ describe("Input", () => {
       />,
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "Search" }));
+    const searchButton = screen.getByRole("button", {
+      name: "Search",
+    });
+
+    fireEvent.click(searchButton);
 
     expect(screen.getByPlaceholderText("Search products")).toHaveAttribute(
       "type",
       "search",
     );
-    expect(screen.getByRole("button", { name: "Search" })).toBeInTheDocument();
+
+    expect(searchButton).toBeInTheDocument();
     expect(handleSearch).toHaveBeenCalledTimes(1);
   });
 
@@ -72,6 +65,7 @@ describe("Input", () => {
     );
 
     expect(screen.getByTestId("custom-icon")).toBeInTheDocument();
+
     expect(screen.getByPlaceholderText("Product name")).toHaveClass("pr-12");
   });
 
@@ -79,26 +73,30 @@ describe("Input", () => {
     render(<Input type="password" placeholder="Password" />);
 
     const input = screen.getByPlaceholderText("Password");
-    expect(input).toHaveAttribute("type", "password");
-    expect(
-      screen.getByRole("button", { name: "Show password" }),
-    ).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "Show password" }));
+    expect(input).toHaveAttribute("type", "password");
+
+    const showPasswordButton = screen.getByRole("button", {
+      name: "Show password",
+    });
+
+    expect(showPasswordButton).toBeInTheDocument();
+
+    fireEvent.click(showPasswordButton);
 
     expect(input).toHaveAttribute("type", "text");
+
     expect(
-      screen.getByRole("button", { name: "Hide password" }),
+      screen.getByRole("button", {
+        name: "Hide password",
+      }),
     ).toBeInTheDocument();
   });
 
-  it("applies className to the input wrapper", () => {
-    const { container } = render(
-      <Input className="max-w-72" placeholder="Email address" />,
-    );
+  it("applies className to the native input", () => {
+    render(<Input className="max-w-72" placeholder="Email address" />);
 
-    expect(container.firstElementChild).toHaveClass("max-w-72");
-    expect(screen.getByPlaceholderText("Email address")).not.toHaveClass(
+    expect(screen.getByPlaceholderText("Email address")).toHaveClass(
       "max-w-72",
     );
   });

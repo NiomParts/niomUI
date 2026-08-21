@@ -68,6 +68,7 @@ const InputImpl = (
     hasLeftIcon && INPUT_WITH_LEFT_ICON_CLASS,
     ((hasRightIcon && !hasRightAction) || hasRightAction) &&
       INPUT_WITH_RIGHT_ACTION_CLASS,
+    className,
   );
 
   const input = (
@@ -86,11 +87,11 @@ const InputImpl = (
   );
 
   if (!hasRightAction && !hasLeftIcon && !hasRightIcon) {
-    return <div className={cn(className || "w-full")}>{input}</div>;
+    return <div className="w-full">{input}</div>;
   }
 
   return (
-    <div className={cn("relative", className || "w-full")}>
+    <div className={cn("w-full relative")}>
       {hasLeftIcon ? (
         <span className={cn(INPUT_AFFIX_CLASS, INPUT_LEFT_AFFIX_CLASS)}>
           {icon}
