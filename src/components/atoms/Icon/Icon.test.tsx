@@ -29,7 +29,14 @@ import {
   WhatsAppLogo,
   MasterCard,
   PlusIcon,
-  MinusIcon
+  MinusIcon,
+  MailIcon,
+  PhoneIcon,
+  InformationIcon,
+  HomeIcon,
+  BitcoinLogo,
+  TruckIcon,
+  WarningIcon,
 } from "./Icon";
 
 describe("Icons", () => {
@@ -61,8 +68,15 @@ describe("Icons", () => {
     { name: "MCBLogo", icon: MCBLogo },
     { name: "WhatsAppLogo", icon: WhatsAppLogo },
     { name: "MasterCard", icon: MasterCard },
-    { name: "PlusIcon", icon: PlusIcon},
-    { name: "MinusIcon", icon: MinusIcon}
+    { name: "PlusIcon", icon: PlusIcon },
+    { name: "MinusIcon", icon: MinusIcon },
+    { name: "MailIcon", icon: MailIcon },
+    { name: "PhoneIcon", icon: PhoneIcon },
+    { name: "InformationIcon", icon: InformationIcon },
+    { name: "HomeIcon", icon: HomeIcon },
+    { name: "BitcoinLogo", icon: BitcoinLogo },
+    { name: "TruckIcon", icon: TruckIcon },
+    { name: "WarningIcon", icon: WarningIcon },
   ];
 
   icons.forEach(({ name, icon: Icons }) => {

@@ -27,7 +27,14 @@ import {
   MCBLogo,
   MasterCard,
   PlusIcon,
-  MinusIcon
+  MinusIcon,
+  MailIcon,
+  PhoneIcon,
+  InformationIcon,
+  HomeIcon,
+  BitcoinLogo,
+  TruckIcon,
+  WarningIcon,
 } from "./Icon";
 import type { SVGprops } from "@type/components/atoms";
 import { Search } from "./Icon";
@@ -273,5 +280,60 @@ export const MinusIconStory: Story = {
   args: {
     size: 24,
     color: "white",
+  } as SVGprops,
+};
+
+export const MailIconStory: Story = {
+  render: createTemplate(MailIcon),
+  args: {
+    size: 24,
+    color: "white",
+  } as SVGprops,
+};
+
+export const PhoneIconStory: Story = {
+  render: createTemplate(PhoneIcon),
+  args: {
+    size: 24,
+    color: "white",
+  } as SVGprops,
+};
+
+export const InformationIconStory: Story = {
+  render: createTemplate(InformationIcon),
+  args: {
+    size: 24,
+    color: "white",
+  } as SVGprops,
+};
+
+export const HomeIconStory: Story = {
+  render: createTemplate(HomeIcon),
+  args: {
+    size: 24,
+    color: "white",
+  } as SVGprops,
+};
+
+export const BitcoinLogoIconStory: Story = {
+  render: createTemplate(BitcoinLogo),
+  args: {
+    size: 24,
+    color: "orange",
+  } as SVGprops,
+};
+
+export const TruckIconStory: Story = {
+  render: createTemplate(TruckIcon),
+  args: {
+    size: 24,
+    color: "white",
+  } as SVGprops,
+};
+
+export const WarningIconStory: Story = {
+  render: createTemplate(WarningIcon),
+  args: {
+    size: 24,
   } as SVGprops,
 };
