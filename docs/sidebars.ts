@@ -27,6 +27,7 @@ const sidebars: SidebarsConfig = {
             "components/atoms/button",
             "components/atoms/card",
             "components/atoms/checkbox",
+            "components/atoms/radio",
             "components/atoms/icon",
             "components/atoms/image",
             "components/atoms/input",
