@@ -1,0 +1,120 @@
+---
+title: Radio
+description: Controlled or uncontrolled radio button.
+---
+
+---
+
+# Radio
+
+Radio manages the semantic variants of the radio button and its text separately.
+
+```jsx live
+function RadioExample() {
+  const [value, setValue] = React.useState("email");
+
+  return (
+    <div className="grid gap-3">
+      <Radio
+        name="contact"
+        value="email"
+        checked={value === "email"}
+        onChange={() => setValue("email")}
+      >
+        Email
+      </Radio>
+
+      <Radio
+        name="contact"
+        value="sms"
+        checked={value === "sms"}
+        onChange={() => setValue("sms")}
+        variant="secondary"
+        textVariant="secondary"
+      >
+        SMS
+      </Radio>
+
+      <Radio name="contact" value="disabled" disabled>
+        Unavailable option
+      </Radio>
+    </div>
+  );
+}
+```
+
+```tsx
+import { Radio } from "niom-parts";
+
+<Radio
+  name="plan"
+  value="pro"
+  checked={plan === "pro"}
+  onChange={() => setPlan("pro")}
+>
+  Pro
+</Radio>;
+```
+
+## Common use cases
+
+Radio buttons are useful for groups of options where only one value can be selected. They can be controlled by React or use `defaultChecked` for uncontrolled behavior.
+
+```jsx live
+function RadioUseCases() {
+  const [plan, setPlan] = React.useState("basic");
+
+  return (
+    <div className="grid gap-3">
+      <Radio
+        name="plan"
+        value="basic"
+        checked={plan === "basic"}
+        onChange={() => setPlan("basic")}
+      >
+        Basic
+      </Radio>
+
+      <Radio
+        name="plan"
+        value="pro"
+        checked={plan === "pro"}
+        onChange={() => setPlan("pro")}
+        variant="accent"
+        textVariant={plan === "pro" ? "accent" : "foreground"}
+      >
+        Pro
+      </Radio>
+
+      <Radio
+        name="notification"
+        value="daily"
+        defaultChecked
+        variant="secondary"
+      >
+        Daily notifications
+      </Radio>
+
+      <Radio name="plan" value="enterprise" disabled>
+        Enterprise
+      </Radio>
+    </div>
+  );
+}
+```
+
+## Properties
+
+| Property         | Type                                                                                        | Default value  |
+| ---------------- | ------------------------------------------------------------------------------------------- | -------------- |
+| `id`             | `string`                                                                                    | -              |
+| `name`           | `string`                                                                                    | -              |
+| `value`          | `string`                                                                                    | -              |
+| `checked`        | `boolean`                                                                                   | -              |
+| `defaultChecked` | `boolean`                                                                                   | -              |
+| `onChange`       | `(event: React.ChangeEvent<HTMLInputElement>) => void`                                      | -              |
+| `variant`        | `"primary" \| "secondary" \| "tertiary" \| "accent"`                                        | `"primary"`    |
+| `textVariant`    | `"foreground" \| "muted" \| "primary" \| "secondary" \| "tertiary" \| "accent" \| "danger"` | `"foreground"` |
+| `disabled`       | `boolean`                                                                                   | `false`        |
+| `children`       | `ReactNode`                                                                                 | -              |
+| `className`      | `string`                                                                                    | -              |
