@@ -12,3 +12,4 @@ export type * from "./Skeleton.type";
 export type * from "./Select.type";
 export type * from "./TextArea.type";
 export type * from "./Radio.type";
+export type * from "./QuantityStepper.type";

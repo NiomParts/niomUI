@@ -37,6 +37,7 @@ const sidebars: SidebarsConfig = {
             "components/atoms/select",
             "components/atoms/skeleton",
             "components/atoms/slider",
+            "components/atoms/quantity-stepper",
           ],
         },
         {

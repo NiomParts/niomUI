@@ -1,0 +1,113 @@
+---
+title: QuantityStepper
+description: Controlled quantity selector with minimum, maximum, disabled, and size options.
+---
+
+---
+
+# QuantityStepper
+
+QuantityStepper lets users increase or decrease a numeric value while respecting optional minimum and maximum limits.
+
+```jsx live
+function QuantityStepperExample() {
+  const [quantity, setQuantity] = React.useState(1);
+
+  return (
+    <div className="grid gap-3">
+      <QuantityStepper value={quantity} onChange={setQuantity} />
+
+      <p>Quantity: {quantity}</p>
+    </div>
+  );
+}
+```
+
+```tsx
+import { QuantityStepper } from "niom-parts";
+
+<QuantityStepper value={quantity} onChange={setQuantity} min={1} max={10} />;
+```
+
+## Common use cases
+
+QuantityStepper is useful for product quantities, ticket counts, item amounts, or any controlled numeric value that users should adjust incrementally.
+
+```jsx live
+function QuantityStepperUseCases() {
+  const [small, setSmall] = React.useState(1);
+  const [medium, setMedium] = React.useState(3);
+  const [large, setLarge] = React.useState(5);
+
+  return (
+    <div className="grid gap-4">
+      <QuantityStepper
+        value={small}
+        onChange={setSmall}
+        min={1}
+        max={5}
+        size="sm"
+      />
+
+      <QuantityStepper
+        value={medium}
+        onChange={setMedium}
+        min={1}
+        max={10}
+        size="md"
+      />
+
+      <QuantityStepper value={large} onChange={setLarge} min={1} size="lg" />
+
+      <QuantityStepper value={2} onChange={() => {}} disabled />
+    </div>
+  );
+}
+```
+
+## Minimum and maximum values
+
+Use `min` and `max` to restrict the allowed quantity range. The decrease button is automatically disabled when the value reaches `min`, and the increase button is disabled when it reaches `max`.
+
+```jsx live
+function QuantityStepperLimits() {
+  const [quantity, setQuantity] = React.useState(2);
+
+  return (
+    <QuantityStepper value={quantity} onChange={setQuantity} min={1} max={3} />
+  );
+}
+```
+
+## Sizes
+
+QuantityStepper supports three predefined sizes.
+
+```jsx live
+function QuantityStepperSizes() {
+  const [quantity, setQuantity] = React.useState(1);
+
+  return (
+    <div className="flex items-center gap-4">
+      <QuantityStepper value={quantity} onChange={setQuantity} size="sm" />
+
+      <QuantityStepper value={quantity} onChange={setQuantity} size="md" />
+
+      <QuantityStepper value={quantity} onChange={setQuantity} size="lg" />
+    </div>
+  );
+}
+```
+
+## Properties
+
+| Property        | Type                      | Default value |
+| --------------- | ------------------------- | ------------- |
+| `value`         | `number`                  | -             |
+| `onChange`      | `(value: number) => void` | -             |
+| `min`           | `number`                  | `1`           |
+| `max`           | `number`                  | -             |
+| `disabled`      | `boolean`                 | `false`       |
+| `size`          | `"sm" \| "md" \| "lg"`    | `"sm"`        |
+| `className`     | `string`                  | -             |
+| `iconClassName` | `string`                  | -             |
