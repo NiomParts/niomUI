@@ -1,6 +1,6 @@
 {
   "name": "niom-parts",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -60,7 +60,7 @@
     "build:package": "npm run test && tsup && npm run build:css",
     "serve": "docusaurus serve",
     "prepublishOnly": "npm run build:package",
-    "prepare": "husky >/dev/null 2>&1 || true"
+    "prepare": "husky"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.2",
