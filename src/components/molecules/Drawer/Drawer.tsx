@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { Button, Cross } from "@atoms";
 import { cn } from "@utils";
 import type { DrawerProps } from "@type/components/molecules";
-
 import { DRAWER_SIDE_CLASSES } from "./Drawer.constants";
 
 function CloseIcon() {
@@ -17,6 +16,7 @@ export function Drawer({
   children,
 }: DrawerProps) {
   const sideClasses = DRAWER_SIDE_CLASSES[side];
+
   const closeButtonRef = useRef<HTMLElement>(null);
 
   const closeDrawer = () => {
@@ -52,18 +52,17 @@ export function Drawer({
   }
 
   return (
-    <div className={cn("fixed inset-0 z-999 flex items-start justify-start")}>
+    <div className="fixed inset-0 z-999 flex items-start justify-start">
       <button
         type="button"
-        tabIndex={-1}
-        className="absolute inset-0 bg-black/60 outline-none"
+        className="absolute inset-0 bg-primary-foreground/60"
         aria-label="Close drawer overlay"
         onClick={closeDrawer}
       />
 
       <aside
         className={cn(
-          "absolute top-0 h-full w-[min(82vw,320px)] border-r border-border bg-surface shadow-2xl transition-transform duration-300",
+          "absolute top-0 flex h-full w-[min(82vw,320px)] flex-col overflow-hidden border-r border-border bg-surface shadow-2xl transition-transform duration-300",
           sideClasses.panel,
           "translate-x-0",
           className,
@@ -72,7 +71,7 @@ export function Drawer({
         aria-modal="true"
         role="dialog"
       >
-        <div className="flex justify-end p-4">
+        <div className="flex shrink-0 justify-end p-4">
           <Button
             aria-label="Close drawer"
             className="h-10 w-10 rounded-full p-0"
@@ -83,7 +82,8 @@ export function Drawer({
             <CloseIcon />
           </Button>
         </div>
-        <div className="flex h-full flex-col px-4">{children}</div>
+
+        <div className="min-h-0 flex-1 overflow-hidden px-4">{children}</div>
       </aside>
     </div>
   );
