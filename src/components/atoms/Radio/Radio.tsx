@@ -35,7 +35,7 @@ export const Radio = ({
     <Label
       disabled={disabled}
       className={cn(
-        "group flex min-h-12 items-center gap-3",
+        "group flex items-center gap-3",
         "cursor-pointer",
         RADIO_TEXT_VARIANTS_CLASSNAMES[textVariant],
         disabled && "cursor-not-allowed opacity-50",
