@@ -37,7 +37,28 @@ import {
   BitcoinLogo,
   TruckIcon,
   WarningIcon,
-} from "./Icon";
+  CardIcon,
+  LockIcon,
+  ShieldIcon,
+  ServerIcon,
+  CoffeeIcon,
+  EditIcon,
+  MoneroIcon,
+  PlainBitcoinLogo,
+  DogecoinLogo,
+  LitecoinLogo,
+  SolanaIcon,
+  EthLogo,
+  TrashIcon,
+  CalenderIcon,
+  BagIcon,
+  AttachmentIcon,
+  MaximiseIcon,
+  MinimiseIcon,
+  SettingsIcon,
+  Download,
+} from "./icons";
+import { Icon } from "./Icon";
 
 describe("Icons", () => {
   const icons = [
@@ -70,19 +91,48 @@ describe("Icons", () => {
     { name: "MasterCard", icon: MasterCard },
     { name: "PlusIcon", icon: PlusIcon },
     { name: "MinusIcon", icon: MinusIcon },
-    { name: "MailIcon", icon: MailIcon },
-    { name: "PhoneIcon", icon: PhoneIcon },
-    { name: "InformationIcon", icon: InformationIcon },
     { name: "HomeIcon", icon: HomeIcon },
-    { name: "BitcoinLogo", icon: BitcoinLogo },
+    { name: "PhoneIcon", icon: PhoneIcon },
+    { name: "MailIcon", icon: MailIcon },
+    { name: "InformationIcon", icon: InformationIcon },
+    { name: "BitcoinIcon", icon: BitcoinLogo },
     { name: "TruckIcon", icon: TruckIcon },
     { name: "WarningIcon", icon: WarningIcon },
+    { name: "CardICon", icon: CardIcon },
+    { name: "LockIcon", icon: LockIcon },
+    { name: "ShieldIcon", icon: ShieldIcon },
+    { name: "ServerIcon", icon: ServerIcon },
+    { name: "CoffeIcon", icon: CoffeeIcon },
+    { name: "EditIcon", icon: EditIcon },
+    { name: "MoneroIcon", icon: MoneroIcon },
+    { name: "PlainBitcoinIcon", icon: PlainBitcoinLogo },
+    { name: "DogecoinIcon", icon: DogecoinLogo },
+    { name: "LitecoinIcon", icon: LitecoinLogo },
+    { name: "SolanaIcon", icon: SolanaIcon },
+    { name: "EthIcon", icon: EthLogo },
+    { name: "TrashIcon", icon: TrashIcon },
+    { name: "CalenderIcon", icon: CalenderIcon },
+    { name: "BagIcon", icon: BagIcon },
+    { name: "AttachmentIcon", icon: AttachmentIcon },
+    { name: "MaximiseIcon", icon: MaximiseIcon },
+    { name: "MinimiseIcon", icon: MinimiseIcon },
+    { name: "SettingsIcon", icon: SettingsIcon },
+    { name: "DownloadIcon", icon: Download },
   ];
 
   icons.forEach(({ name, icon: Icons }) => {
     describe(`${name} Icon`, () => {
       it("renders correctly with default props", () => {
         const { container } = render(<Icons />);
+        expect(container.querySelector("svg")).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe("Icon Component", () => {
+    icons.forEach(({ name, icon: Icons }) => {
+      it(`renders ${name} icon correctly`, () => {
+        const { container } = render(<Icon icon={Icons} />);
         expect(container.querySelector("svg")).toBeInTheDocument();
       });
     });

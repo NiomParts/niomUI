@@ -1,2 +1,3 @@
-export * from './Icon';
-export * from '@type/components/atoms/Icon.type';
+export * from "./Icon";
+export * from "./icons";
+export * from "@type/components/atoms/Icon.type";

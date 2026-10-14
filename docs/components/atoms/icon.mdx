@@ -41,11 +41,32 @@ import {
   BitcoinLogo,
   TruckIcon,
   WarningIcon,
+  Icon,
+  CardIcon,
+  LockIcon,
+  ShieldIcon,
+  ServerIcon,
+  CoffeeIcon,
+  EditIcon,
+  MoneroIcon,
+  PlainBitcoinLogo,
+  DogecoinLogo,
+  LitecoinLogo,
+  SolanaIcon,
+  EthLogo,
+  TrashIcon,
+  CalenderIcon,
+  BagIcon,
+  AttachmentIcon,
+  MaximiseIcon,
+  MinimiseIcon,
+  SettingsIcon,
+  Download,
 } from "@site/src/components";
 
 # Icon
 
-Niom exports a set of lightweight SVG icon components. Every icon accepts standard SVG props plus `size`, `width`, `height`, `color`, and `className`.
+Niom exports lightweight SVG icon components and a generic `Icon` renderer. Use an icon directly, or pass it to `Icon` through its `icon` prop. Icons accept standard SVG props plus `size` and `color`.
 
 <ComponentPreview label="Icon catalog" className="component-preview--top">
   <div className="icon-catalog">
@@ -193,14 +214,94 @@ Niom exports a set of lightweight SVG icon components. Every icon accepts standa
       <WarningIcon />
       <code>WarningIcon</code>
     </div>
+    <div className="icon-catalog__item">
+      <CardIcon size={24} />
+      <code>CardIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <LockIcon size={24} color={"red"} />
+      <code>LockIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <ShieldIcon size={24} color={"red"} />
+      <code>ShieldIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <ServerIcon size={24} />
+      <code>ServerIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <CoffeeIcon size={24} />
+      <code>CoffeeIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <EditIcon size={24} />
+      <code>EditIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <MoneroIcon size={24} />
+      <code>MoneroIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <PlainBitcoinLogo size={24} />
+      <code>PlainBitcoinLogo</code>
+    </div>
+    <div className="icon-catalog__item">
+      <DogecoinLogo size={24} />
+      <code>DogecoinLogo</code>
+    </div>
+    <div className="icon-catalog__item">
+      <LitecoinLogo size={24} />
+      <code>LitecoinLogo</code>
+    </div>
+    <div className="icon-catalog__item">
+      <SolanaIcon size={24} />
+      <code>SolanaIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <EthLogo size={24} />
+      <code>EthLogo</code>
+    </div>
+    <div className="icon-catalog__item">
+      <TrashIcon size={24} />
+      <code>TrashIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <CalenderIcon size={24} />
+      <code>CalenderIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <BagIcon size={24} />
+      <code>BagIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <AttachmentIcon size={24} />
+      <code>AttachmentIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <MaximiseIcon size={24} />
+      <code>MaximiseIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <MinimiseIcon size={24} />
+      <code>MinimiseIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <SettingsIcon size={24} />
+      <code>SettingsIcon</code>
+    </div>
+    <div className="icon-catalog__item">
+      <Download size={24} />
+      <code>Download</code>
+    </div>
   </div>
 </ComponentPreview>
 
 ```tsx
-import { Button, Cart } from "niom-parts";
+import { Button, Cart, Icon } from "niom-parts";
 
 <Button aria-label="Open cart" variant="ghost">
-  <Cart size={20} aria-hidden="true" />
+  <Icon icon={Cart} size={20} aria-hidden="true" />
 </Button>;
 ```
 
@@ -228,11 +329,9 @@ function IconUseCases() {
 
 ## Props
 
-| Prop           | Type                      | Default          |
-| -------------- | ------------------------- | ---------------- |
-| `size`         | `number \| string`        | icon-specific    |
-| `width`        | `number \| string`        | -                |
-| `height`       | `number \| string`        | -                |
-| `color`        | `string`                  | `"currentColor"` |
-| `className`    | `string`                  | -                |
-| SVG attributes | `SVGProps<SVGSVGElement>` | -                |
+| Prop           | Type                      | Default            |
+| -------------- | ------------------------- | ------------------ |
+| `icon`         | `ComponentType<SVGprops>` | required by `Icon` |
+| `size`         | `number \| string`        | icon-specific      |
+| `color`        | `string`                  | `"currentColor"`   |
+| SVG attributes | `SVGProps<SVGSVGElement>` | -                  |
