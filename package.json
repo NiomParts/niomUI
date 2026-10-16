@@ -1,6 +1,7 @@
 {
   "name": "niom-parts",
-  "version": "0.2.6",
+  "version": "0.2.7",
+  "description": "A lightweight React component library featuring highly accessible atoms, molecules, and customizable tables optimized for TailwindCSS and Vite.",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -20,6 +21,14 @@
     "README.md"
   ],
   "keywords": [
+    "niom-parts",
+    "niom",
+    "niomui",
+    "component-library",
+    "react-components",
+    "tailwind-components",
+    "accessible-components",
+    "ui-kit",
     "vite",
     "storybook",
     "tailwindcss",
@@ -35,6 +44,13 @@
     "url": "git+https://github.com/NiomParts/niomUI.git"
   },
   "homepage": "https://docs.niomparts.com",
+  "bugs": {
+    "url": "https://github.com/NiomParts/niomUI/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://www.paypal.com/paypalme/nomekuma"
+  },
   "license": "MIT",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
